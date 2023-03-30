@@ -6,10 +6,11 @@ import { gql, useQuery } from '@apollo/client'
 import { PER_PAGE } from 'constants/common'
 import useGetSelection from 'hooks/useGetSelection'
 import { GetSearchListQuery, GetSearchListQueryVariables } from 'api/graphql'
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import DestinationCard from 'components/Search/DestinationCard'
 import { Loading } from 'routes/Router'
 import { useParams, useSearchParams } from 'react-router-dom'
+import Spinner from 'components/common/Spinner'
 
 const SearchQuery = gql`
   query GetSearchList(
@@ -78,7 +79,7 @@ const Search = () => {
     setToggle: state.setToggle,
     position: state.position,
   }))
-
+  const [isLoading, setIsLoading] = useState(true)
   const selection = useGetSelection()
   const variables = useMemo(() => {
     if (!position?.coords.latitude || !position?.coords.longitude) {
@@ -100,12 +101,17 @@ const Search = () => {
     called,
   } = useQuery<GetSearchListQuery>(SearchQuery, {
     variables,
+    notifyOnNetworkStatusChange: true,
+    onCompleted(data) {
+      console.log(data, 'dd')
+      setIsLoading(false)
+    },
   })
 
   const hasNextPage = places?.pageInfo.hasNextPage
   const edges = useMemo(() => places?.edges, [places?.edges])
 
-  return loading || !called ? (
+  return isLoading || !called ? (
     <Loading text='결과를 불러오고 있어요..' />
   ) : (
     <Wrapper>
@@ -125,6 +131,9 @@ const Search = () => {
         </h3>
         <KakaoIcon
           onClick={() => {
+            console.log(edges[0].node.thumbnails[0])
+            console.log(edges[1].node.thumbnails[0])
+            console.log(edges[2].node.thumbnails[0])
             window.Kakao.Share.sendCustom({
               templateId: 91940,
               templateArgs: {
@@ -133,7 +142,7 @@ const Search = () => {
                 thumb_2: edges[1].node.thumbnails[0],
                 thumb_3: edges[2].node.thumbnails[0],
               },
-              installTalk: true,
+
               callback: () => console.log('???'),
             })
           }}
@@ -169,6 +178,17 @@ const Search = () => {
               />
             ))
           : null}
+        {loading ? (
+          <Spinner
+            trackColor='#a7a7a7'
+            indicatorColor='#4f4f4f'
+            size={50}
+            progress={25}
+            trackWidth={5}
+            indicatorWidth={5}
+            spinnerMode={true}
+          />
+        ) : null}
       </DestinationList>
     </Wrapper>
   )
