@@ -1,6 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
 import { ReactComponent as Picture } from 'assets/picture.svg'
+import { ReactComponent as Alone } from 'assets/alone.svg'
+import { ReactComponent as People } from 'assets/people.svg'
+
 import { Selection } from '../types/selection'
 import store from 'store/index'
 type HasGaurdianProps = {
@@ -19,7 +22,7 @@ const HasGaurdian: React.FC<HasGaurdianProps> = ({ onChangeNeedCompanion }) => {
             onChangeNeedCompanion(false)
           }}
         >
-          <Picture />
+          <Alone />
         </Option>
         <Option
           highlight={selection.needCompanion}
@@ -27,7 +30,7 @@ const HasGaurdian: React.FC<HasGaurdianProps> = ({ onChangeNeedCompanion }) => {
             onChangeNeedCompanion(true)
           }}
         >
-          <Picture />
+          <People />
         </Option>
       </OptionWrapper>
       <OptionWrapper>
