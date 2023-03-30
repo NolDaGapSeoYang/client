@@ -1,0 +1,64 @@
+name: CD
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  ECR_REGISTRY: 078512149071.dkr.ecr.ap-northeast-2.amazonaws.com
+  ECR_REPOSITORY: uhdre-gamdi-web
+  EKS_CLUSTER_NAME: goormthon-cluster
+  AWS_REGION: ap-northeast-2
+  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  VITE_API_URL: ${{ secrets.VITE_API_URL }}
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Checkout source code
+        uses: actions/checkout@v2
+
+      - name: get-npm-version
+        id: package-version
+        uses: martinbeentjes/npm-get-version-action@main
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Build Docker image
+        id: build-image
+        run: |
+          docker build \
+            --build-arg VITE_API_URL=${{ env.VITE_API_URL }} \
+            -t ${{ env.ECR_REPOSITORY }}:${{ steps.package-version.outputs.current-version}} \
+            .
+      - name: Tag Docker iamge
+        id: tag-image
+        run: docker tag ${{ env.ECR_REPOSITORY }}:${{ steps.package-version.outputs.current-version}} ${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY }}:${{ steps.package-version.outputs.current-version}}
+
+      - name: Push Docker image to Amazon ECR
+        id: push-image
+        run: docker push ${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY }}:${{ steps.package-version.outputs.current-version}}
+
+      - name: Configure EKS
+        id: configure-eks
+        run: aws eks update-kubeconfig --region ${{ env.AWS_REGION }} --name ${{ env.EKS_CLUSTER_NAME }}
+
+      - name: Apply yaml
+        id: apply-yaml
+        env:
+          ECR_REGISTRY: 078512149071.dkr.ecr.ap-northeast-2.amazonaws.com
+          ECR_REPOSITORY: uhdre-gamdi-web
+          TAG: ${{ steps.package-version.outputs.current-version}}
+        run: envsubst < index.yaml | kubectl apply -f -
