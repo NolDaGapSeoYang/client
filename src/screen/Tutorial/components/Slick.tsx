@@ -25,12 +25,17 @@ interface sliderProps {
 function Slick({ children, className, autoplay = true, speed = 300, loop = true }: sliderProps) {
   const settings = useMemo<Settings>(
     () => ({
-      dots: true,
-      infinite: loop,
-      speed: speed,
-      slidesToShow: 1,
-      autoplay: Boolean(autoplay),
-      autoplaySpeed: typeof autoplay === 'boolean' ? 3000 : autoplay,
+      dots: false,
+      // infinite: loop,
+      infinite: true,
+      speed: 2000,
+      arrows: false,
+      slidesToShow: 3,
+      slidesToScroll: 1,
+      autoplay: true,
+      autoplaySpeed: 3000,
+      // autoplay: Boolean(autoplay),
+      // autoplaySpeed: typeof autoplay === 'boolean' ? 3000 : autoplay,
     }),
     [autoplay, loop, speed],
   )

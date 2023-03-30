@@ -1,14 +1,14 @@
 import React from 'react'
 import styled from 'styled-components'
-import 'slick-carousel/slick/slick.css'
-import 'slick-carousel/slick/slick-theme.css'
+import Item from './Item'
 
 const Result = () => {
   return (
     <Wrapper>
-      <div>
+      {/* <div>
         <span>자연경관</span>
-      </div>
+      </div> */}
+      <Item />
       <Title>
         총 20개의 <br />
         편안한 여행지를 찾았어요
