@@ -114,7 +114,7 @@ const Option = styled.button<{ highlight: boolean }>`
   align-items: center;
   flex-direction: column;
   /* height: 11rem; */
-  background-color: #efeff0;
+  background-color: #fafafa;
   border-radius: 1rem;
   padding: 1rem 0rem;
   font-weight: 500;

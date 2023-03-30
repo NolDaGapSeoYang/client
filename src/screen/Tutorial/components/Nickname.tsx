@@ -27,7 +27,7 @@ const Nickname = () => {
 }
 
 const InputBox = styled.div`
-  background-color: #efeff0;
+  background-color: #fafafa;
   width: 100%;
   height: 6.5rem;
   border-radius: 2rem;
