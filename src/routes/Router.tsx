@@ -1,6 +1,6 @@
 import ErrorBoundary from 'components/common/ErrorBoundary'
 import { LazyExoticComponent, Suspense, FC, lazy } from 'react'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Outlet, Route, Routes } from 'react-router-dom'
 import GlobalStyle from '../GlobalStyle'
 import Default from 'layout/Default'
 
@@ -21,6 +21,7 @@ const Loadable =
 const Home = Loadable(lazy(() => import('../screen/Home')))
 const Detail = Loadable(lazy(() => import('../screen/Detail')))
 const Convenient = Loadable(lazy(() => import('../screen/Convenient')))
+const Search = Loadable(lazy(() => import('../screen/Search')))
 const Router = () => {
   return (
     <BrowserRouter>
@@ -28,8 +29,9 @@ const Router = () => {
       <Routes>
         <Route element={<Default />}>
           <Route path='' element={<Home />} />
-          <Route path='detail' element={<Detail />} />
           <Route path='convenient' element={<Convenient />} />
+          <Route path='detail' element={<Detail />} />
+          <Route path='result' element={<Search />} />
         </Route>
       </Routes>
     </BrowserRouter>
