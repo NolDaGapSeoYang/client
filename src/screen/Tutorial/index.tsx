@@ -23,6 +23,8 @@ const Tutorial = () => {
     // console.log(type) // 숫자로 변환된 값
     setPercent((prevPercent) => prevPercent + 20)
 
+    console.log(step)
+
     if (step === 5) {
       // window.localStorage.setItem('nickName', selection.nickName)
       // selection cleaning
