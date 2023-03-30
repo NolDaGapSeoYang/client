@@ -5,7 +5,7 @@ const GlobalStyle = createGlobalStyle`
   html {
     font-size: 62.5%; // 1rem = 10px 로 변경
     width: 100%;
-    height: calc(var(--var,1vh) * 100);
+    max-height: calc(var(--var,1vh) * 100);
   }
   body {
     background-color: #f9f9f9;
@@ -38,7 +38,6 @@ const GlobalStyle = createGlobalStyle`
     word-break: break-word;
     tab-size: 4;
   }
-  html,
   body,
   #root {
     height: 100%;
