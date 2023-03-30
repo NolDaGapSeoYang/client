@@ -1,5 +1,5 @@
 import React from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import styled, { withTheme } from 'styled-components'
 import HasGaurdin from './components/hasGuardian'
 import Result from './components/Result'
@@ -12,8 +12,41 @@ const Tutorial = () => {
   console.log(param)
   const [percent, setPercent] = React.useState(25)
 
-  const handleIncrement = () => {
+  const navigate = useNavigate()
+
+  const getType = () => {
+    if (param.type) {
+      return parseInt(param.type)
+    } else {
+      return 1
+    }
+  }
+
+  const handleNext = () => {
+    console.log('다음 버튼 클릭!!')
+    const type = getType()
+    // console.log(type) // 숫자로 변환된 값
     setPercent((prevPercent) => prevPercent + 25)
+
+    if (type === 4) {
+      navigate(`/result`)
+    } else {
+      navigate(`/option/${type + 1}`)
+    }
+    // navigate(`/option/${String(intParam + 1)}`)
+    // navigate(`/option/`)
+  }
+
+  const handlePrev = () => {
+    console.log('이전 버튼 클릭!!')
+    const type = getType()
+    console.log('이전버튼 클릭시 type :', type)
+    setPercent((prevPercent) => prevPercent - 25)
+    if (type === 1) {
+      navigate(`/`)
+    } else {
+      navigate(`/option/${type - 1}`)
+    }
   }
 
   return (
@@ -28,13 +61,14 @@ const Tutorial = () => {
           <WhichOption />
         ) : param.type === '3' ? (
           <WhichPlace />
-        ) : param.type === 'result' ? (
+        ) : param.type === '4' ? (
           <Result />
         ) : null}
       </Main>
-      <NaxtBtn onClick={handleIncrement} disabled={percent >= 100}>
-        다음
-      </NaxtBtn>
+      <Footer>
+        {param.type === '2' || '3' || '4' ? <PrevBtn onClick={handlePrev}>이전</PrevBtn> : null}
+        <NaxtBtn onClick={handleNext}>다음</NaxtBtn>
+      </Footer>
     </Mx>
   )
 }
@@ -61,6 +95,17 @@ const Main = styled.main`
   flex: 1;
 `
 
+const PrevBtn = styled.button`
+  width: 100%;
+  height: 4.187rem;
+  background-color: #efeff0;
+  border-radius: 2rem;
+  font-size: 1.3rem;
+  line-height: 2rem;
+  margin-bottom: 1.5rem;
+  color: #19191b;
+`
+
 const NaxtBtn = styled.button`
   width: 100%;
   height: 4.187rem;
@@ -69,6 +114,11 @@ const NaxtBtn = styled.button`
   font-size: 1.3rem;
   line-height: 2rem;
   color: white;
+`
+
+const Footer = styled.footer`
+  margin-top: 4rem;
+  /* border-top: 1px solid red; */
 `
 
 export default Tutorial

@@ -5,16 +5,16 @@ import { ReactComponent as Picture } from 'assets/picture.svg'
 const HasGaurdin = () => {
   return (
     <Wrapper>
-      <SubTitle>시설 선택</SubTitle>
+      <SubTitle>동행 여부</SubTitle>
       <Title>보호자와 동행하시나요?</Title>
       <OptionWrapper>
         <Option>
           <Picture />
-          <span>있음</span>
+          <OptionName>있음</OptionName>
         </Option>
         <Option>
           <Picture />
-          <span>없음</span>
+          <OptionName>없음</OptionName>
         </Option>
       </OptionWrapper>
     </Wrapper>
@@ -73,6 +73,11 @@ const Option = styled.button`
   font-weight: 500;
   font-size: 16px;
   line-height: 24px;
+`
+const OptionName = styled.span`
+  font-size: 1.6rem;
+  line-height: 2.4rem;
+  font-weight: 500;
 `
 
 export default HasGaurdin
