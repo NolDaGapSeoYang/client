@@ -2,11 +2,12 @@ import React from 'react'
 import styled from 'styled-components'
 import { ReactComponent as Picture } from 'assets/picture.svg'
 import { Selection } from '../types/selection'
+import store from 'store/index'
 type HasGaurdianProps = {
-  selection: Selection // 동행 여부 변경
   onChangeNeedCompanion: (needCompanion: boolean) => void
 }
-const HasGaurdian: React.FC<HasGaurdianProps> = ({ selection, onChangeNeedCompanion }) => {
+const HasGaurdian: React.FC<HasGaurdianProps> = ({ onChangeNeedCompanion }) => {
+  const selection = store((state) => state.selection)
   return (
     <Wrapper>
       <SubTitle>동행 여부</SubTitle>

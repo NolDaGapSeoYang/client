@@ -2,8 +2,8 @@ import React from 'react'
 import styled from 'styled-components'
 import { Selection } from '../types/selection'
 import { ReactComponent as Picture } from 'assets/picture.svg'
+import store from 'store/index'
 type OptionProps = {
-  selection: Selection // 옵션 선택 여부 변경
   onChangeParkingLot: () => void
   onChangeWheelchair: () => void
   onChangeToilet: () => void
@@ -11,13 +11,14 @@ type OptionProps = {
   onChangeElevator: () => void
 }
 const WhichOption: React.FC<OptionProps> = ({
-  selection,
   onChangeParkingLot,
   onChangeWheelchair,
   onChangeToilet,
   onChangePath,
   onChangeElevator,
 }) => {
+  const selection = store((state) => state.selection)
+
   return (
     <Wrapper>
       <SubTitle>필요 시설</SubTitle>

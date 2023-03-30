@@ -12,7 +12,7 @@ import { Loading } from 'routes/Router'
 import { useParams, useSearchParams } from 'react-router-dom'
 import Spinner from 'components/common/Spinner'
 
-const SearchQuery = gql`
+export const SearchQuery = gql`
   query GetSearchList(
     $before: String
     $after: String
@@ -75,9 +75,10 @@ const SearchQuery = gql`
 `
 
 const Search = () => {
-  const { setToggle, position } = store((state) => ({
+  const { setToggle, position, myName } = store((state) => ({
     setToggle: state.setToggle,
     position: state.position,
+    myName: state.myName,
   }))
   const [isLoading, setIsLoading] = useState(true)
   const selection = useGetSelection()
@@ -124,11 +125,17 @@ const Search = () => {
         className='px'
       >
         <h3 className='title-large'>
-          내 주변 가까운 <br />
+          {myName ? `${myName}님` : '내'} 주변 가까운 <br />
           {places?.totalCount}개의 추천 관광지
         </h3>
         <div
           onClick={() => {
+            let vars = { ...selection }
+            if (vars.categories?.length) {
+              vars.categories = vars.categories.join(',')
+            }
+            console.log(selection, 'selection')
+
             window.Kakao.Share.sendCustom({
               templateId: 91940,
               templateArgs: {
@@ -136,7 +143,7 @@ const Search = () => {
                 thumb_2: edges[1].node.thumbnails[0],
                 thumb_3: edges[2].node.thumbnails[0],
                 name: 'test',
-                ...selection,
+                ...vars,
               },
             })
           }}

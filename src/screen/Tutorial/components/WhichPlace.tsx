@@ -2,12 +2,13 @@ import React from 'react'
 import styled from 'styled-components'
 import { Selection } from '../types/selection'
 import { ReactComponent as Picture } from 'assets/picture.svg'
+import store from 'store/index'
 type PlaceProps = {
-  selection: Selection
   onClickCategory: (category: string) => void
 }
 
-const WhichPlace: React.FC<PlaceProps> = ({ selection, onClickCategory }) => {
+const WhichPlace: React.FC<PlaceProps> = ({ onClickCategory }) => {
+  const selection = store((state) => state.selection)
   return (
     <Wrapper>
       <SubTitle>필요 시설</SubTitle>
