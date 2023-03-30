@@ -7,14 +7,13 @@ const Nickname = () => {
   return (
     <Wrapper>
       <SubTitle>???</SubTitle>
-      <Title>여행 닉네임을 알려주세요!</Title>
+      <Title>여행 닉네임을 알려주세요</Title>
       <InputBox>
         <label htmlFor='nickname'>
-          <div>
-            <input name='nickname' id='id' type='name' placeholder='닉네임을 입력해주세요' />
-          </div>
+          <input name='nickname' id='id' type='name' placeholder='닉네임을 입력해주세요' />
         </label>
       </InputBox>
+      <GuideMessage>최대 5글자로 해주세요!</GuideMessage>
     </Wrapper>
   )
 }
@@ -24,6 +23,9 @@ const InputBox = styled.div`
   width: 100%;
   height: 6.5rem;
   border-radius: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   :focus-within {
     border: 0.1rem solid blue;
   }
@@ -44,11 +46,18 @@ const InputBox = styled.div`
     font-weight: 400;
     font-size: 2rem;
     line-height: 2.8rem;
-    margin: 0 auto;
+    /* margin: 0 auto; */
+    text-align: center;
     ::placeholder {
       color: #afb1b6;
     }
   }
+`
+const GuideMessage = styled.span`
+  margin-top: 1.3rem;
+  font-size: 1.3rem;
+  font-weight: 500;
+  line-height: 2.5rem;
 `
 
 const Wrapper = styled.div`
