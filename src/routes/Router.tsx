@@ -1,8 +1,9 @@
-import ErrorBoundary from 'components/common/ErrorBoundary'
-import { LazyExoticComponent, Suspense, FC, lazy } from 'react'
-import { BrowserRouter, Outlet, Route, Routes } from 'react-router-dom'
-import GlobalStyle from '../GlobalStyle'
-import Default from 'layout/Default'
+import ErrorBoundary from 'components/common/ErrorBoundary';
+import Default from 'layout/Default';
+import { FC, lazy, LazyExoticComponent, Suspense } from 'react';
+import { BrowserRouter, Outlet, Route, Routes } from 'react-router-dom';
+
+import GlobalStyle from '../GlobalStyle';
 
 const Error = () => {
   return <>ERROR</>
@@ -33,9 +34,7 @@ const Router = () => {
           <Route path='convenient' element={<Convenient />} />
           <Route path='detail' element={<Detail />} />
           <Route path='result' element={<Search />} />
-          <Route path='option' element={<Outlet />}>
-            <Route path=':type' element={<Tutorial />} />
-          </Route>
+          <Route path='option' element={<Tutorial />} />
         </Route>
       </Routes>
     </BrowserRouter>

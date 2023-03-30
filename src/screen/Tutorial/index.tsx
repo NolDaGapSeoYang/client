@@ -1,38 +1,50 @@
-import React from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
-import styled, { withTheme } from 'styled-components'
-import HasGaurdian from './components/HasGuardian'
-import Result from './components/Result'
-import WhichOption from './components/WhichOption'
-import WhichPlace from './components/WhichPlace'
-import ProgressBar from './components/ProgressBar'
-import Nickname from './components/Nickname'
+import React from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import styled, { withTheme } from 'styled-components';
+
+import HasGaurdian from './components/HasGuardian';
+import Nickname from './components/Nickname';
+import ProgressBar from './components/ProgressBar';
+import Result from './components/Result';
+import WhichOption from './components/WhichOption';
+import WhichPlace from './components/WhichPlace';
+
+type Selection = {
+  needCompanion: boolean;
+  nickName: string;
+  facilities?: string[];
+  categories?: string[];
+}
 
 const Tutorial = () => {
-  const param = useParams()
-  console.log(param)
+
+  const [selection, setSelection] = React.useState<Selection>({
+    needCompanion: false,
+    nickName: ""
+  });
+
+  const [step, setStep] = React.useState(1);
   const [percent, setPercent] = React.useState(20)
 
   const navigate = useNavigate()
 
-  const getType = () => {
-    if (param.type) {
-      return parseInt(param.type)
-    } else {
-      return 1
-    }
-  }
-
   const handleNext = () => {
-    console.log('다음 버튼 클릭!!')
-    const type = getType()
     // console.log(type) // 숫자로 변환된 값
     setPercent((prevPercent) => prevPercent + 20)
 
-    if (type === 5) {
-      navigate(`/result`)
+    if (step === 5) {
+      window.localStorage.setItem('nickName', selection.nickName);
+      
+
+
+      const searchParams = new URLSearchParams({
+        needCompanion: selection.needCompanion ? 'true' : 'false',
+        facilities: selection.facilities?.join(',') || '',
+        categories: selection.categories?.join(',') || '',
+      })
+      navigate(`/result?${searchParams.toString()}`);
     } else {
-      navigate(`/option/${type + 1}`)
+      setStep((prevStep) => prevStep + 1)
     }
     // navigate(`/option/${String(intParam + 1)}`)
     // navigate(`/option/`)
@@ -40,15 +52,14 @@ const Tutorial = () => {
 
   const handlePrev = () => {
     console.log('이전 버튼 클릭!!')
-    const type = getType()
-    console.log('이전버튼 클릭시 type :', type)
     setPercent((prevPercent) => prevPercent - 20)
-    if (type === 1) {
+    if (step === 1) {
       navigate(`/`)
     } else {
-      navigate(`/option/${type - 1}`)
+      setStep((prevStep) => prevStep - 1)
     }
   }
+
 
   return (
     <Mx className='mx'>
@@ -56,20 +67,20 @@ const Tutorial = () => {
         <ProgressBar percent={percent} />
       </Header>
       <Main>
-        {param.type === '1' ? (
+        {step=== 1 ? (
           <HasGaurdian />
-        ) : param.type === '2' ? (
+        ) : step=== 2 ? (
           <Nickname />
-        ) : param.type === '3' ? (
+        ) : step=== 3 ? (
           <WhichOption />
-        ) : param.type === '4' ? (
+        ) : step=== 4 ? (
           <WhichPlace />
-        ) : param.type === '5' ? (
+        ) : step=== 5 ? (
           <Result />
         ) : null}
       </Main>
       <Footer>
-        {param.type === '2' || '3' || '4' || '5' ? (
+        {step > 1? (
           <PrevBtn onClick={handlePrev}>이전</PrevBtn>
         ) : null}
         <NaxtBtn onClick={handleNext}>다음</NaxtBtn>
