@@ -63,6 +63,8 @@ const InputBox = styled.div`
 `
 const GuideMessage = styled.span`
   margin-top: 1.3rem;
+  color: #de3324;
+  opacity: 0.7;
   font-size: 1.3rem;
   font-weight: 500;
   line-height: 2.5rem;
