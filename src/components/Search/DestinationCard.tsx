@@ -23,8 +23,8 @@ const DestinationCard: FC<any> = ({ node, maxLength, idx, fetchMore }) => {
         </PlaceHolderWrapper>
         <LocationWrapper>
           <div style={{ display: 'flex', flexDirection: 'column' }}>
-            <h4 className='title-medium'>{node.name}</h4>
-            <span className='title-small text-subdark'>
+            <h4 className='title-medium text-bold'>{node.name}</h4>
+            <span className='title-small main-text'>
               나와의 거리 {getDistance(node.distance)}km
             </span>
             <Address className='body-small2 text-subdark'>
@@ -76,7 +76,7 @@ const DestinationCard: FC<any> = ({ node, maxLength, idx, fetchMore }) => {
 
 export default DestinationCard
 const Destination = styled(motion.div)`
-  padding: 1rem;
+  padding: 2rem 1rem;
   border-radius: 1rem;
   display: flex;
   flex-direction: column;

@@ -154,6 +154,10 @@ const GlobalStyle = createGlobalStyle`
     line-height:  1.6rem;
   }
 
+  .text-bold {
+    font-weight: 600;
+  }
+
   .px {
     padding-left :2rem;
     padding-right: 2rem;

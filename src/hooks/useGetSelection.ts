@@ -12,7 +12,6 @@ const useGetSelection = () => {
           const obj = {
             [cur]: cur === 'needCompanion' ? value === 'true' : value,
           }
-          console.log(obj)
           return {
             ...acc,
             ...obj,

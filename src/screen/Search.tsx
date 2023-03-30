@@ -103,7 +103,6 @@ const Search = () => {
     variables,
     notifyOnNetworkStatusChange: true,
     onCompleted(data) {
-      console.log(data, 'dd')
       setIsLoading(false)
     },
   })
@@ -130,7 +129,6 @@ const Search = () => {
         </h3>
         <div
           onClick={() => {
-            console.log('onClick')
             window.Kakao.Share.sendCustom({
               templateId: 91940,
               templateArgs: {
@@ -140,8 +138,6 @@ const Search = () => {
                 name: 'test',
                 ...selection,
               },
-
-              callback: () => console.log('???'),
             })
           }}
         >
