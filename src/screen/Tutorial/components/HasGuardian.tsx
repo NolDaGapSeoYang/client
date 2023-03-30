@@ -10,7 +10,7 @@ const HasGaurdian: React.FC<HasGaurdianProps> = ({ onChangeNeedCompanion }) => {
   const selection = store((state) => state.selection)
   return (
     <Wrapper>
-      <SubTitle>동행 여부</SubTitle>
+      <SubTitle className='filter-medium'>동행 여부</SubTitle>
       <Title>보호자와 동행하시나요?</Title>
       <OptionWrapper>
         <Option
@@ -43,9 +43,10 @@ const Wrapper = styled.div`
   flex-direction: column;
 `
 
-const SubTitle = styled.div`
-  background-color: #efeff0;
-  width: 8rem;
+export const SubTitle = styled.div`
+  background-color: #61646b;
+  color: #fafafa;
+  width: fit-content;
   height: 3rem;
   border-radius: 11rem;
   margin-top: 29px;

@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { Selection } from '../types/selection'
 import { ReactComponent as Picture } from 'assets/picture.svg'
 import store from 'store/index'
+import { SubTitle } from './HasGuardian'
 type PlaceProps = {
   onClickCategory: (category: string) => void
 }
@@ -11,7 +12,7 @@ const WhichPlace: React.FC<PlaceProps> = ({ onClickCategory }) => {
   const selection = store((state) => state.selection)
   return (
     <Wrapper>
-      <SubTitle>필요 시설</SubTitle>
+      <SubTitle className='filter-medium'>필요 시설</SubTitle>
       <Title>어떤 옵션이 필요하신가요?</Title>
       <OptionWrapper>
         <Option
@@ -82,20 +83,6 @@ const WhichPlace: React.FC<PlaceProps> = ({ onClickCategory }) => {
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-`
-
-const SubTitle = styled.div`
-  background-color: #efeff0;
-  width: 8rem;
-  height: 3rem;
-  border-radius: 11rem;
-  margin-top: 29px;
-  margin-bottom: 18px;
-  padding: 0.3rem 1.3rem;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
 `
 
 const Title = styled.h1`

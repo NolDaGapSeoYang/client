@@ -136,6 +136,10 @@ const GlobalStyle = createGlobalStyle`
     font-size: 1.5rem;
     line-height: 2.8rem;
   }
+  .filter-xs {
+    font-size: 1rem;
+    line-height: 2.8rem;
+  }
 
   .text-gray {
    color : #AFB1B6;
