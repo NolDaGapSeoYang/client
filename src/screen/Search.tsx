@@ -3,13 +3,13 @@ import { ReactComponent as KakaoIcon } from 'assets/kakao.svg'
 
 import store from 'store/index'
 import { gql, useQuery } from '@apollo/client'
-import { PER_PAGE } from 'constants/common'
+import { FILTER_TYPE, PER_PAGE } from 'constants/common'
 import useGetSelection from 'hooks/useGetSelection'
-import { GetSearchListQuery, GetSearchListQueryVariables } from 'api/graphql'
+import { GetSearchListQuery } from 'api/graphql'
 import { useEffect, useMemo, useState } from 'react'
 import DestinationCard from 'components/Search/DestinationCard'
 import { Loading } from 'routes/Router'
-import { useParams, useSearchParams } from 'react-router-dom'
+
 import Spinner from 'components/common/Spinner'
 
 export const SearchQuery = gql`
@@ -119,6 +119,8 @@ const Search = () => {
     }
   }, [toggle, selection])
 
+  const selected = store((state) => state.selection)
+
   return isLoading || !called ? (
     <Loading text='결과를 불러오고 있어요..' />
   ) : (
@@ -162,11 +164,28 @@ const Search = () => {
 
       <Stickable>
         <FilterList className='mx scrollbar-hide' onClick={() => setToggle(true)}>
-          {Array.from({ length: 5 }, (_, i) => i + 1).map((item) => (
-            <FilterItem className='filter-small' key={item}>
-              {item}
-            </FilterItem>
-          ))}
+          {Object.keys(selected).map((item) => {
+            if (item === 'categories') {
+              if (selected[item]?.length) {
+                return selected[item].map((item) =>
+                  item ? (
+                    <FilterItem className='filter-small' key={item}>
+                      {item}
+                    </FilterItem>
+                  ) : null,
+                )
+              } else {
+                return null
+              }
+            } else if (item === 'needCompanion' && !selected[item]) {
+              return null
+            }
+            return selected[item] ? (
+              <FilterItem className='filter-small' key={item}>
+                {FILTER_TYPE[item]}
+              </FilterItem>
+            ) : null
+          })}
         </FilterList>
       </Stickable>
       <DestinationList>
@@ -239,9 +258,9 @@ const FilterList = styled.div`
 `
 const FilterItem = styled.div`
   font-size: 1.7rem;
-  padding: 0.25rem 0;
-  width: 7rem;
+  padding: 0.25rem 1rem;
   text-align: center;
-  background-color: #efeff0;
+  background-color: #61646b;
+  color: white;
   border-radius: 999rem;
 `
