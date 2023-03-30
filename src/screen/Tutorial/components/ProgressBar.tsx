@@ -25,7 +25,7 @@ const Wrapper = styled.div`
 const BarContainer = styled.div`
   width: 100%;
   background-color: #f2f2f2;
-  height: 20px;
+  height: 0.7rem;
   border-radius: 15px;
 `
 

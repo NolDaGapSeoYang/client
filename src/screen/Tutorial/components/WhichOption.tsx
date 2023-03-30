@@ -9,6 +9,7 @@ import { ReactComponent as Wheel } from 'assets/wheel.svg'
 import { ReactComponent as Toilet } from 'assets/toilet.svg'
 
 import store from 'store/index'
+import { SubTitle } from './HasGuardian'
 type OptionProps = {
   onChangeParkingLot: () => void
   onChangeWheelchair: () => void
@@ -27,7 +28,7 @@ const WhichOption: React.FC<OptionProps> = ({
 
   return (
     <Wrapper>
-      <SubTitle>필요 시설</SubTitle>
+      <SubTitle className='filter-medium'>필요 시설</SubTitle>
       <Title>어떤 옵션이 필요하신가요?</Title>
       <OptionWrapper>
         <Option
@@ -83,22 +84,6 @@ const WhichOption: React.FC<OptionProps> = ({
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-`
-const SubTitle = styled.div`
-  background-color: #61646b;
-  color: #fafafa;
-  width: 8.2rem;
-  height: 3.4rem;
-  border-radius: 11rem;
-  margin-top: 29px;
-  margin-bottom: 18px;
-  padding: 0.3rem 1.3rem;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  font-size: 1.5rem;
-  line-height: 2.8rem;
 `
 
 const Title = styled.h1`

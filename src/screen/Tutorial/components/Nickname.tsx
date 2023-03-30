@@ -1,12 +1,13 @@
 import styled from 'styled-components'
 import store from 'store/index'
+import { SubTitle } from './HasGuardian'
 
 const Nickname = () => {
   const [name, setName] = store((state) => [state.myName, state.setName])
 
   return (
     <Wrapper>
-      <SubTitle>닉네임 입력</SubTitle>
+      <SubTitle className='filter-medium'>닉네임 입력</SubTitle>
       <Title>여행 닉네임을 알려주세요</Title>
       <InputBox>
         <label htmlFor='nickName'>
@@ -72,22 +73,6 @@ const GuideMessage = styled.span`
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-`
-const SubTitle = styled.div`
-  background-color: #61646b;
-  color: #fafafa;
-  width: 9.5rem;
-  height: 3.4rem;
-  border-radius: 11rem;
-  margin-top: 29px;
-  margin-bottom: 18px;
-  padding: 0.3rem 1.3rem;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  font-size: 1.5rem;
-  line-height: 2.8rem;
 `
 
 const Title = styled.h1`

@@ -9,6 +9,7 @@ import ProgressBar from './components/ProgressBar'
 import Result from './components/Result'
 import WhichOption from './components/WhichOption'
 import WhichPlace from './components/WhichPlace'
+import { ReactComponent as Check } from 'assets/InfoCircleicon.svg'
 import { Selection } from './types/selection'
 
 const Tutorial = () => {
@@ -138,6 +139,17 @@ const Tutorial = () => {
         ) : step === 5 ? (
           <Result />
         ) : null}
+        {step === 1 && !selection.needCompanion ? (
+          <Alert className='title-small'>
+            <Check />
+            <p>
+              보호자 동행 없이 여행하는 경우
+              <br />
+              시설 방문에 여려움이 있는 곳은 빼드릴게요.
+            </p>
+            <b className='body-small'>(입구 경사로가 매우 가파른 곳 등)</b>
+          </Alert>
+        ) : null}
       </Main>
       <Footer>
         {step > 1 ? <PrevBtn onClick={handlePrev}>이전</PrevBtn> : null}
@@ -146,6 +158,19 @@ const Tutorial = () => {
     </Mx>
   )
 }
+
+const Alert = styled.div`
+  padding: 1.4rem 0;
+  position: absolute;
+  bottom: 0;
+  border: 1px solid #61646b;
+  border-radius: 1rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+`
 
 const Mx = styled.div`
   display: flex;
@@ -158,9 +183,11 @@ const Header = styled.header`
   width: 100vw;
   max-width: inherit;
   position: relative;
+  padding-top: 5rem;
   left: -2rem;
 `
 const Main = styled.main`
+  position: relative;
   flex: 1;
 `
 const PrevBtn = styled.button`

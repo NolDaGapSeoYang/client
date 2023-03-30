@@ -6,7 +6,7 @@ import { gql, useQuery } from '@apollo/client'
 import { PER_PAGE } from 'constants/common'
 import useGetSelection from 'hooks/useGetSelection'
 import { GetSearchListQuery, GetSearchListQueryVariables } from 'api/graphql'
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import DestinationCard from 'components/Search/DestinationCard'
 import { Loading } from 'routes/Router'
 import { useParams, useSearchParams } from 'react-router-dom'
@@ -75,10 +75,11 @@ export const SearchQuery = gql`
 `
 
 const Search = () => {
-  const { setToggle, position, myName } = store((state) => ({
+  const { toggle, setToggle, position, myName } = store((state) => ({
     setToggle: state.setToggle,
     position: state.position,
     myName: state.myName,
+    toggle: state.toggle,
   }))
   const [isLoading, setIsLoading] = useState(true)
   const selection = useGetSelection()
@@ -94,12 +95,13 @@ const Search = () => {
       },
       first: PER_PAGE,
     }
-  }, [position])
+  }, [position, selection])
   const {
     data: { places } = {},
     fetchMore,
     loading,
     called,
+    refetch,
   } = useQuery<GetSearchListQuery>(SearchQuery, {
     variables,
     notifyOnNetworkStatusChange: true,
@@ -109,6 +111,13 @@ const Search = () => {
   })
   const hasNextPage = places?.pageInfo.hasNextPage
   const edges = useMemo(() => places?.edges, [places?.edges])
+
+  useEffect(() => {
+    if (!toggle) {
+      refetch()
+      // setIsLoading(true)
+    }
+  }, [toggle, selection])
 
   return isLoading || !called ? (
     <Loading text='결과를 불러오고 있어요..' />
@@ -134,7 +143,6 @@ const Search = () => {
             if (vars.categories?.length) {
               vars.categories = vars.categories.join(',')
             }
-            console.log(selection, 'selection')
 
             window.Kakao.Share.sendCustom({
               templateId: 91940,
