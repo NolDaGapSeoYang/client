@@ -90,6 +90,15 @@ const GlobalStyle = createGlobalStyle`
   li {
     list-style-type: none;
   }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
 `
 
 export default GlobalStyle
