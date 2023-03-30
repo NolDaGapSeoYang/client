@@ -6,7 +6,7 @@ interface IStore {
   isMobile: boolean
   toggle: boolean
   position?: GeolocationPosition | null
-  setToggle: () => void
+  setToggle: (flag?: boolean) => void
   setPosition: (p: GeolocationPosition) => void
 }
 
@@ -14,17 +14,26 @@ const store = create<IStore>()(
   persist(
     (set) => ({
       isMobile: getIsMobile(),
-      toggle: true,
+      toggle: false,
       position: null,
       setPosition: (position: GeolocationPosition) => set((state) => ({ ...state, position })),
-      setToggle: () => {
-        set((state) => ({ ...state, toggle: !state.toggle }))
+      setToggle: (flag) => {
+        set((state) => ({ ...state, toggle: flag !== undefined ? flag : !state.toggle }))
       },
     }),
 
     {
       name: 'uhdre-gamdi',
       storage: createJSONStorage(() => localStorage),
+      merge(persistedState: any, currentState) {
+        console.log(getIsMobile(), 'getIsMobile()')
+        return {
+          ...persistedState,
+          ...currentState,
+          isMobile: getIsMobile(),
+          toggle: false,
+        }
+      },
     },
   ),
 )

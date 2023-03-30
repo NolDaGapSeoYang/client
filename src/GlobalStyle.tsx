@@ -37,6 +37,8 @@ const GlobalStyle = createGlobalStyle`
     overflow-wrap: break-word;
     word-break: break-word;
     tab-size: 4;
+    --color-normal: #19191b;
+    --color-dark : #61646B;
   }
   body,
   #root {
@@ -99,6 +101,43 @@ const GlobalStyle = createGlobalStyle`
   }
   .mx {
     max-width: var(--mx, '100%');
+  }
+
+  .title-large  {
+    font-size: 2.2rem;
+    line-height: 3.5rem;
+  }
+  .title-medium {
+    font-size:1.6rem;
+    line-height: 2rem;
+  }
+  .title-small {
+    font-size: 1.3rem;
+    line-height: 2.8rem;
+  }
+
+  .body-small {
+    font-size: 1.1rem;
+    line-height : 2rem;
+  }
+
+
+  .button-text {
+    font-size: 1.6rem;
+    line-height: 2.8rem;
+  }
+  .filter-medium {
+    font-size:1.5rem;
+    line-height: 2.8rem;
+  }
+
+  .filter-smaill {
+    font-size: 1.5rem;
+    line-height: 2.8rem;
+  }
+
+  .text-gray {
+   color : #AFB1B6;
   }
 
 `

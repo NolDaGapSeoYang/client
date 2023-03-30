@@ -16,6 +16,7 @@ const Home = () => {
         MOBILE?
       </button>
       <Link to='detail'>Detail</Link>
+      <Link to='result'>result</Link>
     </div>
   )
 }

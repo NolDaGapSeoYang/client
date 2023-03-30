@@ -1,12 +1,14 @@
 import styled from 'styled-components'
 import { ReactComponent as Placeholder } from 'assets/placeholder.svg'
 import { ReactComponent as LocationIcon } from 'assets/location.svg'
+import store from 'store/index'
 const Search = () => {
+  const [toggle, setToggle] = store((state) => [state.toggle, state.setToggle])
   return (
     <div style={{ position: 'relative' }}>
       <h3 style={{ fontSize: '2.2rem' }}>@개의 여행지를 추천드려요.</h3>
       <Stickable>
-        <FilterList className='scrollbar-hide'>
+        <FilterList className='mx scrollbar-hide' onClick={() => setToggle()}>
           {Array.from({ length: 5 }, (_, i) => i + 1).map((item) => (
             <FilterItem key={item}>{item}</FilterItem>
           ))}
@@ -162,7 +164,7 @@ export default Search
 const Stickable = styled.div`
   position: sticky;
   top: 0;
-  z-index: 10;
+  z-index: 1;
 `
 const Buttons = styled.div`
   display: flex;
