@@ -75,6 +75,7 @@ const Home = Loadable(lazy(() => import('../screen/Home')))
 const Detail = Loadable(lazy(() => import('../screen/Detail')))
 const Convenient = Loadable(lazy(() => import('../screen/Convenient')))
 const Search = Loadable(lazy(() => import('../screen/Search')))
+const Tutorial = Loadable(lazy(() => import('../screen/Tutorial')))
 const Router = () => {
   return (
     <BrowserRouter>
@@ -85,6 +86,7 @@ const Router = () => {
           <Route path='result' element={<Search />} />
           <Route path='convenient' element={<Convenient />} />
           <Route path='detail' element={<Detail />} />
+          <Route path='option' element={<Tutorial />} />
         </Route>
       </Routes>
     </BrowserRouter>
