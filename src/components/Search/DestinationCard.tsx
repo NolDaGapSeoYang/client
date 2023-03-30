@@ -24,9 +24,7 @@ const DestinationCard: FC<any> = ({ node, maxLength, idx, fetchMore }) => {
         <LocationWrapper>
           <div style={{ display: 'flex', flexDirection: 'column' }}>
             <h4 className='title-medium text-bold'>{node.name}</h4>
-            <span className='title-small main-text'>
-              나와의 거리 {getDistance(node.distance)}km
-            </span>
+            <span className='title-small main-text'>나와의 거리 {getDistance(node.distance)}</span>
             <Address className='body-small2 text-subdark'>
               {node.address
                 .split(' ')
