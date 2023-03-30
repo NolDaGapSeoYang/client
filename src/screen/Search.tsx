@@ -78,24 +78,32 @@ const Search = () => {
     position: state.position,
   }))
   const selection = useGetSelection()
-  const {
-    data: { places } = {},
-    fetchMore,
-    loading,
-  } = useQuery<GetSearchListQuery>(SearchQuery, {
-    variables: {
+  const variables = useMemo(() => {
+    if (!position?.coords.latitude || !position?.coords.longitude) {
+      return { ...selection, first: PER_PAGE }
+    }
+    return {
       ...selection,
       coordinates: {
         latitude: position?.coords.latitude,
         longitude: position?.coords.longitude,
       },
       first: PER_PAGE,
-    } as GetSearchListQueryVariables,
+    }
+  }, [position])
+  const {
+    data: { places } = {},
+    fetchMore,
+    loading,
+    called,
+  } = useQuery<GetSearchListQuery>(SearchQuery, {
+    variables,
   })
 
   const hasNextPage = places?.pageInfo.hasNextPage
   const edges = useMemo(() => places?.edges, [places?.edges])
-  return loading ? (
+  console.log(loading, 'loading')
+  return loading || !called ? (
     <Loading text='결과를 불러오고 있어요..' />
   ) : (
     <Wrapper>
