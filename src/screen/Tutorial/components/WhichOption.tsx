@@ -84,11 +84,11 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
 `
-
 const SubTitle = styled.div`
-  background-color: #efeff0;
-  width: 8rem;
-  height: 3rem;
+  background-color: #61646b;
+  color: #fafafa;
+  width: 8.2rem;
+  height: 3.4rem;
   border-radius: 11rem;
   margin-top: 29px;
   margin-bottom: 18px;
@@ -97,6 +97,8 @@ const SubTitle = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  font-size: 1.5rem;
+  line-height: 2.8rem;
 `
 
 const Title = styled.h1`
@@ -133,7 +135,7 @@ const Option = styled.button<{ highlight: boolean }>`
   font-weight: 500;
   font-size: 16px;
   line-height: 24px;
-  ${(props) => (props.highlight ? 'border 2px solid #51BE9D;' : '')}
+  ${(props) => (props.highlight ? 'border 1px solid #51BE9D;' : '')}
 `
 
 const OptionName = styled.span`

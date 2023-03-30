@@ -32,7 +32,7 @@ const BarContainer = styled.div`
 const Bar = styled.div<ProgressBarProps>`
   height: 100%;
   border-radius: 10px;
-  background-color: #19191b;
+  background-color: #50b194;
   width: ${(props) => `${props.percent}%`};
 `
 

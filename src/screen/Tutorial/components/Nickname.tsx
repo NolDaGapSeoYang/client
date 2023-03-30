@@ -6,7 +6,7 @@ const Nickname = () => {
 
   return (
     <Wrapper>
-      <SubTitle>???</SubTitle>
+      <SubTitle>닉네임 입력</SubTitle>
       <Title>여행 닉네임을 알려주세요</Title>
       <InputBox>
         <label htmlFor='nickName'>
@@ -14,7 +14,6 @@ const Nickname = () => {
             name='nickName'
             id='nickName'
             type='name'
-            defaultValue={name}
             maxLength={5}
             placeholder='닉네임을 입력해주세요'
             onChange={(event) => setName({ key: 'myName', value: event.target.value })}
@@ -35,7 +34,7 @@ const InputBox = styled.div`
   justify-content: center;
   align-items: center;
   :focus-within {
-    border: 0.1rem solid blue;
+    border: 0.1rem solid #51be9d;
   }
   label {
     display: block;
@@ -74,11 +73,11 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
 `
-
 const SubTitle = styled.div`
-  background-color: #efeff0;
-  width: 8rem;
-  height: 3rem;
+  background-color: #61646b;
+  color: #fafafa;
+  width: 9.5rem;
+  height: 3.4rem;
   border-radius: 11rem;
   margin-top: 29px;
   margin-bottom: 18px;
@@ -87,6 +86,8 @@ const SubTitle = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  font-size: 1.5rem;
+  line-height: 2.8rem;
 `
 
 const Title = styled.h1`

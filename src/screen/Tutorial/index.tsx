@@ -177,7 +177,7 @@ const PrevBtn = styled.button`
 const NaxtBtn = styled.button`
   width: 100%;
   height: 4.187rem;
-  background-color: #19191b;
+  background-color: #51be9d;
   border-radius: 2rem;
   font-size: 1.3rem;
   line-height: 2rem;

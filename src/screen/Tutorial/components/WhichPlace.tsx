@@ -11,7 +11,7 @@ const WhichPlace: React.FC<PlaceProps> = ({ onClickCategory }) => {
   const selection = store((state) => state.selection)
   return (
     <Wrapper>
-      <SubTitle>필요 시설</SubTitle>
+      <SubTitle>선호 장소</SubTitle>
       <Title>어떤 옵션이 필요하신가요?</Title>
       <OptionWrapper>
         <Option
@@ -85,9 +85,10 @@ const Wrapper = styled.div`
 `
 
 const SubTitle = styled.div`
-  background-color: #efeff0;
-  width: 8rem;
-  height: 3rem;
+  background-color: #61646b;
+  color: #fafafa;
+  width: 8.2rem;
+  height: 3.4rem;
   border-radius: 11rem;
   margin-top: 29px;
   margin-bottom: 18px;
@@ -96,6 +97,8 @@ const SubTitle = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  font-size: 1.5rem;
+  line-height: 2.8rem;
 `
 
 const Title = styled.h1`
@@ -132,7 +135,7 @@ const Option = styled.button<{ highlight: boolean }>`
   font-weight: 500;
   font-size: 16px;
   line-height: 24px;
-  ${(props) => (props.highlight ? 'border 2px solid #51BE9D;' : '')}
+  ${(props) => (props.highlight ? 'border 1px solid #51BE9D;' : '')}
 `
 const OptionName = styled.span`
   font-size: 1.6rem;
