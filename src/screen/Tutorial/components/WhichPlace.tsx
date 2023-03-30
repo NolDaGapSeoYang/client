@@ -15,13 +15,13 @@ const WhichPlace: React.FC<PlaceProps> = ({ onClickCategory }) => {
       <Title>어떤 옵션이 필요하신가요?</Title>
       <OptionWrapper>
         <Option
-          highlight={!!selection.categories?.includes('자연 경관')}
+          highlight={!!selection.categories?.includes('자연경관')}
           onClick={() => {
-            onClickCategory('자연 경관')
+            onClickCategory('자연경관')
           }}
         >
           <Picture />
-          <OptionName>자연 경관</OptionName>
+          <OptionName>자연경관</OptionName>
           <Example>섬, 숲길/굴/폭포, 공원</Example>
         </Option>
         <Option

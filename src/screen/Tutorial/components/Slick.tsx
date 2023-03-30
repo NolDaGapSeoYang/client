@@ -26,16 +26,16 @@ function Slick({ children, className, autoplay = true, speed = 300, loop = true 
   const settings = useMemo<Settings>(
     () => ({
       dots: false,
-      // infinite: loop,
-      infinite: true,
+      infinite: loop,
+      // infinite: true,
       speed: 2000,
       arrows: false,
       slidesToShow: 3,
       slidesToScroll: 1,
-      autoplay: true,
-      autoplaySpeed: 3000,
-      // autoplay: Boolean(autoplay),
-      // autoplaySpeed: typeof autoplay === 'boolean' ? 3000 : autoplay,
+      // // autoplay: true,
+      // autoplaySpeed: 3000,
+      autoplay: Boolean(autoplay),
+      autoplaySpeed: typeof autoplay === 'boolean' ? 3000 : autoplay,
     }),
     [autoplay, loop, speed],
   )

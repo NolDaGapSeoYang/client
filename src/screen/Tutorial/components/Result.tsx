@@ -56,9 +56,6 @@ const Result = () => {
     <Loading text='결과를 불러오고 있어요..' />
   ) : (
     <Wrapper>
-      {/* <div>
-        <span>자연경관</span>
-      </div> */}
       <Item />
       <Title>
         {name}에게 어울리는 <br />총 {places?.totalCount}개의 <br />
