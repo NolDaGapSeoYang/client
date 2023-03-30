@@ -217,6 +217,9 @@ const NaxtBtn = styled.button`
   font-size: 1.3rem;
   line-height: 2rem;
   color: white;
+  &:disabled {
+    background-color: #61646b;
+  }
 `
 
 const Footer = styled.footer`
