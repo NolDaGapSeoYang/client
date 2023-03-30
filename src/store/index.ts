@@ -33,8 +33,8 @@ const store = create<Store>()(
       isMobile: getIsMobile(),
       toggle: false,
       position: null,
-      myName: '어드미',
-      sharedName: '어드미',
+      myName: '',
+      sharedName: '',
       setName: (options) => set((state) => ({ ...state, [options.key]: options.value })),
       selection: {
         categories: null,

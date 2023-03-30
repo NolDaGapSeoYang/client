@@ -14,6 +14,9 @@ import { Selection } from './types/selection'
 
 const Tutorial = () => {
   const [selection, setSelection] = store((state) => [state.selection, state.setSelection])
+  const [name, setName] = store((state) => [state.myName, state.setName])
+
+  console.log('!!!', name, name.length)
 
   const [step, setStep] = React.useState(1)
   const [percent, setPercent] = React.useState(20)
@@ -115,6 +118,9 @@ const Tutorial = () => {
       })
     }
   }
+  // step 1일때랑 name 빈문자열이 아닐 때 disabled 풀기
+
+  const disabledName = step === 1 || name !== ''
 
   return (
     <Mx className='mx'>
@@ -153,12 +159,13 @@ const Tutorial = () => {
       </Main>
       <Footer>
         {step > 1 ? <PrevBtn onClick={handlePrev}>이전</PrevBtn> : null}
-        <NaxtBtn onClick={handleNext}>다음</NaxtBtn>
+        <NaxtBtn onClick={handleNext} disabled={!disabledName}>
+          다음
+        </NaxtBtn>
       </Footer>
     </Mx>
   )
 }
-
 const Alert = styled.div`
   padding: 1.4rem 0;
   position: absolute;
