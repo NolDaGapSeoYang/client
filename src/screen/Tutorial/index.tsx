@@ -33,17 +33,42 @@ const Tutorial = () => {
 
     if (step === 5) {
       // window.localStorage.setItem('nickName', selection.nickName)
-
       // selection cleaning
       // selection에서 undefined인 key값을 모두 삭제해야함
-      const searchParams = new URLSearchParams({
-        elevatorAvailable: 'true',
-      })
 
-      for (const category of ['관광', '동네탐방']) {
-        searchParams.append('categories', category)
+      const searchParams = new URLSearchParams()
+
+      for (const key in selection) {
+        if (key === 'nickName') {
+          window.localStorage.setItem('nickName', selection.nickName)
+          continue
+        }
+
+        if (key === 'categories') {
+          // category가 undefinded면 넣으면 안됨
+          // category가 있는데, 비어있다면 넣으면 안됨
+          // 아니라면, 각 카테고리에 대해서
+          // searchParams.append('categories', category);
+        } else {
+          // boolean value만 있음
+          //@ts-expect-error key
+          const value = selection[key]
+
+          if (!!value) {
+            searchParams.set(key, value)
+          }
+        }
       }
-      navigate(`/result?${searchParams.toString()}`)
+
+      console.log(searchParams.toString())
+
+      // const searchParams = new URLSearchParams({
+      //   elevatorAvailable: 'true',
+      // })
+      // for (const category of ['관광', '동네탐방']) {
+      //   searchParams.append('categories', category)
+      // }
+      // navigate(`/result?${searchParams.toString()}`)
     } else {
       setStep((prevStep) => prevStep + 1)
     }
