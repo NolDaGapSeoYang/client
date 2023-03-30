@@ -1,29 +1,22 @@
-import React from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import styled, { withTheme } from 'styled-components';
+import React from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
+import styled, { withTheme } from 'styled-components'
 
-import HasGaurdian from './components/HasGuardian';
-import Nickname from './components/Nickname';
-import ProgressBar from './components/ProgressBar';
-import Result from './components/Result';
-import WhichOption from './components/WhichOption';
-import WhichPlace from './components/WhichPlace';
-
-type Selection = {
-  needCompanion: boolean;
-  nickName: string;
-  facilities?: string[];
-  categories?: string[];
-}
+import HasGaurdian from './components/HasGuardian'
+import Nickname from './components/Nickname'
+import ProgressBar from './components/ProgressBar'
+import Result from './components/Result'
+import WhichOption from './components/WhichOption'
+import WhichPlace from './components/WhichPlace'
+import { Selection } from './types/selection'
 
 const Tutorial = () => {
-
   const [selection, setSelection] = React.useState<Selection>({
     needCompanion: false,
-    nickName: ""
-  });
+    nickName: '',
+  })
 
-  const [step, setStep] = React.useState(1);
+  const [step, setStep] = React.useState(1)
   const [percent, setPercent] = React.useState(20)
 
   const navigate = useNavigate()
@@ -33,21 +26,17 @@ const Tutorial = () => {
     setPercent((prevPercent) => prevPercent + 20)
 
     if (step === 5) {
-      window.localStorage.setItem('nickName', selection.nickName);
-      
-
+      window.localStorage.setItem('nickName', selection.nickName)
 
       const searchParams = new URLSearchParams({
         needCompanion: selection.needCompanion ? 'true' : 'false',
         facilities: selection.facilities?.join(',') || '',
         categories: selection.categories?.join(',') || '',
       })
-      navigate(`/result?${searchParams.toString()}`);
+      navigate(`/result?${searchParams.toString()}`)
     } else {
       setStep((prevStep) => prevStep + 1)
     }
-    // navigate(`/option/${String(intParam + 1)}`)
-    // navigate(`/option/`)
   }
 
   const handlePrev = () => {
@@ -60,6 +49,12 @@ const Tutorial = () => {
     }
   }
 
+  const onChangeNeedCompanion = (needCompanion: boolean) => {
+    setSelection((prev) => ({
+      ...prev,
+      needCompanion,
+    }))
+  }
 
   return (
     <Mx className='mx'>
@@ -67,22 +62,20 @@ const Tutorial = () => {
         <ProgressBar percent={percent} />
       </Header>
       <Main>
-        {step=== 1 ? (
-          <HasGaurdian />
-        ) : step=== 2 ? (
+        {step === 1 ? (
+          <HasGaurdian selection={selection} onChangeNeedCompanion={onChangeNeedCompanion} />
+        ) : step === 2 ? (
           <Nickname />
-        ) : step=== 3 ? (
+        ) : step === 3 ? (
           <WhichOption />
-        ) : step=== 4 ? (
+        ) : step === 4 ? (
           <WhichPlace />
-        ) : step=== 5 ? (
+        ) : step === 5 ? (
           <Result />
         ) : null}
       </Main>
       <Footer>
-        {step > 1? (
-          <PrevBtn onClick={handlePrev}>이전</PrevBtn>
-        ) : null}
+        {step > 1 ? <PrevBtn onClick={handlePrev}>이전</PrevBtn> : null}
         <NaxtBtn onClick={handleNext}>다음</NaxtBtn>
       </Footer>
     </Mx>

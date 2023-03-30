@@ -1,17 +1,31 @@
 import React from 'react'
 import styled from 'styled-components'
 import { ReactComponent as Picture } from 'assets/picture.svg'
-
-const HasGaurdian = () => {
+import { Selection } from '../types/selection'
+type HasGaurdianProps = {
+  selection: Selection // 동행 여부 변경
+  onChangeNeedCompanion: (needCompanion: boolean) => void
+}
+const HasGaurdian: React.FC<HasGaurdianProps> = ({ selection, onChangeNeedCompanion }) => {
   return (
     <Wrapper>
       <SubTitle>동행 여부</SubTitle>
       <Title>보호자와 동행하시나요?</Title>
       <OptionWrapper>
-        <Option>
+        <Option
+          highlight={!selection.needCompanion}
+          onClick={() => {
+            onChangeNeedCompanion(false)
+          }}
+        >
           <Picture />
         </Option>
-        <Option>
+        <Option
+          highlight={selection.needCompanion}
+          onClick={() => {
+            onChangeNeedCompanion(true)
+          }}
+        >
           <Picture />
         </Option>
       </OptionWrapper>
@@ -60,7 +74,7 @@ const OptionWrapper = styled.div`
   flex: 1;
   /* margin-bottom: 36rem; */
 `
-const Option = styled.button`
+const Option = styled.button<{ highlight: boolean }>`
   /* width: 15rem; */
   flex: 1;
   aspect-ratio: 1.3/1;
@@ -68,6 +82,7 @@ const Option = styled.button`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+
   /* height: 11rem; */
   background-color: #efeff0;
   border-radius: 1rem;
@@ -75,6 +90,7 @@ const Option = styled.button`
   font-weight: 500;
   font-size: 16px;
   line-height: 24px;
+  ${(props) => (props.highlight ? 'border 2px solid green;' : '')}
 `
 const OptionName = styled.span`
   display: block;
