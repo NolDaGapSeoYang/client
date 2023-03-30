@@ -18,7 +18,7 @@ const Wrapper = styled.div`
   width: 100%;
   padding: 0rem 2rem 2rem;
   /* height: 100%; */
-  border-bottom: 0.1rem solid red; // 작업 후 EFEFF0 로 변경
+  border-bottom: 0.1rem solid #efeff0; // 작업 후 EFEFF0 로 변경
   /* background-color: yellow; */
 `
 

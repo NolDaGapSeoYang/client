@@ -17,27 +17,37 @@ const Tutorial = () => {
   }
 
   return (
-    <div>
+    <Mx className='mx'>
       <Header>
         <ProgressBar percent={percent} />
       </Header>
-      {param.type === '1' ? (
-        <HasGaurdin />
-      ) : param.type === '2' ? (
-        <WhichOption />
-      ) : param.type === '3' ? (
-        <WhichPlace />
-      ) : param.type === 'result' ? (
-        <Result />
-      ) : null}
-      <NaxtBtn onClick={handleIncrement}>다음</NaxtBtn>
-    </div>
+      <Main>
+        {param.type === '1' ? (
+          <HasGaurdin />
+        ) : param.type === '2' ? (
+          <WhichOption />
+        ) : param.type === '3' ? (
+          <WhichPlace />
+        ) : param.type === 'result' ? (
+          <Result />
+        ) : null}
+      </Main>
+      <NaxtBtn onClick={handleIncrement} disabled={percent >= 100}>
+        다음
+      </NaxtBtn>
+    </Mx>
   )
 }
 
-const Wrapper = styled.div`
+// const Wrapper = styled.div`
+//   display: flex;
+//   min-height: 100vh;
+//   flex-direction: column;
+// `
+
+const Mx = styled.div`
   display: flex;
-  min-height: 100vh;
+  min-height: calc(var(--vh, 1vh) * 100);
   flex-direction: column;
 `
 
@@ -46,6 +56,9 @@ const Header = styled.header`
   max-width: inherit;
   position: relative;
   left: -2rem;
+`
+const Main = styled.main`
+  flex: 1;
 `
 
 const NaxtBtn = styled.button`
