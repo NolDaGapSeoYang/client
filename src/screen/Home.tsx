@@ -1,30 +1,28 @@
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import { Link } from 'react-router-dom'
+import styled from 'styled-components'
 
 const Home = () => {
   return (
     <Container>
-      <Heading>어드레감디</Heading>
+      <SubTitle>제주 휠체어 관광지 250곳 중</SubTitle>
+      <Heading>어드레감디?</Heading>
+
+      {/* <Description
+        style={{
+          marginTop: '12.5rem',
+        }}
+      >
+        ‘어디로 갈까?’의 제주 방언으로,
+      </Description> */}
 
       <Description
         style={{
           marginTop: '12.5rem',
         }}
       >
-        ‘어디로 갈까?’의 제주 방언으로,
-      </Description>
-
-      <Description
-        style={{
-          marginTop: '3.5rem',
-        }}
-      >
-        휠체어를 타고도
+        원하는 조건 선택만 하면,
         <br />
-        제주도의 @곳을 편안하게
-        <br />
-        방문할 수 있다.
-        <br />
+        나에게 딱 맞는 장소를 추천해요!
       </Description>
 
       <StartLink to='/option'>시작하기</StartLink>
@@ -43,14 +41,18 @@ const Container = styled.div`
 
   padding: 0 2rem;
 `
+const SubTitle = styled.h4`
+  margin-top: 10rem;
+  font-size: 2.2rem;
+  line-height: 3.5rem;
+  font-weight: 500;
+`
 
 const Heading = styled.h1`
   font-style: normal;
   font-weight: 700;
   font-size: 4.4rem;
   line-height: 5.3rem;
-
-  margin-top: 10rem;
 `
 
 const Description = styled.p`

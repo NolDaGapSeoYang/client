@@ -5,6 +5,8 @@ import { ReactComponent as Picture } from 'assets/picture.svg'
 import { ReactComponent as Local } from 'assets/local.svg'
 import { ReactComponent as Nature } from 'assets/nature.svg'
 import { ReactComponent as Tracking } from 'assets/tracking.svg'
+import { ReactComponent as Sea } from 'assets/sea.svg'
+import { ReactComponent as Art } from 'assets/art.svg'
 
 import store from 'store/index'
 import { SubTitle } from './HasGuardian'
@@ -45,7 +47,7 @@ const WhichPlace: React.FC<PlaceProps> = ({ onClickCategory }) => {
             onClickCategory('바닷가')
           }}
         >
-          <Picture />
+          <Sea />
           <OptionName>바닷가</OptionName>
           <Example>바다, 해변, 해안</Example>
         </Option>
@@ -65,7 +67,7 @@ const WhichPlace: React.FC<PlaceProps> = ({ onClickCategory }) => {
             onClickCategory('문화예술')
           }}
         >
-          <Picture />
+          <Art />
           <OptionName>문화예술</OptionName>
           <Example>전시, 테마파크, 박물관, 공연</Example>
         </Option>
