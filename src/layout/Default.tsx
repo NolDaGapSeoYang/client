@@ -4,15 +4,10 @@ import styled from 'styled-components'
 import { ReactComponent as Baby } from 'assets/baby.svg'
 import { ReactComponent as Reset } from 'assets/reset.svg'
 import store from 'store/index'
-import { gql, useQuery } from '@apollo/client'
-
-import { GetPlaceQuery } from 'api/graphql'
-import { placeInfoFragment } from '../fragments'
 import {
   AnimatePresence,
   easeInOut,
   motion,
-  useDragControls,
   useMotionValue,
   useTransform,
   Variants,
@@ -34,18 +29,7 @@ const SliderVariants: Variants = {
   },
 }
 
-const q = gql`
-  query getPlace {
-    places {
-      ...PlaceInfo
-      __typename
-    }
-  }
-  ${placeInfoFragment}
-`
-
 const Default = () => {
-  const { data } = useQuery<GetPlaceQuery>(q)
   const { setPosition, toggle, setToggle } = store((state) => ({
     toggle: state.toggle,
     setPosition: state.setPosition,
@@ -105,7 +89,6 @@ const Default = () => {
       setSliderHeight((prev) => sliderRef.current.clientHeight)
     }
   }, [sliderRef.current?.clientHeight])
-  console.log(sliderHeight, 'sliderHeight')
   return (
     <Main>
       <AnimatePresence mode='popLayout'>
@@ -145,41 +128,52 @@ const Default = () => {
               <Content>
                 <FilterList>
                   <FilterHeader>
-                    <span className='title-small'>옵션</span>
-                    <button>
-                      <span className='body-small text-gray'>모두 선택</span>
-                    </button>
+                    <span className='title-small main-text'>동행 여부</span>
                   </FilterHeader>
                   <FilterItems>
-                    <FilterItem>1</FilterItem>
-                    <FilterItem>1</FilterItem>
-                    <FilterItem>1</FilterItem>
-                    <FilterItem>1</FilterItem>
-                    <FilterItem>1</FilterItem>
-                    <FilterItem>1</FilterItem>
+                    <FilterItem className='filter-small'>1</FilterItem>
+                    <FilterItem className='filter-small'>1</FilterItem>
                   </FilterItems>
                 </FilterList>
                 <FilterList>
                   <FilterHeader>
-                    <span className='title-small'>옵션</span>
+                    <span className='title-small main-text'>옵션</span>
                     <button>
                       <span className='body-small text-gray'>모두 선택</span>
                     </button>
                   </FilterHeader>
                   <FilterItems>
-                    <FilterItem>1</FilterItem>
-                    <FilterItem>1</FilterItem>
-                    <FilterItem>1</FilterItem>
-                    <FilterItem>1</FilterItem>
-                    <FilterItem>1</FilterItem>
-                    <FilterItem>1</FilterItem>
+                    <FilterItem className='filter-small'>1</FilterItem>
+                    <FilterItem className='filter-small'>1</FilterItem>
+                    <FilterItem className='filter-small'>1</FilterItem>
+                    <FilterItem className='filter-small'>1</FilterItem>
+                    <FilterItem className='filter-small'>1</FilterItem>
+                    <FilterItem className='filter-small'>1</FilterItem>
+                  </FilterItems>
+                </FilterList>
+                <FilterList>
+                  <FilterHeader>
+                    <span className='title-small main-text'>옵션</span>
+                    <button>
+                      <span className='body-small text-gray'>모두 선택</span>
+                    </button>
+                  </FilterHeader>
+                  <FilterItems>
+                    <FilterItem className='filter-small'>1</FilterItem>
+                    <FilterItem className='filter-small'>1</FilterItem>
+                    <FilterItem className='filter-small'>1</FilterItem>
+                    <FilterItem className='filter-small'>1</FilterItem>
+                    <FilterItem className='filter-small'>1</FilterItem>
+                    <FilterItem className='filter-small'>1</FilterItem>
                   </FilterItems>
                 </FilterList>
               </Content>
               <Footer className='mx' style={{ justifyContent: 'space-between' }}>
                 <div style={{ display: 'flex', alignItems: 'center', columnGap: '0.5rem' }}>
                   <Reset style={{ width: '2.2rem', stroke: 'gray' }} />
-                  <span className='title-medium text-gray'>초기화</span>
+                  <span className='title-medium text-gray' style={{ textDecoration: 'underline', textUnderlineOffset : '5px' }}>
+                    초기화
+                  </span>
                 </div>
                 <SearchButton className='button-text'>@개 여행지 보기</SearchButton>
               </Footer>
@@ -203,10 +197,10 @@ const SnapBars = styled(motion.div)`
   transform: translateX(-50%);
 `
 const SnapBar = styled.div`
-  width: 5rem;
+  width: 3.4rem;
   height: 0.4rem;
   border-radius: 999rem;
-  background-color: gray;
+  background-color: #efeff0;
 `
 
 const Content = styled.div`
@@ -231,12 +225,14 @@ const Footer = styled.div`
 
 const FilterList = styled.div`
   &:first-child {
-    padding-bottom: 2.2rem;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.178);
+    padding-bottom: 1.4rem;
+    border-bottom: 1px solid #efeff0;
   }
-
   + div {
-    padding: 2.2rem 0;
+    padding: 1.4rem 0;
+    &:not(:last-child) {
+      border-bottom: 1px solid #efeff0;
+    }
   }
 `
 const FilterItems = styled.div`
@@ -247,8 +243,8 @@ const FilterItems = styled.div`
 const FilterItem = styled.div`
   display: flex;
   justify-content: center;
-  padding: 0.5rem 0;
-  background-color: gray;
+  /* padding: 0.5rem 0; */
+  background-color: #efeff0;
   border-radius: 999rem;
   align-items: center;
 `
@@ -285,8 +281,9 @@ const Slider = styled(motion.div)`
 
 const Main = styled.main`
   max-width: 412px;
+  width: 100vw;
   margin: 0 auto;
-  padding: 4rem 2rem;
+  /* padding: 4rem 2rem; */
 `
 
 const Fallback = styled.div`

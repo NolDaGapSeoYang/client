@@ -4,11 +4,12 @@ const GlobalStyle = createGlobalStyle`
   @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
   html {
     font-size: 62.5%; // 1rem = 10px 로 변경
+    color : hsl(240, 3.8461538461538463%, 10.196078431372548%);
     width: 100%;
     max-height: calc(var(--var,1vh) * 100);
   }
   body {
-    background-color: #f9f9f9;
+
     font-family: Pretendard, -apple-system, BlinkMacSystemFont, 'Segoe UI',
       'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
       'Helvetica Neue', sans-serif;
@@ -131,13 +132,31 @@ const GlobalStyle = createGlobalStyle`
     line-height: 2.8rem;
   }
 
-  .filter-smaill {
+  .filter-small {
     font-size: 1.5rem;
     line-height: 2.8rem;
   }
 
   .text-gray {
    color : #AFB1B6;
+  }
+
+  .text-subdark {
+    color :#61646B;
+  }
+
+  .main-text {
+    color : #4DB495;
+  }
+
+  .body-small2 {
+    font-size : 0.9rem;
+    line-height:  1.6rem;
+  }
+
+  .px {
+    padding-left :2rem;
+    padding-right: 2rem;
   }
 
 `
