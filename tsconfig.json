@@ -2,6 +2,8 @@
   "compilerOptions": {
     "paths": {
       "routes/*":["./src/routes/*"],
+      "constants/*":["./src/constants/*"],
+      "hooks/*":["./src/hooks/*"],
       "api/*":["./src/api/*"],
       "gql/*":["./src/gql/*"],
       "components/*":["./src/components/*"],

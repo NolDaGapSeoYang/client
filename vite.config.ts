@@ -30,6 +30,10 @@ export default ({ mode }) => {
           replacement: path.resolve(__dirname, 'src/store'),
         },
         {
+          find: 'constants',
+          replacement: path.resolve(__dirname, 'src/constants'),
+        },
+        {
           find: 'apollo',
           replacement: path.resolve(__dirname, 'apollo'),
         },
@@ -44,6 +48,14 @@ export default ({ mode }) => {
         {
           find: 'api',
           replacement: path.resolve(__dirname, 'src/api'),
+        },
+        {
+          find: 'hooks',
+          replacement: path.resolve(__dirname, 'src/hooks'),
+        },
+        {
+          find: 'routes',
+          replacement: path.resolve(__dirname, 'src/routes'),
         },
         {
           find: 'types',
