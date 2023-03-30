@@ -1,9 +1,5 @@
-import { useEffect, useRef, useState } from 'react'
-import { Outlet } from 'react-router-dom'
-import styled from 'styled-components'
-import { ReactComponent as Baby } from 'assets/baby.svg'
-import { ReactComponent as Reset } from 'assets/reset.svg'
-import store from 'store/index'
+import { ReactComponent as Baby } from 'assets/baby.svg';
+import { ReactComponent as Reset } from 'assets/reset.svg';
 import {
   AnimatePresence,
   easeInOut,
@@ -11,7 +7,11 @@ import {
   useMotionValue,
   useTransform,
   Variants,
-} from 'framer-motion'
+} from 'framer-motion';
+import { useEffect, useRef, useState } from 'react';
+import { Outlet } from 'react-router-dom';
+import store from 'store/index';
+import styled from 'styled-components';
 
 const SliderVariants: Variants = {
   exit: {
