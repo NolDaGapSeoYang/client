@@ -19,6 +19,7 @@ const Tutorial = () => {
     elevatorAvailable: false,
     toiletAvailable: false,
     pathExists: false,
+    categories: [],
   })
 
   const [step, setStep] = React.useState(1)
@@ -35,7 +36,6 @@ const Tutorial = () => {
 
       // selection cleaning
       // selection에서 undefined인 key값을 모두 삭제해야함
-
       const searchParams = new URLSearchParams({
         elevatorAvailable: 'true',
       })
@@ -43,7 +43,6 @@ const Tutorial = () => {
       for (const category of ['관광', '동네탐방']) {
         searchParams.append('categories', category)
       }
-
       navigate(`/result?${searchParams.toString()}`)
     } else {
       setStep((prevStep) => prevStep + 1)
@@ -99,6 +98,24 @@ const Tutorial = () => {
     }))
   }
 
+  const onClickCategory = (category: string) => {
+    const prevCategories = selection.categories || []
+    if (!prevCategories.includes(category)) {
+      const newCategories = [...prevCategories, category]
+
+      setSelection((prev) => ({
+        ...prev,
+        categories: newCategories,
+      }))
+    } else {
+      const newCategories = prevCategories.filter((pCategory) => pCategory !== category)
+      setSelection((prev) => ({
+        ...prev,
+        categories: newCategories,
+      }))
+    }
+  }
+
   return (
     <Mx className='mx'>
       <Header>
@@ -119,7 +136,7 @@ const Tutorial = () => {
             onChangeElevator={onChangeElevator}
           />
         ) : step === 4 ? (
-          <WhichPlace />
+          <WhichPlace selection={selection} onClickCategory={onClickCategory} />
         ) : step === 5 ? (
           <Result />
         ) : null}

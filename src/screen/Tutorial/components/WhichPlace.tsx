@@ -1,39 +1,74 @@
 import React from 'react'
 import styled from 'styled-components'
+import { Selection } from '../types/selection'
 import { ReactComponent as Picture } from 'assets/picture.svg'
+type PlaceProps = {
+  selection: Selection
+  onClickCategory: (category: string) => void
+}
 
-const WhichPlace = () => {
+const WhichPlace: React.FC<PlaceProps> = ({ selection, onClickCategory }) => {
   return (
     <Wrapper>
       <SubTitle>필요 시설</SubTitle>
       <Title>어떤 옵션이 필요하신가요?</Title>
       <OptionWrapper>
-        <Option>
+        <Option
+          highlight={!!selection.categories?.includes('자연 경관')}
+          onClick={() => {
+            onClickCategory('자연 경관')
+          }}
+        >
           <Picture />
           <OptionName>자연 경관</OptionName>
           <Example>섬, 숲길/굴/폭포, 공원</Example>
         </Option>
-        <Option>
+        <Option
+          highlight={!!selection.categories?.includes('트레킹')}
+          onClick={() => {
+            onClickCategory('트레킹')
+          }}
+        >
           <Picture />
           <OptionName>트레킹</OptionName>
           <Example>오름, 산, 올레</Example>
         </Option>
-        <Option>
+        <Option
+          highlight={!!selection.categories?.includes('바닷가')}
+          onClick={() => {
+            onClickCategory('바닷가')
+          }}
+        >
           <Picture />
           <OptionName>바닷가</OptionName>
           <Example>바다, 해변, 해안</Example>
         </Option>
-        <Option>
+        <Option
+          highlight={!!selection.categories?.includes('동네 구경')}
+          onClick={() => {
+            onClickCategory('동네 구경')
+          }}
+        >
           <Picture />
           <OptionName>동네 구경</OptionName>
           <Example>시장, 마을</Example>
         </Option>
-        <Option>
+        <Option
+          highlight={!!selection.categories?.includes('문화예술')}
+          onClick={() => {
+            onClickCategory('문화예술')
+          }}
+        >
           <Picture />
           <OptionName>문화예술</OptionName>
           <Example>전시, 테마파크, 박물관, 공연</Example>
         </Option>
-        <Option>
+        <Option
+          highlight={!!selection.categories?.includes('쇼핑')}
+          onClick={() => {
+            onClickCategory('쇼핑')
+          }}
+        >
           <Picture />
           <OptionName>쇼핑</OptionName>
           <Example>면세점, 기념품샵</Example>
@@ -81,7 +116,7 @@ const OptionWrapper = styled.div`
   row-gap: 1.5rem;
   /* margin-bottom: 36rem; */
 `
-const Option = styled.button`
+const Option = styled.button<{ highlight: boolean }>`
   /* width: 15rem; */
   width: 48%;
   aspect-ratio: 1.3/1;
@@ -96,6 +131,7 @@ const Option = styled.button`
   font-weight: 500;
   font-size: 16px;
   line-height: 24px;
+  ${(props) => (props.highlight ? 'border 2px solid #51BE9D;' : '')}
 `
 const OptionName = styled.span`
   font-size: 1.6rem;
