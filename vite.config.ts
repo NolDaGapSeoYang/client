@@ -9,6 +9,7 @@ export default ({ mode }) => {
     plugins: [react(), svgr()],
     server: {
       port: 3000,
+      host: true,
     },
 
     resolve: {

@@ -7,9 +7,10 @@ const Home = () => {
       HOME
       <button
         onClick={() =>
-          linkToKaKaoMap({
-            latitude: 37.4979502,
-            longitude: 127.0276368,
+          window.Kakao.Share.sendCustom({
+            templateId: 91940,
+
+            callback: () => console.log('???'),
           })
         }
       >

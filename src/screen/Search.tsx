@@ -107,7 +107,6 @@ const Search = () => {
       setIsLoading(false)
     },
   })
-
   const hasNextPage = places?.pageInfo.hasNextPage
   const edges = useMemo(() => places?.edges, [places?.edges])
 
@@ -129,24 +128,25 @@ const Search = () => {
           내 주변 가까운 <br />
           {places?.totalCount}개의 추천 관광지
         </h3>
-        <KakaoIcon
+        <div
           onClick={() => {
-            console.log(edges[0].node.thumbnails[0])
-            console.log(edges[1].node.thumbnails[0])
-            console.log(edges[2].node.thumbnails[0])
+            console.log('onClick')
             window.Kakao.Share.sendCustom({
               templateId: 91940,
               templateArgs: {
-                name: '???',
                 thumb_1: edges[0].node.thumbnails[0],
                 thumb_2: edges[1].node.thumbnails[0],
                 thumb_3: edges[2].node.thumbnails[0],
+                name: 'test',
+                ...selection,
               },
 
               callback: () => console.log('???'),
             })
           }}
-        />
+        >
+          <KakaoIcon />
+        </div>
       </div>
 
       <Stickable>

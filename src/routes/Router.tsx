@@ -82,9 +82,9 @@ const Router = () => {
       <Routes>
         <Route path='' element={<Default />}>
           <Route index element={<Home />} />
+          <Route path='result' element={<Search />} />
           <Route path='convenient' element={<Convenient />} />
           <Route path='detail' element={<Detail />} />
-          <Route path='result' element={<Search />} />
         </Route>
       </Routes>
     </BrowserRouter>

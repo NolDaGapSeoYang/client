@@ -8,7 +8,15 @@ const useGetSelection = () => {
     (state: IStore) =>
       Object.keys(state.selection).reduce((acc, cur) => {
         if (param.get(cur) || state.selection[cur] || cur === 'needCompanion') {
-          return { ...acc, [cur]: param.get(cur) || state.selection[cur] }
+          const value = param.get(cur) || state.selection[cur]
+          const obj = {
+            [cur]: cur === 'needCompanion' ? value === 'true' : value,
+          }
+          console.log(obj)
+          return {
+            ...acc,
+            ...obj,
+          }
         }
         return { ...acc }
       }, {}),
