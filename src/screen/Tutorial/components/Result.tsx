@@ -2,14 +2,37 @@ import { useQuery } from '@apollo/client'
 import { GetSearchListQuery } from 'api/graphql'
 import { PER_PAGE } from 'constants/common'
 import useGetSelection from 'hooks/useGetSelection'
-import React, { useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { Loading } from 'routes/Router'
 import store from 'store/index'
-
+import Slider from 'react-slick'
 import styled from 'styled-components'
 import { SearchQuery } from '../../Search'
 import Item from './Item'
-
+import { AnimatePresence, easeIn, motion, Variants } from 'framer-motion'
+const SliderVariants: Variants = {
+  initial: {
+    x: 200,
+    transition: {
+      type: 'tween',
+      ease: easeIn,
+    },
+  },
+  animate: {
+    x: 0,
+    transition: {
+      type: 'tween',
+      ease: easeIn,
+    },
+  },
+  exit: {
+    x: -200,
+    transition: {
+      type: 'tween',
+      ease: easeIn,
+    },
+  },
+}
 const Result = () => {
   const [isLoading, setIsLoading] = useState(true)
   const { selection, setToggle, position } = store((state) => ({
@@ -38,7 +61,6 @@ const Result = () => {
       first: PER_PAGE,
     }
   }, [position])
-  console.log(variables, 'variables')
   const {
     data: { places } = {},
     fetchMore,
@@ -51,12 +73,42 @@ const Result = () => {
       setIsLoading(false)
     },
   })
-  const name = store((state) => state.myName)
+  const [name, categories] = store((state) => [state.myName, state.selection.categories])
+
+  const [idx, setIdx] = useState(0)
+  console.log(categories, 'categories')
+  console.log(idx, 'idx')
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      if (categories?.length) {
+        setIdx((prev) => (prev + 1) % categories?.length)
+      }
+    }, 1000)
+    return () => {
+      clearInterval(intervalId)
+    }
+  }, [])
   return isLoading || !called ? (
     <Loading text='결과를 불러오고 있어요..' />
   ) : (
     <Wrapper>
-      <Item />
+      <div style={{ display: 'flex', overflowX: 'hidden' }}>
+        <AnimatePresence mode='sync'>
+          {categories?.length ? (
+            <Icon
+              variants={SliderVariants}
+              initial='initial'
+              animate='animate'
+              exit='exit'
+              key={categories[idx]}
+            >
+              {categories[idx]}
+            </Icon>
+          ) : null}
+        </AnimatePresence>
+      </div>
+
       <Title>
         {name}에게 <br />
         어울리는 총 {places?.totalCount}개의 <br />
@@ -82,4 +134,5 @@ const Title = styled.span`
   height: 16.5rem;
 `
 
+const Icon = styled(motion.div)``
 export default Result
