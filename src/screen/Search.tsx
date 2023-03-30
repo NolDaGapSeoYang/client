@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { ReactComponent as Kakao } from 'assets/kakao.svg'
+import { ReactComponent as KakaoIcon } from 'assets/kakao.svg'
 
 import store from 'store/index'
 import { gql, useQuery } from '@apollo/client'
@@ -9,6 +9,7 @@ import { GetSearchListQuery, GetSearchListQueryVariables } from 'api/graphql'
 import { useMemo } from 'react'
 import DestinationCard from 'components/Search/DestinationCard'
 import { Loading } from 'routes/Router'
+import { useParams, useSearchParams } from 'react-router-dom'
 
 const SearchQuery = gql`
   query GetSearchList(
@@ -77,6 +78,7 @@ const Search = () => {
     setToggle: state.setToggle,
     position: state.position,
   }))
+
   const selection = useGetSelection()
   const variables = useMemo(() => {
     if (!position?.coords.latitude || !position?.coords.longitude) {
@@ -102,7 +104,7 @@ const Search = () => {
 
   const hasNextPage = places?.pageInfo.hasNextPage
   const edges = useMemo(() => places?.edges, [places?.edges])
-  console.log(loading, 'loading')
+
   return loading || !called ? (
     <Loading text='결과를 불러오고 있어요..' />
   ) : (
@@ -121,7 +123,21 @@ const Search = () => {
           내 주변 가까운 <br />
           {places?.totalCount}개의 추천 관광지
         </h3>
-        <Kakao />
+        <KakaoIcon
+          onClick={() => {
+            window.Kakao.Share.sendCustom({
+              templateId: 91940,
+              templateArgs: {
+                name: '???',
+                thumb_1: edges[0].node.thumbnails[0],
+                thumb_2: edges[1].node.thumbnails[0],
+                thumb_3: edges[2].node.thumbnails[0],
+              },
+              installTalk: true,
+              callback: () => console.log('???'),
+            })
+          }}
+        />
       </div>
 
       <Stickable>
