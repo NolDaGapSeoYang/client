@@ -192,7 +192,7 @@ const Search = () => {
         {edges
           ? edges.map(({ node }, i) => (
               <DestinationCard
-                key={node.id}
+                key={node.id + i + ''}
                 node={node}
                 idx={i}
                 fetchMore={() => {

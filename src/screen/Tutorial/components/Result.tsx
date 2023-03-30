@@ -10,32 +10,36 @@ import styled from 'styled-components'
 import { SearchQuery } from '../../Search'
 import Item from './Item'
 import { AnimatePresence, easeIn, motion, Variants } from 'framer-motion'
+import option from 'assets/option'
 const SliderVariants: Variants = {
   initial: {
     x: 200,
     transition: {
       type: 'tween',
-      ease: easeIn,
+      ease: 'circOut',
+      duration: 2,
     },
   },
   animate: {
     x: 0,
     transition: {
       type: 'tween',
-      ease: easeIn,
+      ease: 'circOut',
+      duration: 2,
     },
   },
   exit: {
     x: -200,
     transition: {
       type: 'tween',
-      ease: easeIn,
+      ease: 'circOut',
+      duration: 2,
     },
   },
 }
 const Result = () => {
   const [isLoading, setIsLoading] = useState(true)
-  const { selection, setToggle, position } = store((state) => ({
+  const { selection, position } = store((state) => ({
     setToggle: state.setToggle,
     position: state.position,
     selection: state.selection,
@@ -61,12 +65,7 @@ const Result = () => {
       first: PER_PAGE,
     }
   }, [position])
-  const {
-    data: { places } = {},
-    fetchMore,
-    loading,
-    called,
-  } = useQuery<GetSearchListQuery>(SearchQuery, {
+  const { data: { places } = {}, called } = useQuery<GetSearchListQuery>(SearchQuery, {
     variables,
     notifyOnNetworkStatusChange: true,
     onCompleted(data) {
@@ -75,26 +74,52 @@ const Result = () => {
   })
   const [name, categories] = store((state) => [state.myName, state.selection.categories])
 
-  const [idx, setIdx] = useState(0)
-  console.log(categories, 'categories')
-  console.log(idx, 'idx')
-
   useEffect(() => {
     const intervalId = setInterval(() => {
-      if (categories?.length) {
-        setIdx((prev) => (prev + 1) % categories?.length)
-      }
-    }, 1000)
+      paginate(1)
+    }, 5000)
     return () => {
       clearInterval(intervalId)
     }
   }, [])
+
+  const variants = {
+    enter: (direction: number) => {
+      return {
+        x: direction > 0 ? '200%' : '-200%',
+        opacity: 0,
+      }
+    },
+    center: {
+      zIndex: 1,
+      x: 0,
+      opacity: 1,
+    },
+    exit: (direction: number) => {
+      return {
+        zIndex: 0,
+        x: direction < 0 ? '-200%' : '200%',
+        opacity: 0,
+      }
+    },
+  }
+
+  const swipeConfidenceThreshold = 10000
+  const swipePower = (offset: number, velocity: number) => {
+    return Math.abs(offset) * velocity
+  }
+
+  const [[page, direction], setPage] = useState([0, 0])
+  const paginate = (newDirection: number) => {
+    setPage((prev) => [prev[0] + newDirection, newDirection])
+  }
+
   return isLoading || !called ? (
     <Loading text='결과를 불러오고 있어요..' />
   ) : (
     <Wrapper>
       <div style={{ display: 'flex', overflowX: 'hidden' }}>
-        <AnimatePresence mode='sync'>
+        {/* <AnimatePresence mode='sync'>
           {categories?.length ? (
             <Icon
               variants={SliderVariants}
@@ -103,10 +128,41 @@ const Result = () => {
               exit='exit'
               key={categories[idx]}
             >
-              {categories[idx]}
+              <img src={option[categories[idx]]} />
             </Icon>
           ) : null}
-        </AnimatePresence>
+        </AnimatePresence> */}
+        {categories?.length ? (
+          <Card>
+            <AnimatePresence initial={false} custom={direction}>
+              <motion.img
+                key={page}
+                src={option[categories[page % categories.length]]}
+                custom={direction}
+                variants={variants}
+                initial='enter'
+                animate='center'
+                exit='exit'
+                transition={{
+                  x: { type: 'spring', stiffness: 300, damping: 30 },
+                  opacity: { duration: 0.2 },
+                }}
+                drag='x'
+                dragConstraints={{ left: 0, right: 0 }}
+                dragElastic={1}
+                onDragEnd={(e, { offset, velocity }) => {
+                  const swipe = swipePower(offset.x, velocity.x)
+
+                  if (swipe < -swipeConfidenceThreshold) {
+                    paginate(1)
+                  } else if (swipe > swipeConfidenceThreshold) {
+                    paginate(-1)
+                  }
+                }}
+              />
+            </AnimatePresence>
+          </Card>
+        ) : null}
       </div>
 
       <Title>
@@ -117,13 +173,16 @@ const Result = () => {
     </Wrapper>
   )
 }
+const Card = styled.div`
+  display: flex;
+  position: relative;
+`
+
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: yellow;
   justify-content: center;
   align-items: center;
-  margin: 0 auto;
 `
 
 const Title = styled.span`
