@@ -1,14 +1,8 @@
 import { ReactComponent as Baby } from 'assets/baby.svg';
 import { ReactComponent as Reset } from 'assets/reset.svg';
-import {
-  AnimatePresence,
-  easeInOut,
-  motion,
-  useMotionValue,
-  useTransform,
-  Variants,
-} from 'framer-motion';
-import { useEffect, useRef, useState } from 'react';
+import { ReactComponent as X } from 'assets/x-thin.svg';
+import { AnimatePresence, easeInOut, motion, Variants } from 'framer-motion';
+import { useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 import store from 'store/index';
 import styled from 'styled-components';
@@ -80,15 +74,15 @@ const Default = () => {
     )
   }
 
-  const [sliderHeight, setSliderHeight] = useState(0)
-  const y = useMotionValue(0)
-  const sliderRef = useRef<HTMLDivElement>(null)
-  const perY = useTransform(y, [0, sliderHeight], ['0%', '100%'])
-  useEffect(() => {
-    if (sliderRef?.current) {
-      setSliderHeight((prev) => sliderRef.current.clientHeight)
-    }
-  }, [sliderRef.current?.clientHeight])
+  // const [sliderHeight, setSliderHeight] = useState(0)
+  // const y = useMotionValue(0)
+  // const sliderRef = useRef<HTMLDivElement>(null)
+  // const perY = useTransform(y, [0, sliderHeight], ['0%', '100%'])
+  // useEffect(() => {
+  //   if (sliderRef?.current) {
+  //     setSliderHeight((prev) => sliderRef.current.clientHeight)
+  //   }
+  // }, [sliderRef.current?.clientHeight])
   return (
     <Main>
       <AnimatePresence mode='popLayout'>
@@ -108,8 +102,11 @@ const Default = () => {
                 },
               }}
             />
-            <Slider ref={sliderRef} variants={SliderVariants} style={{ y: perY }}>
-              <SnapBars
+            <Slider variants={SliderVariants}>
+              <div onClick={() => setToggle(false)}>
+                <CloseButton />
+              </div>
+              {/* <SnapBars
                 onPan={(e, point) => {
                   if (point.offset.y > 0) {
                     y.set(point.offset.y)
@@ -124,7 +121,7 @@ const Default = () => {
                 }}
               >
                 <SnapBar />
-              </SnapBars>
+              </SnapBars> */}
               <Content>
                 <FilterList>
                   <FilterHeader>
@@ -171,7 +168,10 @@ const Default = () => {
               <Footer className='mx' style={{ justifyContent: 'space-between' }}>
                 <div style={{ display: 'flex', alignItems: 'center', columnGap: '0.5rem' }}>
                   <Reset style={{ width: '2.2rem', stroke: 'gray' }} />
-                  <span className='title-medium text-gray' style={{ textDecoration: 'underline', textUnderlineOffset : '5px' }}>
+                  <span
+                    className='title-medium text-gray'
+                    style={{ textDecoration: 'underline', textUnderlineOffset: '5px' }}
+                  >
                     초기화
                   </span>
                 </div>
@@ -187,6 +187,10 @@ const Default = () => {
 }
 
 export default Default
+const CloseButton = styled(X)`
+  position: absolute;
+  right: 2rem;
+`
 const SnapBars = styled(motion.div)`
   position: absolute;
   touch-action: none;

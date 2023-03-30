@@ -154,11 +154,62 @@ const GlobalStyle = createGlobalStyle`
     line-height:  1.6rem;
   }
 
+  .text-bold {
+    font-weight: 600;
+  }
+
   .px {
     padding-left :2rem;
     padding-right: 2rem;
   }
 
+
+.svg-pi-wrapper {
+  position: relative;
+}
+
+.svg-pi {
+  transform: rotate(-90deg); /* Fix the orientation */
+}
+
+/* Animated spinner version */
+.svg-pi-indicator--spinner {
+  animation: spinner .75s ease-in-out infinite;
+  transform-origin: center;
+}
+
+.svg-pi-label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.svg-pi-label__loading {
+  opacity: .5;
+  font-size: 0.75em;
+}
+
+.svg-pi-label__progress {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.svg-pi-label__loading,
+.svg-pi-label__progress {
+  display: block;
+}
+
+/* Spinner animation */
+@keyframes spinner {
+  0% {
+    transform: rotate(0)
+  }
+  100% {
+    transform: rotate(360deg)
+  }
+}
 `
 
 export default GlobalStyle
