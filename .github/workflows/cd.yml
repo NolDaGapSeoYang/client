@@ -3,7 +3,7 @@ name: CD
 on:
   push:
     branches:
-      - main
+      - master
 
 env:
   ECR_REGISTRY: 078512149071.dkr.ecr.ap-northeast-2.amazonaws.com
