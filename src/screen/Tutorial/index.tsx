@@ -1,5 +1,6 @@
 import React from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
+import store from 'store/index'
 import styled, { withTheme } from 'styled-components'
 
 import HasGaurdian from './components/HasGuardian'
@@ -11,16 +12,7 @@ import WhichPlace from './components/WhichPlace'
 import { Selection } from './types/selection'
 
 const Tutorial = () => {
-  const [selection, setSelection] = React.useState<Selection>({
-    needCompanion: false,
-    nickName: '',
-    parkingAvailable: false,
-    wheelChairRentable: false,
-    elevatorAvailable: false,
-    toiletAvailable: false,
-    pathExists: false,
-    categories: [],
-  })
+  const [selection, setSelection] = store((state) => [state.selection, state.setSelection])
 
   const [step, setStep] = React.useState(1)
   const [percent, setPercent] = React.useState(20)
@@ -37,20 +29,13 @@ const Tutorial = () => {
       // selection에서 undefined인 key값을 모두 삭제해야함
 
       const searchParams = new URLSearchParams()
-
       for (const key in selection) {
-        if (key === 'nickName') {
-          window.localStorage.getItem('nickName')
-          let name = window.localStorage.getItem('nickName')
-          console.log('닉네임 로컬 : ', name)
-          continue
-        }
         if (key === 'categories') {
           if (!!selection.categories && selection.categories.length > 0) {
             //set search params
-            for (const category of selection.categories) {
-              searchParams.append('categories', category)
-            }
+            const categories = selection.categories.join(',')
+
+            searchParams.append('categories', categories)
           }
           // searchParams.append('categories', selection.categories.)
 
@@ -67,10 +52,6 @@ const Tutorial = () => {
           }
         }
       }
-
-      console.log([...searchParams.entries()])
-
-      console.log(searchParams.getAll('categories'))
 
       // const searchParams = new URLSearchParams({
       //   elevatorAvailable: 'true',
@@ -95,42 +76,25 @@ const Tutorial = () => {
   }
 
   const onChangeNeedCompanion = (needCompanion: boolean) => {
-    setSelection((prev) => ({
-      ...prev,
-      needCompanion,
-    }))
+    setSelection({ needCompanion })
   }
 
+  console.log(selection, ' <<<??')
   const onChangeParkingLot = () => {
-    setSelection((prev) => ({
-      ...prev,
-      parkingAvailable: !prev.parkingAvailable,
-    }))
+    setSelection({ parkingAvailable: !selection.parkingAvailable })
   }
   const onChangeWheelchair = () => {
-    setSelection((prev) => ({
-      ...prev,
-      wheelChairRentable: !prev.wheelChairRentable,
-    }))
+    setSelection({ wheelChairRentable: !selection.wheelChairRentable })
   }
   const onChangeToilet = () => {
-    setSelection((prev) => ({
-      ...prev,
-      toiletAvailable: !prev.toiletAvailable,
-    }))
+    setSelection({ toiletAvailable: !selection.toiletAvailable })
   }
   const onChangePath = () => {
-    setSelection((prev) => ({
-      ...prev,
-      pathExists: !prev.pathExists,
-    }))
+    setSelection({ pathExists: !selection.pathExists })
   }
 
   const onChangeElevator = () => {
-    setSelection((prev) => ({
-      ...prev,
-      elevatorAvailable: !prev.elevatorAvailable,
-    }))
+    setSelection({ elevatorAvailable: !selection.elevatorAvailable })
   }
 
   const onClickCategory = (category: string) => {
@@ -138,16 +102,14 @@ const Tutorial = () => {
     if (!prevCategories.includes(category)) {
       const newCategories = [...prevCategories, category]
 
-      setSelection((prev) => ({
-        ...prev,
+      setSelection({
         categories: newCategories,
-      }))
+      })
     } else {
       const newCategories = prevCategories.filter((pCategory) => pCategory !== category)
-      setSelection((prev) => ({
-        ...prev,
+      setSelection({
         categories: newCategories,
-      }))
+      })
     }
   }
 
@@ -158,12 +120,11 @@ const Tutorial = () => {
       </Header>
       <Main>
         {step === 1 ? (
-          <HasGaurdian selection={selection} onChangeNeedCompanion={onChangeNeedCompanion} />
+          <HasGaurdian onChangeNeedCompanion={onChangeNeedCompanion} />
         ) : step === 2 ? (
           <Nickname />
         ) : step === 3 ? (
           <WhichOption
-            selection={selection}
             onChangeParkingLot={onChangeParkingLot}
             onChangeWheelchair={onChangeWheelchair}
             onChangeToilet={onChangeToilet}
@@ -171,7 +132,7 @@ const Tutorial = () => {
             onChangeElevator={onChangeElevator}
           />
         ) : step === 4 ? (
-          <WhichPlace selection={selection} onClickCategory={onClickCategory} />
+          <WhichPlace onClickCategory={onClickCategory} />
         ) : step === 5 ? (
           <Result />
         ) : null}
@@ -184,14 +145,9 @@ const Tutorial = () => {
   )
 }
 
-// const Wrapper = styled.div`
-//   display: flex;
-//   min-height: 100vh;
-//   flex-direction: column;
-// `
-
 const Mx = styled.div`
   display: flex;
+  padding: 2rem;
   min-height: calc(var(--vh, 1vh) * 100);
   flex-direction: column;
 `
@@ -205,7 +161,6 @@ const Header = styled.header`
 const Main = styled.main`
   flex: 1;
 `
-
 const PrevBtn = styled.button`
   width: 100%;
   height: 4.187rem;

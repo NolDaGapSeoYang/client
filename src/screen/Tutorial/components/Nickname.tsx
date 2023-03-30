@@ -1,17 +1,8 @@
-import React from 'react'
 import styled from 'styled-components'
-import { useState, type ChangeEventHandler } from 'react'
-import { ReactComponent as Picture } from 'assets/picture.svg'
+import store from 'store/index'
 
 const Nickname = () => {
-  const [nickName, setNickName] = useState('')
-
-  const handleNickName: ChangeEventHandler<HTMLInputElement> = (e) => {
-    setNickName((prev) => e.target.value)
-    window.localStorage.setItem('nickName', e.target.value) // 추후 막아두기 글자수 제한 넣어서
-  }
-
-  // const
+  const [name, setName] = store((state) => [state.myName, state.setName])
 
   return (
     <Wrapper>
@@ -23,8 +14,10 @@ const Nickname = () => {
             name='nickName'
             id='nickName'
             type='name'
+            defaultValue={name}
+            maxLength={5}
             placeholder='닉네임을 입력해주세요'
-            onChange={handleNickName}
+            onChange={(event) => setName({ key: 'myName', value: event.target.value })}
           />
         </label>
       </InputBox>

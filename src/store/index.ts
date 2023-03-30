@@ -2,18 +2,24 @@ import { getIsMobile } from './../utils/index'
 import { create } from 'zustand'
 import { persist, createJSONStorage } from 'zustand/middleware'
 
+export interface Selection {
+  categories: string[] | null
+  parkingAvailable: boolean
+  wheelChairRentable: boolean
+  elevatorAvailable: boolean
+  toiletAvailable: boolean
+  pathExists: boolean
+  needCompanion: boolean
+}
+
 export interface IStore {
   isMobile: boolean
   toggle: boolean
-  selection: {
-    categories: string[] | null
-    parkingAvailable: boolean
-    wheelChairRentable: boolean
-    elevatorAvailable: boolean
-    toiletAvailable: boolean
-    pathExists: boolean
-    needCompanion: boolean
-  }
+  myName: string
+  sharedName: string
+  selection: Selection
+  setSelection: (selection: Partial<Selection>) => void
+  setName: ({ key, value }: { key: 'myName' | 'sharedName'; value: string }) => void
   position?: GeolocationPosition | null
   setToggle: (flag?: boolean) => void
   setPosition: (p: GeolocationPosition) => void
@@ -27,6 +33,9 @@ const store = create<Store>()(
       isMobile: getIsMobile(),
       toggle: false,
       position: null,
+      myName: '어드미',
+      sharedName: '어드미',
+      setName: (options) => set((state) => ({ ...state, [options.key]: options.value })),
       selection: {
         categories: null,
         parkingAvailable: false,
@@ -37,6 +46,9 @@ const store = create<Store>()(
         needCompanion: false,
       },
       setPosition: (position: GeolocationPosition) => set((state) => ({ ...state, position })),
+      setSelection: (selection) => {
+        set((state) => ({ ...state, selection: { ...state.selection, ...selection } }))
+      },
       setToggle: (flag) => {
         set((state) => ({ ...state, toggle: flag !== undefined ? flag : !state.toggle }))
       },

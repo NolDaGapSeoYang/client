@@ -7,14 +7,35 @@ const useGetSelection = () => {
   const selectorFn = useCallback(
     (state: IStore) =>
       Object.keys(state.selection).reduce((acc, cur) => {
-        if (param.get(cur) || state.selection[cur] || cur === 'needCompanion') {
-          const value = param.get(cur) || state.selection[cur]
-          const obj = {
-            [cur]: cur === 'needCompanion' ? value === 'true' : value,
+        if (cur === 'categories') {
+          let categories = param.get(cur) || state.selection[cur]
+          if (typeof categories === 'string') {
+            categories = categories.split(',')
           }
           return {
             ...acc,
-            ...obj,
+            [cur]: categories,
+          }
+        } else if (
+          param.get(cur) === 'true' ||
+          state.selection[cur] === 'true' ||
+          cur === 'needCompanion'
+        ) {
+          const value = (param.get(cur) || state.selection[cur]) === 'true'
+          const obj = {
+            [cur]: value,
+          }
+          if (cur === 'needCompanion') {
+            return {
+              ...acc,
+              [cur]: !!(param.get(cur) || state.selection[cur]),
+            }
+          }
+          if (value) {
+            return {
+              ...acc,
+              ...obj,
+            }
           }
         }
         return { ...acc }
