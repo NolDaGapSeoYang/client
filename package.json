@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "vite build",
     "preview": "vite preview",
     "codegen": "graphql-codegen --config src/codegen.ts"
   },
@@ -22,6 +22,8 @@
   "devDependencies": {
     "@graphql-codegen/cli": "^3.2.2",
     "@graphql-codegen/client-preset": "^2.1.1",
+    "@graphql-codegen/fragment-matcher": "^4.0.1",
+    "@graphql-codegen/typescript-apollo-client-helpers": "^2.2.6",
     "@graphql-codegen/typescript-operations": "^3.0.2",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",

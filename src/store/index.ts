@@ -5,7 +5,9 @@ import { persist, createJSONStorage } from 'zustand/middleware'
 interface IStore {
   isMobile: boolean
   toggle: boolean
+  position?: GeolocationPosition | null
   setToggle: () => void
+  setPosition: (p: GeolocationPosition) => void
 }
 
 const store = create<IStore>()(
@@ -13,6 +15,8 @@ const store = create<IStore>()(
     (set) => ({
       isMobile: getIsMobile(),
       toggle: true,
+      position: null,
+      setPosition: (position: GeolocationPosition) => set((state) => ({ ...state, position })),
       setToggle: () => {
         set((state) => ({ ...state, toggle: !state.toggle }))
       },

@@ -13,7 +13,8 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
-    "\n    query test {\n      places {\n        address\n      }\n    }\n  ": types.TestDocument,
+    "\n  fragment PlaceInfo on Place {\n    parkingAvailable\n    parkingCount\n    wheelChairRentable\n    elevatorAvailable\n    toiletAvailable\n    pathExists\n    pathDescription\n    latitude\n    longitude\n    etc\n    basicInfo\n    category\n    id\n  }\n": types.PlaceInfoFragmentDoc,
+    "\n  query getPlace {\n    places {\n      ...PlaceInfo\n      __typename\n    }\n  }\n  \n": types.GetPlaceDocument,
 };
 
 /**
@@ -33,7 +34,11 @@ export function graphql(source: string): unknown;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n    query test {\n      places {\n        address\n      }\n    }\n  "): (typeof documents)["\n    query test {\n      places {\n        address\n      }\n    }\n  "];
+export function graphql(source: "\n  fragment PlaceInfo on Place {\n    parkingAvailable\n    parkingCount\n    wheelChairRentable\n    elevatorAvailable\n    toiletAvailable\n    pathExists\n    pathDescription\n    latitude\n    longitude\n    etc\n    basicInfo\n    category\n    id\n  }\n"): (typeof documents)["\n  fragment PlaceInfo on Place {\n    parkingAvailable\n    parkingCount\n    wheelChairRentable\n    elevatorAvailable\n    toiletAvailable\n    pathExists\n    pathDescription\n    latitude\n    longitude\n    etc\n    basicInfo\n    category\n    id\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  query getPlace {\n    places {\n      ...PlaceInfo\n      __typename\n    }\n  }\n  \n"): (typeof documents)["\n  query getPlace {\n    places {\n      ...PlaceInfo\n      __typename\n    }\n  }\n  \n"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};
