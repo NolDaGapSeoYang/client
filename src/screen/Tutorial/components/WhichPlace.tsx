@@ -2,6 +2,10 @@ import React from 'react'
 import styled from 'styled-components'
 import { Selection } from '../types/selection'
 import { ReactComponent as Picture } from 'assets/picture.svg'
+import { ReactComponent as Local } from 'assets/local.svg'
+import { ReactComponent as Nature } from 'assets/nature.svg'
+import { ReactComponent as Tracking } from 'assets/tracking.svg'
+
 import store from 'store/index'
 import { SubTitle } from './HasGuardian'
 type PlaceProps = {
@@ -21,7 +25,7 @@ const WhichPlace: React.FC<PlaceProps> = ({ onClickCategory }) => {
             onClickCategory('자연경관')
           }}
         >
-          <Picture />
+          <Nature />
           <OptionName>자연경관</OptionName>
           <Example>섬, 숲길/굴/폭포, 공원</Example>
         </Option>
@@ -31,7 +35,7 @@ const WhichPlace: React.FC<PlaceProps> = ({ onClickCategory }) => {
             onClickCategory('트레킹')
           }}
         >
-          <Picture />
+          <Tracking />
           <OptionName>트레킹</OptionName>
           <Example>오름, 산, 올레</Example>
         </Option>
@@ -51,7 +55,7 @@ const WhichPlace: React.FC<PlaceProps> = ({ onClickCategory }) => {
             onClickCategory('동네 구경')
           }}
         >
-          <Picture />
+          <Local />
           <OptionName>동네 구경</OptionName>
           <Example>시장, 마을</Example>
         </Option>
