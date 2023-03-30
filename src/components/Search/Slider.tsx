@@ -346,6 +346,7 @@ const SliderFilter = () => {
           <SearchButton
             className='button-text'
             onClick={() => {
+              console.log(variables, 'variables')
               setSelectionStore({ ...variables })
               setToggle(false)
             }}
