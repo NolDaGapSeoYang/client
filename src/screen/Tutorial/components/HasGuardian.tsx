@@ -90,7 +90,7 @@ const Option = styled.button<{ highlight: boolean }>`
   font-weight: 500;
   font-size: 16px;
   line-height: 24px;
-  ${(props) => (props.highlight ? 'border 2px solid green;' : '')}
+  ${(props) => (props.highlight ? 'border 2px solid #51BE9D;' : '')}
 `
 const OptionName = styled.span`
   display: block;
