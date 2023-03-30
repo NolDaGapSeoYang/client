@@ -1,27 +1,55 @@
 import React from 'react'
 import styled from 'styled-components'
+import { useState } from 'react'
 import { ReactComponent as Picture } from 'assets/picture.svg'
 
-const HasGaurdian = () => {
+const Nickname = () => {
   return (
     <Wrapper>
-      <SubTitle>동행 여부</SubTitle>
-      <Title>보호자와 동행하시나요?</Title>
-      <OptionWrapper>
-        <Option>
-          <Picture />
-        </Option>
-        <Option>
-          <Picture />
-        </Option>
-      </OptionWrapper>
-      <OptionWrapper>
-        <Answer>아니요</Answer>
-        <Answer>예</Answer>
-      </OptionWrapper>
+      <SubTitle>???</SubTitle>
+      <Title>여행 닉네임을 알려주세요!</Title>
+      <InputBox>
+        <label htmlFor='nickname'>
+          <div>
+            <input name='nickname' id='id' type='name' placeholder='닉네임을 입력해주세요' />
+          </div>
+        </label>
+      </InputBox>
     </Wrapper>
   )
 }
+
+const InputBox = styled.div`
+  background-color: #efeff0;
+  width: 100%;
+  height: 6.5rem;
+  border-radius: 2rem;
+  :focus-within {
+    border: 0.1rem solid blue;
+  }
+  label {
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 1.6rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  input {
+    background-color: inherit;
+    margin-top: 0.2rem;
+    width: 100%;
+    height: 2.8rem;
+    font-weight: 400;
+    font-size: 2rem;
+    line-height: 2.8rem;
+    margin: 0 auto;
+    ::placeholder {
+      color: #afb1b6;
+    }
+  }
+`
 
 const Wrapper = styled.div`
   display: flex;
@@ -96,4 +124,4 @@ const Answer = styled.span`
   /* background-color: yellow; */
 `
 
-export default HasGaurdian
+export default Nickname

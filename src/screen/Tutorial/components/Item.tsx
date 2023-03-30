@@ -21,11 +21,11 @@ const items: itemsProps[] = [
     name: '이미지01',
   },
   {
-    item: 'http://placehold.it/120x400/ff0000',
+    item: 'http://placehold.it/120x120/ff0000',
     name: '이미지02',
   },
   {
-    item: 'http://placehold.it/120x400/00ffff',
+    item: 'http://placehold.it/120x120/00ffff',
     name: '이미지03',
   },
 ]

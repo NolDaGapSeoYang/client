@@ -3,7 +3,6 @@ import { LazyExoticComponent, Suspense, FC, lazy } from 'react'
 import { BrowserRouter, Outlet, Route, Routes } from 'react-router-dom'
 import GlobalStyle from '../GlobalStyle'
 import Default from 'layout/Default'
-import HasGaurdin from '../screen/Tutorial/components/hasGuardian'
 
 const Error = () => {
   return <>ERROR</>
