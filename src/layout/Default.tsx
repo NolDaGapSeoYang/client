@@ -32,7 +32,7 @@ const q = gql`
 `
 
 const Default = () => {
-  const { data } = useQuery<GetPlaceQuery>(q)
+  // const { data } = useQuery<GetPlaceQuery>(q)
   const { setPosition, toggle, setToggle } = store((state) => ({
     toggle: state.toggle,
     setPosition: state.setPosition,

@@ -1,30 +1,70 @@
 import React from 'react'
 import styled from 'styled-components'
+import { Selection } from '../types/selection'
 import { ReactComponent as Picture } from 'assets/picture.svg'
-
-const WhichOption = () => {
+type OptionProps = {
+  selection: Selection // 옵션 선택 여부 변경
+  onChangeParkingLot: () => void
+  onChangeWheelchair: () => void
+  onChangeToilet: () => void
+  onChangePath: () => void
+  onChangeElevator: () => void
+}
+const WhichOption: React.FC<OptionProps> = ({
+  selection,
+  onChangeParkingLot,
+  onChangeWheelchair,
+  onChangeToilet,
+  onChangePath,
+  onChangeElevator,
+}) => {
   return (
     <Wrapper>
       <SubTitle>필요 시설</SubTitle>
       <Title>어떤 옵션이 필요하신가요?</Title>
       <OptionWrapper>
-        <Option>
+        <Option
+          highlight={!!selection.parkingAvailable}
+          onClick={() => {
+            onChangeParkingLot()
+          }}
+        >
           <Picture />
           <OptionName>장애인 주차장</OptionName>
         </Option>
-        <Option>
+        <Option
+          highlight={!!selection.wheelChairRentable}
+          onClick={() => {
+            onChangeWheelchair()
+          }}
+        >
           <Picture />
           <OptionName>휠체어 대여</OptionName>
         </Option>
-        <Option>
+        <Option
+          highlight={!!selection.toiletAvailable}
+          onClick={() => {
+            onChangeToilet()
+          }}
+        >
           <Picture />
-          <OptionName>장애인 주차장</OptionName>
+          <OptionName>장애인 전용 화장실</OptionName>
         </Option>
-        <Option>
+        <Option
+          highlight={!!selection.pathExists}
+          onClick={() => {
+            onChangePath()
+          }}
+        >
           <Picture />
-          <OptionName>휠체어 대여</OptionName>
+          <OptionName>무단차/경사로</OptionName>
         </Option>
-        <Option>
+        <Option
+          highlight={!!selection.elevatorAvailable}
+          onClick={() => {
+            onChangeElevator()
+          }}
+        >
           <Picture />
           <OptionName>엘레베이터</OptionName>
         </Option>
@@ -71,7 +111,7 @@ const OptionWrapper = styled.div`
   row-gap: 1.5rem;
   /* margin-bottom: 36rem; */
 `
-const Option = styled.button`
+const Option = styled.button<{ highlight: boolean }>`
   /* width: 15rem; */
   width: 48%;
   aspect-ratio: 1.3/1;
@@ -86,6 +126,7 @@ const Option = styled.button`
   font-weight: 500;
   font-size: 16px;
   line-height: 24px;
+  ${(props) => (props.highlight ? 'border 2px solid #51BE9D;' : '')}
 `
 
 const OptionName = styled.span`

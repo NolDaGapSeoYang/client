@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import { ReactComponent as Placeholder } from 'assets/placeholder.svg'
 import { ReactComponent as LocationIcon } from 'assets/location.svg'
+import { useSearchParams } from 'react-router-dom'
 const Search = () => {
   return (
     <div style={{ position: 'relative' }}>

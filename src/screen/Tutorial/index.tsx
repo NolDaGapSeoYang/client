@@ -14,6 +14,11 @@ const Tutorial = () => {
   const [selection, setSelection] = React.useState<Selection>({
     needCompanion: false,
     nickName: '',
+    parkingAvailable: false,
+    wheelChairRentable: false,
+    elevatorAvailable: false,
+    toiletAvailable: false,
+    pathExists: false,
   })
 
   const [step, setStep] = React.useState(1)
@@ -26,13 +31,19 @@ const Tutorial = () => {
     setPercent((prevPercent) => prevPercent + 20)
 
     if (step === 5) {
-      window.localStorage.setItem('nickName', selection.nickName)
+      // window.localStorage.setItem('nickName', selection.nickName)
+
+      // selection cleaning
+      // selection에서 undefined인 key값을 모두 삭제해야함
 
       const searchParams = new URLSearchParams({
-        needCompanion: selection.needCompanion ? 'true' : 'false',
-        facilities: selection.facilities?.join(',') || '',
-        categories: selection.categories?.join(',') || '',
+        elevatorAvailable: 'true',
       })
+
+      for (const category of ['관광', '동네탐방']) {
+        searchParams.append('categories', category)
+      }
+
       navigate(`/result?${searchParams.toString()}`)
     } else {
       setStep((prevStep) => prevStep + 1)
@@ -56,6 +67,38 @@ const Tutorial = () => {
     }))
   }
 
+  const onChangeParkingLot = () => {
+    setSelection((prev) => ({
+      ...prev,
+      parkingAvailable: !prev.parkingAvailable,
+    }))
+  }
+  const onChangeWheelchair = () => {
+    setSelection((prev) => ({
+      ...prev,
+      wheelChairRentable: !prev.wheelChairRentable,
+    }))
+  }
+  const onChangeToilet = () => {
+    setSelection((prev) => ({
+      ...prev,
+      toiletAvailable: !prev.toiletAvailable,
+    }))
+  }
+  const onChangePath = () => {
+    setSelection((prev) => ({
+      ...prev,
+      pathExists: !prev.pathExists,
+    }))
+  }
+
+  const onChangeElevator = () => {
+    setSelection((prev) => ({
+      ...prev,
+      elevatorAvailable: !prev.elevatorAvailable,
+    }))
+  }
+
   return (
     <Mx className='mx'>
       <Header>
@@ -67,7 +110,14 @@ const Tutorial = () => {
         ) : step === 2 ? (
           <Nickname />
         ) : step === 3 ? (
-          <WhichOption />
+          <WhichOption
+            selection={selection}
+            onChangeParkingLot={onChangeParkingLot}
+            onChangeWheelchair={onChangeWheelchair}
+            onChangeToilet={onChangeToilet}
+            onChangePath={onChangePath}
+            onChangeElevator={onChangeElevator}
+          />
         ) : step === 4 ? (
           <WhichPlace />
         ) : step === 5 ? (
