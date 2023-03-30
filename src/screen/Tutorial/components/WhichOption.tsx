@@ -2,6 +2,12 @@ import React from 'react'
 import styled from 'styled-components'
 import { Selection } from '../types/selection'
 import { ReactComponent as Picture } from 'assets/picture.svg'
+import { ReactComponent as ParkingLot } from 'assets/parkingLot.svg'
+import { ReactComponent as Elevator } from 'assets/elevator.svg'
+import { ReactComponent as Path } from 'assets/path.svg'
+import { ReactComponent as Wheel } from 'assets/wheel.svg'
+import { ReactComponent as Toilet } from 'assets/toilet.svg'
+
 import store from 'store/index'
 type OptionProps = {
   onChangeParkingLot: () => void
@@ -30,7 +36,7 @@ const WhichOption: React.FC<OptionProps> = ({
             onChangeParkingLot()
           }}
         >
-          <Picture />
+          <ParkingLot />
           <OptionName>장애인 주차장</OptionName>
         </Option>
         <Option
@@ -39,7 +45,7 @@ const WhichOption: React.FC<OptionProps> = ({
             onChangeWheelchair()
           }}
         >
-          <Picture />
+          <Wheel />
           <OptionName>휠체어 대여</OptionName>
         </Option>
         <Option
@@ -48,7 +54,7 @@ const WhichOption: React.FC<OptionProps> = ({
             onChangeToilet()
           }}
         >
-          <Picture />
+          <Toilet />
           <OptionName>장애인 전용 화장실</OptionName>
         </Option>
         <Option
@@ -57,7 +63,7 @@ const WhichOption: React.FC<OptionProps> = ({
             onChangePath()
           }}
         >
-          <Picture />
+          <Path />
           <OptionName>무단차/경사로</OptionName>
         </Option>
         <Option
@@ -66,7 +72,7 @@ const WhichOption: React.FC<OptionProps> = ({
             onChangeElevator()
           }}
         >
-          <Picture />
+          <Elevator />
           <OptionName>엘레베이터</OptionName>
         </Option>
       </OptionWrapper>
