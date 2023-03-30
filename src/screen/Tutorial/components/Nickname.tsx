@@ -1,16 +1,31 @@
 import React from 'react'
 import styled from 'styled-components'
-import { useState } from 'react'
+import { useState, type ChangeEventHandler } from 'react'
 import { ReactComponent as Picture } from 'assets/picture.svg'
 
 const Nickname = () => {
+  const [nickName, setNickName] = useState('')
+
+  const handleNickName: ChangeEventHandler<HTMLInputElement> = (e) => {
+    setNickName((prev) => e.target.value)
+    window.localStorage.setItem('nickName', e.target.value) // 추후 막아두기 글자수 제한 넣어서
+  }
+
+  // const
+
   return (
     <Wrapper>
       <SubTitle>???</SubTitle>
       <Title>여행 닉네임을 알려주세요</Title>
       <InputBox>
-        <label htmlFor='nickname'>
-          <input name='nickname' id='id' type='name' placeholder='닉네임을 입력해주세요' />
+        <label htmlFor='nickName'>
+          <input
+            name='nickName'
+            id='nickName'
+            type='name'
+            placeholder='닉네임을 입력해주세요'
+            onChange={handleNickName}
+          />
         </label>
       </InputBox>
       <GuideMessage>최대 5글자로 해주세요!</GuideMessage>

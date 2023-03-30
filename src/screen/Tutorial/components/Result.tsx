@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import Item from './Item'
 
 const Result = () => {
+  let name = window.localStorage.getItem('nickName')
   return (
     <Wrapper>
       {/* <div>
@@ -11,6 +12,7 @@ const Result = () => {
       </div> */}
       <Item />
       <Title>
+        {/* ${`name`}에게 어울리는 <br /> */}
         총 20개의 <br />
         편안한 여행지를 찾았어요
       </Title>

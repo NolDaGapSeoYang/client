@@ -40,11 +40,20 @@ const Tutorial = () => {
 
       for (const key in selection) {
         if (key === 'nickName') {
-          window.localStorage.setItem('nickName', selection.nickName)
+          window.localStorage.getItem('nickName')
+          let name = window.localStorage.getItem('nickName')
+          console.log('닉네임 로컬 : ', name)
           continue
         }
-
         if (key === 'categories') {
+          if (!!selection.categories && selection.categories.length > 0) {
+            //set search params
+            for (const category of selection.categories) {
+              searchParams.append('categories', category)
+            }
+          }
+          // searchParams.append('categories', selection.categories.)
+
           // category가 undefinded면 넣으면 안됨
           // category가 있는데, 비어있다면 넣으면 안됨
           // 아니라면, 각 카테고리에 대해서
@@ -53,14 +62,15 @@ const Tutorial = () => {
           // boolean value만 있음
           //@ts-expect-error key
           const value = selection[key]
-
           if (!!value) {
             searchParams.set(key, value)
           }
         }
       }
 
-      console.log(searchParams.toString())
+      console.log([...searchParams.entries()])
+
+      console.log(searchParams.getAll('categories'))
 
       // const searchParams = new URLSearchParams({
       //   elevatorAvailable: 'true',
@@ -68,7 +78,7 @@ const Tutorial = () => {
       // for (const category of ['관광', '동네탐방']) {
       //   searchParams.append('categories', category)
       // }
-      // navigate(`/result?${searchParams.toString()}`)
+      navigate(`/result?${searchParams.toString()}`)
     } else {
       setStep((prevStep) => prevStep + 1)
     }
