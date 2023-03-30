@@ -27,8 +27,8 @@ const Router = () => {
     <BrowserRouter>
       <GlobalStyle />
       <Routes>
-        <Route element={<Default />}>
-          <Route path='' element={<Home />} />
+        <Route path='' element={<Default />}>
+          <Route index element={<Home />} />
           <Route path='convenient' element={<Convenient />} />
           <Route path='detail' element={<Detail />} />
           <Route path='result' element={<Search />} />
