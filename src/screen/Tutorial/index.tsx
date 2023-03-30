@@ -17,12 +17,10 @@ const Tutorial = () => {
   }
 
   return (
-    <>
+    <div>
       <Header>
         <ProgressBar percent={percent} />
-        {/* <Line /> */}
       </Header>
-      <div></div>
       {param.type === '1' ? (
         <HasGaurdin />
       ) : param.type === '2' ? (
@@ -32,10 +30,16 @@ const Tutorial = () => {
       ) : param.type === 'result' ? (
         <Result />
       ) : null}
-      <NaxtBtn onClick={handleIncrement}>다음으로 가기</NaxtBtn>
-    </>
+      <NaxtBtn onClick={handleIncrement}>다음</NaxtBtn>
+    </div>
   )
 }
+
+const Wrapper = styled.div`
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+`
 
 const Header = styled.header`
   width: 100vw;
@@ -43,22 +47,15 @@ const Header = styled.header`
   position: relative;
   left: -2rem;
 `
-// const Line = withTheme(styled.div`
-//   width: 100%;
-// `)
-
-// const Line = styled.div`
-//   position: absolute;
-//   width: 100vw;
-//   left: 2rem;
-//   height: 2px;
-//   background-color: red;
-// `
 
 const NaxtBtn = styled.button`
   width: 100%;
   height: 4.187rem;
   background-color: #19191b;
+  border-radius: 2rem;
+  font-size: 1.3rem;
+  line-height: 2rem;
+  color: white;
 `
 
 export default Tutorial
