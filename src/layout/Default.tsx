@@ -53,6 +53,7 @@ const Main = styled.main`
   max-width: 412px;
   margin: 0 auto;
   padding: 4rem 2rem;
+  background-color: white;
 `
 
 const Fallback = styled.div`
