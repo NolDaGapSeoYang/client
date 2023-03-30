@@ -97,6 +97,9 @@ const GlobalStyle = createGlobalStyle`
       display: none;
     }
   }
+  .mx {
+    max-width: var(--mx, '100%');
+  }
 
 `
 

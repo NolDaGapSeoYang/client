@@ -7,6 +7,19 @@ import { gql, useQuery } from '@apollo/client'
 
 import { GetPlaceQuery } from 'api/graphql'
 import { placeInfoFragment } from '../fragments'
+import { AnimatePresence, motion, Variants } from 'framer-motion'
+
+const SliderVariants: Variants = {
+  exit: {
+    y: '100%',
+  },
+  animate: {
+    y: '0%',
+  },
+  initial: {
+    y: '100%',
+  },
+}
 
 const q = gql`
   query getPlace {
@@ -20,12 +33,17 @@ const q = gql`
 
 const Default = () => {
   const { data } = useQuery<GetPlaceQuery>(q)
-  const setPosition = store((state) => state.setPosition)
-  const po = store((state) => state.position)
+  const { setPosition, toggle, setToggle } = store((state) => ({
+    toggle: state.toggle,
+    setPosition: state.setPosition,
+    setToggle: state.setToggle,
+  }))
+
   const isMobile = store((state) => state.isMobile)
   const setScreenSize = () => {
     let vh = window.innerHeight * 0.01
     document.documentElement.style.setProperty('--vh', `${vh}px`)
+    document.documentElement.style.setProperty('--mx', `412px`)
   }
 
   setScreenSize()
@@ -68,12 +86,39 @@ const Default = () => {
   // )
   return (
     <Main>
+      <AnimatePresence mode='popLayout'>
+        {toggle ? (
+          <Darker initial='initial' animate='animate' exit='exit' onClick={() => setToggle()}>
+            <Slider variants={SliderVariants}>???</Slider>
+          </Darker>
+        ) : null}
+      </AnimatePresence>
       <Outlet />
     </Main>
   )
 }
 
 export default Default
+const Darker = styled(motion.div)`
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 2;
+`
+
+const Slider = styled(motion.div)`
+  background-color: white;
+  position: absolute;
+  bottom: 0;
+  padding: 1.5rem 2rem;
+  width: 100%;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+`
+
 const Main = styled.main`
   max-width: 412px;
   margin: 0 auto;
