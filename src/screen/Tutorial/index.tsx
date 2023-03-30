@@ -85,7 +85,6 @@ const Tutorial = () => {
     setSelection({ needCompanion })
   }
 
-  console.log(selection, ' <<<??')
   const onChangeParkingLot = () => {
     setSelection({ parkingAvailable: !selection.parkingAvailable })
   }
@@ -127,7 +126,7 @@ const Tutorial = () => {
       <Header>
         <ProgressBar percent={percent} />
       </Header>
-      <Main>
+      <Main active={step === 5}>
         {step === 1 ? (
           <HasGaurdian onChangeNeedCompanion={onChangeNeedCompanion} />
         ) : step === 2 ? (
@@ -193,9 +192,11 @@ const Header = styled.header`
   padding-top: 5rem;
   left: -2rem;
 `
-const Main = styled.main`
+const Main = styled.main<{ active: boolean }>`
   position: relative;
   flex: 1;
+  ${(props) =>
+    props.active ? `display: flex; flex-direction: column; justify-content:center;` : null}
 `
 const PrevBtn = styled.button`
   width: 100%;

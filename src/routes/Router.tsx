@@ -5,6 +5,7 @@ import { ReactComponent as Carbon } from 'assets/carbon_error.svg'
 import GlobalStyle from '../GlobalStyle'
 import Default from 'layout/Default'
 import styled from 'styled-components'
+import { useQuery } from '@apollo/client'
 
 const Error = () => {
   return (
@@ -83,9 +84,11 @@ const Router = () => {
       <Routes>
         <Route path='' element={<Default />}>
           <Route index element={<Home />} />
-          <Route path='result' element={<Search />} />
+          <Route path='result'>
+            <Route index element={<Search />} />
+            <Route path=':id' element={<Detail />} />
+          </Route>
           <Route path='convenient' element={<Convenient />} />
-          <Route path='detail' element={<Detail />} />
           <Route path='option' element={<Tutorial />} />
         </Route>
       </Routes>

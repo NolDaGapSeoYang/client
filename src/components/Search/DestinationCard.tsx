@@ -5,9 +5,13 @@ import { ReactComponent as Navigation } from 'assets/navigation.svg'
 import { ReactComponent as Phone } from 'assets/phone.svg'
 import { ReactComponent as WheelChair } from 'assets/wheelchair.svg'
 import { FC, useEffect, useMemo, useRef } from 'react'
+import serviceIcon from 'assets/serviceIcon'
+import store from 'store/index'
+import { useNavigate } from 'react-router-dom'
 
 const DestinationCard: FC<any> = ({ node, maxLength, idx, fetchMore }) => {
   const ref = useRef(null)
+  const setIsToggleOpen = store((state) => state.setIsToastOpen)
   const inView = useInView(ref, { once: true })
   const isLast = useMemo(() => maxLength === idx + 1, [idx, maxLength])
   useEffect(() => {
@@ -15,8 +19,14 @@ const DestinationCard: FC<any> = ({ node, maxLength, idx, fetchMore }) => {
       fetchMore()
     }
   }, [isLast, inView])
+  const navigate = useNavigate()
   return (
-    <Destination ref={ref}>
+    <Destination
+      ref={ref}
+      onClick={() => {
+        navigate(node.id)
+      }}
+    >
       <Top className='scrollbar-hide'>
         <PlaceHolderWrapper>
           <img src={node.thumbnails[0]} />
@@ -25,7 +35,14 @@ const DestinationCard: FC<any> = ({ node, maxLength, idx, fetchMore }) => {
           <div style={{ display: 'flex', flexDirection: 'column' }}>
             <h4 className='title-medium text-bold'>{node.name}</h4>
             <span className='title-small main-text'>나와의 거리 {getDistance(node.distance)}</span>
-            <Address className='body-small2 text-subdark'>
+            <Address
+              className='body-small2 text-subdark'
+              onClick={() => {
+                window.navigator.clipboard.writeText(node.address).then(() => {
+                  setIsToggleOpen(true)
+                })
+              }}
+            >
               {node.address
                 .split(' ')
                 .filter((_, i) => i !== 0)
@@ -52,21 +69,31 @@ const DestinationCard: FC<any> = ({ node, maxLength, idx, fetchMore }) => {
         </LocationWrapper>
       </Top>
       <BottomButtons className='scrollbar-hide'>
-        <Button>
-          <WheelChair />
-        </Button>
-        <Button>
-          <WheelChair />
-        </Button>
-        <Button>
-          <WheelChair />
-        </Button>
-        <Button>
-          <WheelChair />
-        </Button>
-        <Button>
-          <WheelChair />
-        </Button>
+        {node.parkingAvailable ? (
+          <Button>
+            <img src={serviceIcon.parkingAvailable} />
+          </Button>
+        ) : null}
+        {node.wheelChairRentable ? (
+          <Button>
+            <img src={serviceIcon.wheelChairRentable} />
+          </Button>
+        ) : null}
+        {node.toiletAvailable ? (
+          <Button>
+            <img src={serviceIcon.toiletAvailable} />
+          </Button>
+        ) : null}
+        {node.pathExists ? (
+          <Button>
+            <img src={serviceIcon.pathExists} />
+          </Button>
+        ) : null}
+        {node.elevatorAvailable ? (
+          <Button>
+            <img src={serviceIcon.elevatorAvailable} />
+          </Button>
+        ) : null}
       </BottomButtons>
     </Destination>
   )
@@ -119,7 +146,7 @@ const PlaceHolderWrapper = styled.div`
     object-fit: cover;
   }
 `
-const TopButtons = styled.div`
+export const TopButtons = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -158,7 +185,7 @@ const Address = styled.span`
   width: inherit;
 `
 
-const Button = styled.button`
+export const Button = styled.button`
   width: 4.6rem;
   aspect-ratio: 1/1;
   display: flex;

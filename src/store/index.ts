@@ -17,6 +17,8 @@ export interface IStore {
   toggle: boolean
   myName: string
   sharedName: string
+  isToastOpen: boolean
+  setIsToastOpen: (flag: boolean) => void
   selection: Selection
   setSelection: (selection: Partial<Selection>) => void
   setName: ({ key, value }: { key: 'myName' | 'sharedName'; value: string }) => void
@@ -32,6 +34,8 @@ const store = create<Store>()(
     (set) => ({
       isMobile: getIsMobile(),
       toggle: false,
+      isToastOpen: false,
+      setIsToastOpen: (flag: boolean) => set((state) => ({ ...state, isToastOpen: flag })),
       position: null,
       myName: '',
       sharedName: '',
