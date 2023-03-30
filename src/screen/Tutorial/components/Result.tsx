@@ -58,8 +58,9 @@ const Result = () => {
     <Wrapper>
       <Item />
       <Title>
-        {name}에게 어울리는 <br />총 {places?.totalCount}개의 <br />
-        편안한 여행지를 찾았어요
+        {name}에게 <br />
+        어울리는 총 {places?.totalCount}개의 <br />
+        제주 관광지를 찾았어요!
       </Title>
     </Wrapper>
   )
@@ -74,8 +75,11 @@ const Wrapper = styled.div`
 `
 
 const Title = styled.span`
+  text-align: center;
+  padding: 30px 20px;
   font-size: 2.2rem;
   font-weight: 500;
+  height: 16.5rem;
 `
 
 export default Result
