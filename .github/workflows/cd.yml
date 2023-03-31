@@ -40,7 +40,6 @@ jobs:
         id: build-image
         run: |
           docker build \
-            --build-arg VITE_API_URL=${{ env.VITE_API_URL }} \
             -t ${{ env.ECR_REPOSITORY }}:${{ steps.package-version.outputs.current-version}} \
             .
       - name: Tag Docker iamge
