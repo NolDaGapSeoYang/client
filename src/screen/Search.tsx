@@ -1,16 +1,16 @@
-import styled from 'styled-components'
-import { ReactComponent as KakaoIcon } from 'assets/kakao.svg'
+import { GetSearchListQuery } from 'api/graphql';
+import { ReactComponent as KakaoIcon } from 'assets/kakao.svg';
+import Spinner from 'components/common/Spinner';
+import DestinationCard from 'components/Search/DestinationCard';
+import { FILTER_TYPE, PER_PAGE } from 'constants/common';
+import useGetSelection from 'hooks/useGetSelection';
+import { useEffect, useMemo, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import { Loading } from 'routes/Router';
+import store, { Selection } from 'store/index';
+import styled from 'styled-components';
 
-import store from 'store/index'
-import { gql, useQuery } from '@apollo/client'
-import { FILTER_TYPE, PER_PAGE } from 'constants/common'
-import useGetSelection from 'hooks/useGetSelection'
-import { GetSearchListQuery } from 'api/graphql'
-import { useEffect, useMemo, useState } from 'react'
-import DestinationCard from 'components/Search/DestinationCard'
-import { Loading } from 'routes/Router'
-
-import Spinner from 'components/common/Spinner'
+import { gql, useQuery } from '@apollo/client';
 
 export const SearchQuery = gql`
   query GetSearchList(
@@ -75,14 +75,18 @@ export const SearchQuery = gql`
 `
 
 const Search = () => {
-  const { toggle, setToggle, position, myName } = store((state) => ({
+  const [searchParams] = useSearchParams()
+
+  const { toggle, setToggle, position, myName, selection, setSelection } = store((state) => ({
     setToggle: state.setToggle,
     position: state.position,
     myName: state.myName,
     toggle: state.toggle,
+    selection: state.selection,
+    setSelection: state.setSelection,
   }))
   const [isLoading, setIsLoading] = useState(true)
-  const selection = useGetSelection()
+  // const selection = useGetSelection()
   const variables = useMemo(() => {
     if (!position?.coords.latitude || !position?.coords.longitude) {
       return { ...selection, first: PER_PAGE }
@@ -113,11 +117,37 @@ const Search = () => {
   const edges = useMemo(() => places?.edges, [places?.edges])
 
   useEffect(() => {
+    console.log(toggle, selection)
     if (!toggle) {
       refetch()
       // setIsLoading(true)
     }
   }, [toggle, selection])
+
+  useEffect(() => {
+    const entries = searchParams.entries()
+    let defaultSelection: Selection = {
+      categories: null,
+      parkingAvailable: false,
+      wheelChairRentable: false,
+      elevatorAvailable: false,
+      toiletAvailable: false,
+      pathExists: false,
+      needCompanion: false,
+    }
+
+    for (const entry of entries) {
+      const [key, value] = entry
+      if (key === 'categories') {
+        defaultSelection[key] = value.split(',')
+      } else {
+        //@ts-expect-error Key Type
+        defaultSelection[key] = value === 'true'
+      }
+    }
+
+    setSelection(defaultSelection)
+  }, [])
 
   const selected = store((state) => state.selection)
 

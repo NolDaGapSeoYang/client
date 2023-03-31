@@ -1,12 +1,19 @@
-import { easeInOut, motion, Variants } from 'framer-motion'
-import React, { useEffect, useMemo, useState } from 'react'
-import store, { Selection } from 'store/index'
-import styled from 'styled-components'
-import { ReactComponent as Reset } from 'assets/reset.svg'
-import { ReactComponent as X } from 'assets/x-thin.svg'
-import { gql, useQuery } from '@apollo/client'
-import { GetCountQuery, GetCountQueryVariables, GetSearchListQuery } from 'api/graphql'
-import { SearchQuery } from '../../screen/Search'
+import {
+  GetCountQuery,
+  GetCountQueryVariables,
+  GetSearchListQuery,
+} from 'api/graphql';
+import { ReactComponent as Reset } from 'assets/reset.svg';
+import { ReactComponent as X } from 'assets/x-thin.svg';
+import Spinner from 'components/common/Spinner';
+import { easeInOut, motion, Variants } from 'framer-motion';
+import React, { useEffect, useMemo, useState } from 'react';
+import store, { Selection } from 'store/index';
+import styled from 'styled-components';
+
+import { gql, useQuery } from '@apollo/client';
+
+import { SearchQuery } from '../../screen/Search';
 
 const getCount = gql`
   query getCount($PlaceCountInput: PlaceCountInput!) {
@@ -55,12 +62,8 @@ const SliderFilter = () => {
       ...vars,
     }
   }, [selection])
-  const { refetch: queryRefetch } = useQuery<GetSearchListQuery>(SearchQuery, {
-    variables,
-    notifyOnNetworkStatusChange: true,
-  })
 
-  const { data: { placeCount = 0 } = {}, refetch } = useQuery<GetCountQuery>(getCount, {
+  const { data, refetch, loading } = useQuery<GetCountQuery>(getCount, {
     variables: { PlaceCountInput: { ...selection } } as GetCountQueryVariables,
   })
 
@@ -226,7 +229,7 @@ const SliderFilter = () => {
                       categories:
                         prev.categories?.length >= 6
                           ? []
-                          : ['자연경관', '트래킹', '바닷가', '동네구경', '문화예술', '쇼핑'],
+                          : ['자연경관', '트래킹', '바닷가', '동네 구경', '문화예술', '쇼핑'],
                     }))
                   }}
                 >
@@ -278,13 +281,13 @@ const SliderFilter = () => {
                 바닷가
               </FilterItem>
               <FilterItem
-                selected={!!selection.categories?.includes('동네구경')}
+                selected={!!selection.categories?.includes('동네 구경')}
                 onClick={() => {
                   setSelection((prev) => ({
                     ...prev,
-                    categories: selection.categories?.includes('동네구경')
-                      ? selection.categories?.filter((item) => item !== '동네구경')
-                      : [...prev.categories, '동네구경'],
+                    categories: selection.categories?.includes('동네 구경')
+                      ? selection.categories?.filter((item) => item !== '동네 구경')
+                      : [...prev.categories, '동네 구경'],
                   }))
                 }}
                 className='filter-xs'
@@ -346,12 +349,24 @@ const SliderFilter = () => {
           <SearchButton
             className='button-text'
             onClick={() => {
-              console.log(variables, 'variables')
               setSelectionStore({ ...variables })
               setToggle(false)
             }}
+            disabled={loading || data?.placeCount === 0}
           >
-            {placeCount}개 여행지 보기
+            {loading ? (
+              <Spinner
+                trackColor='#a7a7a7'
+                indicatorColor='#4f4f4f'
+                size={25}
+                progress={25}
+                trackWidth={5}
+                indicatorWidth={5}
+                spinnerMode={true}
+              />
+            ) : (
+              `${data?.placeCount}개 여행지 보기`
+            )}
           </SearchButton>
         </Footer>
       </Slider>
@@ -386,9 +401,14 @@ const Content = styled.div`
 `
 const SearchButton = styled.button`
   color: white;
+  width: 21rem;
+  height: 4.2rem;
   background-color: black;
-  padding: 1rem 5.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border-radius: 999rem;
+  ${(props) => (props.disabled ? 'opacity: 0.7' : '')};
 `
 
 const Footer = styled.div`
