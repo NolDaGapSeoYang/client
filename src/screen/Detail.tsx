@@ -1,13 +1,15 @@
-import { gql, useQuery } from '@apollo/client'
-import { GetPlaceQuery } from 'api/graphql'
-import { Button, TopButtons } from 'components/Search/DestinationCard'
-import { useNavigate, useParams } from 'react-router-dom'
-import { Loading } from 'routes/Router'
-import styled from 'styled-components'
-import { getDistance, linkToKaKaoMap } from 'utils/index'
-import { ReactComponent as Navigation } from 'assets/navigation.svg'
-import { ReactComponent as Phone } from 'assets/phone.svg'
-import serviceIcon from 'assets/serviceIcon'
+import { GetPlaceQuery } from 'api/graphql';
+import { ReactComponent as Navigation } from 'assets/navigation.svg';
+import { ReactComponent as Phone } from 'assets/phone.svg';
+import serviceIcon from 'assets/serviceIcon';
+import { Button, TopButtons } from 'components/Search/DestinationCard';
+import { useNavigate, useParams } from 'react-router-dom';
+import { Loading } from 'routes/Router';
+import styled from 'styled-components';
+import { getDistance, linkToKaKaoMap } from 'utils/index';
+
+import { gql, useQuery } from '@apollo/client';
+
 const getPlace = gql`
   query getPlace($id: String!) {
     place(id: $id) {
@@ -128,14 +130,19 @@ const Detail = () => {
           ) : null}
         </IconWrapper>
         <SubScript>
-          <Desc>
-            <h1 className='title-medium main-text'>경로 설명</h1>
-            <p>{place.pathDescription}</p>
-          </Desc>
-          <Desc>
-            <h1 className='title-medium main-text'>경로 설명</h1>
-            <p>{place.etc}</p>
-          </Desc>
+          {place.pathDescription && (
+            <Desc>
+              <h1 className='title-medium main-text'>경로 설명</h1>
+              <p>{place.pathDescription}</p>
+            </Desc>
+          )}
+
+          {place.etc && (
+            <Desc>
+              <h1 className='title-medium main-text'>참고</h1>
+              <p>{place.etc}</p>
+            </Desc>
+          )}
         </SubScript>
       </Bottom>
     </Wrapper>
