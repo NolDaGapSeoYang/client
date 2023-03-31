@@ -1,4 +1,4 @@
-import{a as e,j as n,s as t}from"./index-f65e6b71.js";const s=()=>e(i,{children:n(l,{children:[e(o,{children:"어떤 시설이 필요하신가요?"}),n(c,{children:[e("label",{htmlFor:"all",children:"전체 선택"}),e("input",{type:"checkbox",name:"all",id:"all"})]}),e(r,{children:"선택 UI"}),e(r,{children:"선택 UI"}),e(r,{children:"선택 UI"}),e(r,{children:"선택 UI"}),e(r,{children:"선택 UI"}),e(r,{children:"선택 UI"}),e(r,{children:"선택 UI"}),e(d,{children:"다음 페이지로"})]})}),i=t.div`
+import{a as e,j as n,s as t}from"./index-17a83146.js";const s=()=>e(i,{children:n(l,{children:[e(o,{children:"어떤 시설이 필요하신가요?"}),n(c,{children:[e("label",{htmlFor:"all",children:"전체 선택"}),e("input",{type:"checkbox",name:"all",id:"all"})]}),e(r,{children:"선택 UI"}),e(r,{children:"선택 UI"}),e(r,{children:"선택 UI"}),e(r,{children:"선택 UI"}),e(r,{children:"선택 UI"}),e(r,{children:"선택 UI"}),e(r,{children:"선택 UI"}),e(d,{children:"다음 페이지로"})]})}),i=t.div`
   width: 100%;
   display: flex;
   justify-content: center;
