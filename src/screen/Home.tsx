@@ -1,12 +1,19 @@
+import React from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import bgImg from '../assets/main.png'
+import { ReactComponent as Title } from 'assets/title.svg'
 
 const Home = () => {
   return (
-    <Container>
+    <Container style={{ backgroundImage: `url(${bgImg})` }}>
       <SubTitle>제주 휠체어 관광지 250곳 중</SubTitle>
-      <Heading>어드레감디?</Heading>
-
+      {/* <Heading>어드레감디?</Heading> */}
+      <Title
+        style={{
+          marginTop: '1.5rem',
+        }}
+      />
       {/* <Description
         style={{
           marginTop: '12.5rem',
@@ -17,7 +24,7 @@ const Home = () => {
 
       <Description
         style={{
-          marginTop: '12.5rem',
+          marginTop: '0.5rem',
         }}
       >
         원하는 조건 선택만 하면,
@@ -36,16 +43,15 @@ const Container = styled.div`
   height: 100vh;
   display: flex;
   flex-direction: column;
-
   position: relative;
-
   padding: 0 2rem;
 `
 const SubTitle = styled.h4`
   margin-top: 10rem;
-  font-size: 2.2rem;
-  line-height: 3.5rem;
-  font-weight: 500;
+  font-size: 1.6rem;
+  line-height: 3rem;
+  font-weight: 600;
+  color: #50b194;
 `
 
 const Heading = styled.h1`
@@ -57,8 +63,8 @@ const Heading = styled.h1`
 
 const Description = styled.p`
   font-style: normal;
-  font-weight: 500;
-  font-size: 2.2rem;
+  font-weight: 400;
+  font-size: 1.8rem;
   line-height: 3.5rem;
 `
 
