@@ -1,4 +1,4 @@
-import{g as m,u as h,b as g,a as i,F as p,c as u,d as v,j as t,e as f,l as b,s as a}from"./index-f6fa265d.js";import{T as x,S as C,a as w,B as n,s as l}from"./DestinationCard-b305e27a.js";const y=m`
+import{g as m,u as h,b as g,a as i,F as p,c as u,d as v,j as t,e as f,l as b,s as a}from"./index-b9a68d02.js";import{T as x,S as C,a as w,B as n,s as l}from"./DestinationCard-cefe1ff4.js";const y=m`
   query getPlace($id: String!) {
     place(id: $id) {
       id
