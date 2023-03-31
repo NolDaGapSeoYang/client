@@ -1,13 +1,13 @@
-import { getDistance, linkToKaKaoMap } from 'utils/index'
-import { motion, useInView } from 'framer-motion'
-import styled from 'styled-components'
-import { ReactComponent as Navigation } from 'assets/navigation.svg'
-import { ReactComponent as Phone } from 'assets/phone.svg'
-import { ReactComponent as WheelChair } from 'assets/wheelchair.svg'
-import { FC, useEffect, useMemo, useRef } from 'react'
-import serviceIcon from 'assets/serviceIcon'
-import store from 'store/index'
-import { useNavigate } from 'react-router-dom'
+import { ReactComponent as Navigation } from 'assets/navigation.svg';
+import { ReactComponent as Phone } from 'assets/phone.svg';
+import serviceIcon from 'assets/serviceIcon';
+import { ReactComponent as WheelChair } from 'assets/wheelchair.svg';
+import { motion, useInView } from 'framer-motion';
+import { FC, useEffect, useMemo, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
+import store from 'store/index';
+import styled from 'styled-components';
+import { getDistance, linkToKaKaoMap } from 'utils/index';
 
 const DestinationCard: FC<any> = ({ node, maxLength, idx, fetchMore }) => {
   const ref = useRef(null)
@@ -101,7 +101,7 @@ const DestinationCard: FC<any> = ({ node, maxLength, idx, fetchMore }) => {
 
 export default DestinationCard
 const Destination = styled(motion.div)`
-  padding: 2rem 1rem;
+  padding: 2rem;
   border-radius: 1rem;
   display: flex;
   flex-direction: column;
@@ -168,8 +168,8 @@ const Top = styled.div`
   column-gap: 1.5rem;
 `
 const Buttons = styled.div`
-  display: flex;
-  column-gap: 1.6rem;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
   /* justify-content: space-around; */
 `
 
@@ -193,4 +193,5 @@ export const Button = styled.button`
   align-items: center;
   background-color: #efeff0;
   border-radius: 999rem;
+  margin: 0 auto;
 `

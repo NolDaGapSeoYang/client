@@ -1,22 +1,20 @@
-import React from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
-import store from 'store/index'
-import styled, { withTheme } from 'styled-components'
+import { ReactComponent as Check } from 'assets/InfoCircleicon.svg';
+import React from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import store from 'store/index';
+import styled, { withTheme } from 'styled-components';
 
-import HasGaurdian from './components/HasGuardian'
-import Nickname from './components/Nickname'
-import ProgressBar from './components/ProgressBar'
-import Result from './components/Result'
-import WhichOption from './components/WhichOption'
-import WhichPlace from './components/WhichPlace'
-import { ReactComponent as Check } from 'assets/InfoCircleicon.svg'
-import { Selection } from './types/selection'
+import HasGaurdian from './components/HasGuardian';
+import Nickname from './components/Nickname';
+import ProgressBar from './components/ProgressBar';
+import Result from './components/Result';
+import WhichOption from './components/WhichOption';
+import WhichPlace from './components/WhichPlace';
+import { Selection } from './types/selection';
 
 const Tutorial = () => {
   const [selection, setSelection] = store((state) => [state.selection, state.setSelection])
   const [name, setName] = store((state) => [state.myName, state.setName])
-
-  console.log('!!!', name, name.length)
 
   const [step, setStep] = React.useState(1)
   const [percent, setPercent] = React.useState(20)
@@ -26,8 +24,6 @@ const Tutorial = () => {
   const handleNext = () => {
     // console.log(type) // 숫자로 변환된 값
     setPercent((prevPercent) => prevPercent + 20)
-
-    console.log(step)
 
     if (step === 5) {
       // window.localStorage.setItem('nickName', selection.nickName)
@@ -72,7 +68,6 @@ const Tutorial = () => {
   }
 
   const handlePrev = () => {
-    console.log('이전 버튼 클릭!!')
     setPercent((prevPercent) => prevPercent - 20)
     if (step === 1) {
       navigate(`/`)
