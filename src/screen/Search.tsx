@@ -153,7 +153,7 @@ const Search = () => {
   const selected = store((state) => state.selection)
 
   return isLoading || !called ? (
-    <Loading text='결과를 불러오고 있어요..' />
+    <Loading text='결과를 불러오고 있어요..' page={false} />
   ) : (
     <Wrapper>
       <div

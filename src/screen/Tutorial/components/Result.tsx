@@ -1,16 +1,18 @@
-import { useQuery } from '@apollo/client'
-import { GetSearchListQuery } from 'api/graphql'
-import { PER_PAGE } from 'constants/common'
+import { GetSearchListQuery } from 'api/graphql';
+import option from 'assets/option';
+import { PER_PAGE } from 'constants/common';
+import { AnimatePresence, easeIn, motion, Variants } from 'framer-motion';
+import React, { useEffect, useMemo, useState } from 'react';
+import Slider from 'react-slick';
+import { Loading } from 'routes/Router';
+import store from 'store/index';
+import styled from 'styled-components';
 
-import React, { useEffect, useMemo, useState } from 'react'
-import { Loading } from 'routes/Router'
-import store from 'store/index'
-import Slider from 'react-slick'
-import styled from 'styled-components'
-import { SearchQuery } from '../../Search'
-import Item from './Item'
-import { AnimatePresence, easeIn, motion, Variants } from 'framer-motion'
-import option from 'assets/option'
+import { useQuery } from '@apollo/client';
+
+import { SearchQuery } from '../../Search';
+import Item from './Item';
+
 const SliderVariants: Variants = {
   initial: {
     x: 200,
@@ -114,7 +116,7 @@ const Result = () => {
   }
 
   return isLoading || !called ? (
-    <Loading text='결과를 불러오고 있어요..' />
+    <Loading text='결과를 불러오고 있어요..' page={false} />
   ) : (
     <Wrapper>
       <div style={{ display: 'flex', overflowX: 'hidden' }}>
