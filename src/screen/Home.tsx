@@ -1,12 +1,13 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import styled from 'styled-components'
-import bgImg from '../assets/main.png'
-import { ReactComponent as Title } from 'assets/title.svg'
+import { ReactComponent as Title } from 'assets/title.svg';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+
+import bgImg from '../assets/main.png';
 
 const Home = () => {
   return (
-    <Container style={{ backgroundImage: `url(${bgImg})` }}>
+    <Container style={{ backgroundImage: `url(${bgImg})`, backgroundSize: 'cover' }}>
       <SubTitle>제주 휠체어 관광지 250곳 중</SubTitle>
       {/* <Heading>어드레감디?</Heading> */}
       <Title
@@ -40,7 +41,7 @@ const Home = () => {
 export default Home
 
 const Container = styled.div`
-  height: 100vh;
+  height: 100dvh;
   display: flex;
   flex-direction: column;
   position: relative;
