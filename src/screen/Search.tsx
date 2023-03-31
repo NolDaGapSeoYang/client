@@ -117,7 +117,6 @@ const Search = () => {
   const edges = useMemo(() => places?.edges, [places?.edges])
 
   useEffect(() => {
-    console.log(toggle, selection)
     if (!toggle) {
       refetch()
       // setIsLoading(true)
