@@ -287,8 +287,8 @@ const FilterList = styled.div`
   overflow-x: scroll;
 `
 const FilterItem = styled.div`
-  font-size: 1.7rem;
-  padding: 0.25rem 1rem;
+  font-size: 1.5rem;
+  padding: 0.3rem 1.2rem;
   text-align: center;
   background-color: #61646b;
   color: white;
