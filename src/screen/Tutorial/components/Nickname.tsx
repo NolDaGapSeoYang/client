@@ -15,13 +15,14 @@ const Nickname = () => {
             name='nickName'
             id='nickName'
             type='name'
+            value={name}
             maxLength={5}
             placeholder='닉네임을 입력해주세요'
             onChange={(event) => setName({ key: 'myName', value: event.target.value })}
           />
         </label>
       </InputBox>
-      <GuideMessage>최대 5글자로 해주세요!</GuideMessage>
+      {name.length > 5 && <GuideMessage>최대 5글자로 해주세요!</GuideMessage>}
     </Wrapper>
   )
 }

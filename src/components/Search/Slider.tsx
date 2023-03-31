@@ -1,19 +1,13 @@
-import {
-  GetCountQuery,
-  GetCountQueryVariables,
-  GetSearchListQuery,
-} from 'api/graphql';
-import { ReactComponent as Reset } from 'assets/reset.svg';
-import { ReactComponent as X } from 'assets/x-thin.svg';
-import Spinner from 'components/common/Spinner';
-import { easeInOut, motion, Variants } from 'framer-motion';
-import React, { useEffect, useMemo, useState } from 'react';
-import store, { Selection } from 'store/index';
-import styled from 'styled-components';
+import { GetCountQuery, GetCountQueryVariables, GetSearchListQuery } from 'api/graphql'
+import { ReactComponent as Reset } from 'assets/reset.svg'
+import { ReactComponent as X } from 'assets/x-thin.svg'
+import Spinner from 'components/common/Spinner'
+import { easeInOut, motion, Variants } from 'framer-motion'
+import React, { useEffect, useMemo, useState } from 'react'
+import store, { Selection } from 'store/index'
+import styled from 'styled-components'
 
-import { gql, useQuery } from '@apollo/client';
-
-import { SearchQuery } from '../../screen/Search';
+import { gql, useQuery } from '@apollo/client'
 
 const getCount = gql`
   query getCount($PlaceCountInput: PlaceCountInput!) {

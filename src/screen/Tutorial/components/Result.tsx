@@ -2,7 +2,6 @@ import { GetSearchListQuery } from 'api/graphql';
 import option from 'assets/option';
 import { PER_PAGE } from 'constants/common';
 import { AnimatePresence, easeIn, motion, Variants } from 'framer-motion';
-import useGetSelection from 'hooks/useGetSelection';
 import React, { useEffect, useMemo, useState } from 'react';
 import Slider from 'react-slick';
 import { Loading } from 'routes/Router';
@@ -80,7 +79,7 @@ const Result = () => {
   useEffect(() => {
     const intervalId = setInterval(() => {
       paginate(1)
-    }, 5000)
+    }, 1500)
     return () => {
       clearInterval(intervalId)
     }
@@ -101,13 +100,12 @@ const Result = () => {
     exit: (direction: number) => {
       return {
         zIndex: 0,
-        x: direction < 0 ? '-200%' : '200%',
+        x: direction < 0 ? '200%' : '-200%',
         opacity: 0,
       }
     },
   }
 
-  const swipeConfidenceThreshold = 10000
   const swipePower = (offset: number, velocity: number) => {
     return Math.abs(offset) * velocity
   }
@@ -137,32 +135,38 @@ const Result = () => {
         </AnimatePresence> */}
         {categories?.length ? (
           <Card>
-            <AnimatePresence initial={false} custom={direction}>
-              <IconWrapper>
+            <AnimatePresence initial={false} custom={direction} mode='wait'>
+              <IconWrapper
+                key={page}
+                custom={direction}
+                variants={variants}
+                transition={{
+                  type: 'tween',
+                  ease: 'circOut',
+                }}
+                initial='enter'
+                animate='center'
+                exit='exit'
+              >
                 <motion.img
-                  key={page}
                   src={option[categories[page % categories.length]]}
-                  custom={direction}
-                  variants={variants}
-                  initial='enter'
-                  animate='center'
-                  exit='exit'
-                  transition={{
-                    x: { type: 'spring', stiffness: 300, damping: 30 },
-                    opacity: { duration: 0.2 },
-                  }}
-                  drag='x'
-                  dragConstraints={{ left: 0, right: 0 }}
-                  dragElastic={1}
-                  onDragEnd={(e, { offset, velocity }) => {
-                    const swipe = swipePower(offset.x, velocity.x)
 
-                    if (swipe < -swipeConfidenceThreshold) {
-                      paginate(1)
-                    } else if (swipe > swipeConfidenceThreshold) {
-                      paginate(-1)
-                    }
-                  }}
+                  // transition={{
+                  //   x: { type: 'spring', stiffness: 300, damping: 30 },
+                  //   opacity: { duration: 0.2 },
+                  // }}
+                  // drag='x'
+                  // dragConstraints={{ left: 0, right: 0 }}
+                  // dragElastic={1}
+                  // onDragEnd={(e, { offset, velocity }) => {
+                  //   const swipe = swipePower(offset.x, velocity.x)
+
+                  //   if (swipe < -swipeConfidenceThreshold) {
+                  //     paginate(1)
+                  //   } else if (swipe > swipeConfidenceThreshold) {
+                  //     paginate(-1)
+                  //   }
+                  // }}
                 />
               </IconWrapper>
             </AnimatePresence>
@@ -190,7 +194,7 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
 `
-const IconWrapper = styled.div`
+const IconWrapper = styled(motion.div)`
   background-color: #fafafa;
   display: flex;
   justify-content: center;
