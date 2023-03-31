@@ -135,31 +135,33 @@ const Result = () => {
         {categories?.length ? (
           <Card>
             <AnimatePresence initial={false} custom={direction}>
-              <motion.img
-                key={page}
-                src={option[categories[page % categories.length]]}
-                custom={direction}
-                variants={variants}
-                initial='enter'
-                animate='center'
-                exit='exit'
-                transition={{
-                  x: { type: 'spring', stiffness: 300, damping: 30 },
-                  opacity: { duration: 0.2 },
-                }}
-                drag='x'
-                dragConstraints={{ left: 0, right: 0 }}
-                dragElastic={1}
-                onDragEnd={(e, { offset, velocity }) => {
-                  const swipe = swipePower(offset.x, velocity.x)
+              <IconWrapper>
+                <motion.img
+                  key={page}
+                  src={option[categories[page % categories.length]]}
+                  custom={direction}
+                  variants={variants}
+                  initial='enter'
+                  animate='center'
+                  exit='exit'
+                  transition={{
+                    x: { type: 'spring', stiffness: 300, damping: 30 },
+                    opacity: { duration: 0.2 },
+                  }}
+                  drag='x'
+                  dragConstraints={{ left: 0, right: 0 }}
+                  dragElastic={1}
+                  onDragEnd={(e, { offset, velocity }) => {
+                    const swipe = swipePower(offset.x, velocity.x)
 
-                  if (swipe < -swipeConfidenceThreshold) {
-                    paginate(1)
-                  } else if (swipe > swipeConfidenceThreshold) {
-                    paginate(-1)
-                  }
-                }}
-              />
+                    if (swipe < -swipeConfidenceThreshold) {
+                      paginate(1)
+                    } else if (swipe > swipeConfidenceThreshold) {
+                      paginate(-1)
+                    }
+                  }}
+                />
+              </IconWrapper>
             </AnimatePresence>
           </Card>
         ) : null}
@@ -176,6 +178,7 @@ const Result = () => {
 const Card = styled.div`
   display: flex;
   position: relative;
+  /* background-color: yellow; */
 `
 
 const Wrapper = styled.div`
@@ -183,6 +186,15 @@ const Wrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+`
+const IconWrapper = styled.div`
+  background-color: #fafafa;
+  display: flex;
+  justify-content: center;
+  padding: 2.5rem;
+  width: 22rem;
+  height: 16.5rem;
+  border-radius: 3rem;
 `
 
 const Title = styled.span`

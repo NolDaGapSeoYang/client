@@ -35,7 +35,7 @@ const InputBox = styled.div`
   justify-content: center;
   align-items: center;
   :focus-within {
-    border: 0.1rem solid #51be9d;
+    border: 0.2rem solid #51be9d;
   }
   label {
     display: block;
