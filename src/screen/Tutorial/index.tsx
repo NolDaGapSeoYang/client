@@ -120,7 +120,7 @@ const Tutorial = () => {
         <ProgressBar percent={percent} />
       </Header>
 
-      <Main active={step === 5}>
+      <Main active={step === 5} step={step}>
         {step === 1 ? (
           <HasGaurdian onChangeNeedCompanion={onChangeNeedCompanion} />
         ) : step === 2 ? (
@@ -139,15 +139,17 @@ const Tutorial = () => {
           <Result />
         ) : null}
         {step === 1 && selection.needCompanion ? (
-          <Alert className='title-small'>
-            <Check />
-            <p>
-              보호자 동행 없이 여행하는 경우
-              <br />
-              시설 방문에 여려움이 있는 곳은 빼드릴게요.
-            </p>
-            <b className='body-small'>(입구 경사로가 매우 가파른 곳 등)</b>
-          </Alert>
+          <div style={{ flex: 1, display: 'flex', alignItems: 'flex-end' }}>
+            <Alert className='title-small'>
+              <Check />
+              <p>
+                보호자 동행 없이 여행하는 경우
+                <br />
+                시설 방문에 여려움이 있는 곳은 빼드릴게요.
+              </p>
+              <b className='body-small'>(입구 경사로가 매우 가파른 곳 등)</b>
+            </Alert>
+          </div>
         ) : null}
       </Main>
       <Footer>
@@ -161,8 +163,6 @@ const Tutorial = () => {
 }
 const Alert = styled.div`
   padding: 1.4rem 0;
-  position: absolute;
-  bottom: 0;
   border: 1px solid #61646b;
   border-radius: 1rem;
   width: 100%;
@@ -186,11 +186,13 @@ const Header = styled.header`
   padding-top: 5rem;
   left: -2rem;
 `
-const Main = styled.main<{ active: boolean }>`
+const Main = styled.main<{ active: boolean; step: number }>`
   position: relative;
   flex: 1;
+
   ${(props) =>
     props.active ? `display: flex; flex-direction: column; justify-content:center;` : null}
+  ${(props) => (props.step === 1 ? `display: flex; flex-direction: column;` : null)}
 `
 const PrevBtn = styled.button`
   width: 100%;
