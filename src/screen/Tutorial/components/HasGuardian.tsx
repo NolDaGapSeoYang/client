@@ -17,17 +17,17 @@ const HasGaurdian: React.FC<HasGaurdianProps> = ({ onChangeNeedCompanion }) => {
       <Title>보호자와 동행하시나요?</Title>
       <OptionWrapper>
         <Option
-          highlight={!selection.needCompanion}
+          highlight={selection.needCompanion}
           onClick={() => {
-            onChangeNeedCompanion(false)
+            onChangeNeedCompanion(true)
           }}
         >
           <Alone />
         </Option>
         <Option
-          highlight={selection.needCompanion}
+          highlight={!selection.needCompanion}
           onClick={() => {
-            onChangeNeedCompanion(true)
+            onChangeNeedCompanion(false)
           }}
         >
           <People />

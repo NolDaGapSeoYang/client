@@ -1,16 +1,14 @@
-import { ReactComponent as Check } from 'assets/InfoCircleicon.svg';
-import React from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import store from 'store/index';
-import styled, { withTheme } from 'styled-components';
-
-import HasGaurdian from './components/HasGuardian';
-import Nickname from './components/Nickname';
-import ProgressBar from './components/ProgressBar';
-import Result from './components/Result';
-import WhichOption from './components/WhichOption';
-import WhichPlace from './components/WhichPlace';
-import { Selection } from './types/selection';
+import { ReactComponent as Check } from 'assets/InfoCircleicon.svg'
+import React from 'react'
+import { useNavigate } from 'react-router-dom'
+import store from 'store/index'
+import styled from 'styled-components'
+import HasGaurdian from './components/HasGuardian'
+import Nickname from './components/Nickname'
+import ProgressBar from './components/ProgressBar'
+import Result from './components/Result'
+import WhichOption from './components/WhichOption'
+import WhichPlace from './components/WhichPlace'
 
 const Tutorial = () => {
   const [selection, setSelection] = store((state) => [state.selection, state.setSelection])
@@ -121,6 +119,7 @@ const Tutorial = () => {
       <Header>
         <ProgressBar percent={percent} />
       </Header>
+
       <Main active={step === 5}>
         {step === 1 ? (
           <HasGaurdian onChangeNeedCompanion={onChangeNeedCompanion} />
@@ -139,7 +138,7 @@ const Tutorial = () => {
         ) : step === 5 ? (
           <Result />
         ) : null}
-        {step === 1 && !selection.needCompanion ? (
+        {step === 1 && selection.needCompanion ? (
           <Alert className='title-small'>
             <Check />
             <p>

@@ -91,11 +91,11 @@ const SliderFilter = () => {
             </FilterHeader>
             <FilterItems>
               <FilterItem
-                selected={!selection.needCompanion}
+                selected={selection.needCompanion}
                 onClick={() =>
                   setSelection((prev) => ({
                     ...prev,
-                    needCompanion: false,
+                    needCompanion: true,
                   }))
                 }
                 className='filter-xs'
@@ -103,11 +103,11 @@ const SliderFilter = () => {
                 아니오
               </FilterItem>
               <FilterItem
-                selected={selection.needCompanion}
+                selected={!selection.needCompanion}
                 onClick={() =>
                   setSelection((prev) => ({
                     ...prev,
-                    needCompanion: true,
+                    needCompanion: false,
                   }))
                 }
                 className='filter-xs'
