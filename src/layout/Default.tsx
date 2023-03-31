@@ -1,11 +1,10 @@
-import { ReactComponent as Baby } from 'assets/baby.svg'
-
-import Slider from 'components/Search/Slider'
-import { AnimatePresence, easeInOut, motion, Variants } from 'framer-motion'
-import { useEffect } from 'react'
-import { Outlet } from 'react-router-dom'
-import store from 'store/index'
-import styled from 'styled-components'
+import code from 'assets/qr_code.png';
+import Slider from 'components/Search/Slider';
+import { AnimatePresence, easeInOut, motion, Variants } from 'framer-motion';
+import { useEffect } from 'react';
+import { Outlet } from 'react-router-dom';
+import store from 'store/index';
+import styled from 'styled-components';
 
 const Default = () => {
   const { selection, setSelection, setPosition, toggle, setToggle } = store((state) => ({
@@ -55,7 +54,14 @@ const Default = () => {
   if (!isMobile) {
     return (
       <Fallback>
-        <Baby />
+        <CodeWrapper>
+          <QR src={code} />
+        </CodeWrapper>
+        <FallbackDes>
+          모바일 기기에서
+          <br />
+          편하게 사용하수깡
+        </FallbackDes>
       </Fallback>
     )
   }
@@ -80,7 +86,30 @@ const Fallback = styled.div`
   width: 100%;
   height: 100vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #f4b03e;
+  background-color: #51be9d;
+`
+
+const CodeWrapper = styled.div`
+  padding: 1rem;
+  border-radius: 1.6rem;
+  display: flex;
+  background-color: white;
+`
+
+const FallbackDes = styled.p`
+  color: white;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 2.2rem;
+  line-height: 3.5rem;
+  text-align: center;
+  margin-top: 5rem;
+`
+
+const QR = styled.img`
+  width: 15rem;
+  height: 15rem;
 `

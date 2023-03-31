@@ -139,10 +139,13 @@ const PlaceHolderWrapper = styled.div`
   aspect-ratio: 1/1;
   width: 10rem;
   height: 10rem;
+
+  display: flex;
   position: relative;
   overflow: hidden;
   img {
-    aspect-ratio: 1/1;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
   }
 `
