@@ -3,7 +3,6 @@ import { ReactComponent as KakaoIcon } from 'assets/kakao.svg';
 import Spinner from 'components/common/Spinner';
 import DestinationCard from 'components/Search/DestinationCard';
 import { FILTER_TYPE, PER_PAGE } from 'constants/common';
-import useGetSelection from 'hooks/useGetSelection';
 import { useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Loading } from 'routes/Router';

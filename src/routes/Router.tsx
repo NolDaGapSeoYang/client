@@ -1,11 +1,12 @@
-import ErrorBoundary from 'components/common/ErrorBoundary'
-import { LazyExoticComponent, Suspense, FC, lazy } from 'react'
-import { BrowserRouter, Link, Route, Routes } from 'react-router-dom'
-import { ReactComponent as Carbon } from 'assets/carbon_error.svg'
-import GlobalStyle from '../GlobalStyle'
-import Default from 'layout/Default'
-import styled from 'styled-components'
-import { useQuery } from '@apollo/client'
+import { ReactComponent as Carbon } from 'assets/carbon_error.svg';
+import ErrorBoundary from 'components/common/ErrorBoundary';
+import Spinner from 'components/common/Spinner';
+import Default from 'layout/Default';
+import { FC, lazy, LazyExoticComponent, Suspense } from 'react';
+import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
+import styled from 'styled-components';
+
+import GlobalStyle from '../GlobalStyle';
 
 const Error = () => {
   return (
@@ -22,7 +23,15 @@ const Error = () => {
 export const Loading: FC<{ text?: string }> = ({ text = '페이지를 불러오고 있어요...' }) => {
   return (
     <LoadingWrapper>
-      <LoadingIcon />
+      <Spinner
+        trackColor='#a7a7a7'
+        indicatorColor='#4f4f4f'
+        size={100}
+        progress={25}
+        trackWidth={5}
+        indicatorWidth={5}
+        spinnerMode={true}
+      />
       <p className='title-large'>{text}</p>
     </LoadingWrapper>
   )
