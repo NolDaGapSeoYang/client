@@ -1,13 +1,19 @@
+import React from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import bgImg from '../assets/main.png'
+import { ReactComponent as Title } from 'assets/title.svg'
 
 const Home = () => {
   return (
     <Container style={{ backgroundImage: `url(${bgImg})` }}>
       <SubTitle>제주 휠체어 관광지 250곳 중</SubTitle>
-      <Heading>어드레감디?</Heading>
-
+      {/* <Heading>어드레감디?</Heading> */}
+      <Title
+        style={{
+          marginTop: '1.5rem',
+        }}
+      />
       {/* <Description
         style={{
           marginTop: '12.5rem',
