@@ -42,9 +42,10 @@ const Container = styled.div`
 `
 const SubTitle = styled.h4`
   margin-top: 10rem;
-  font-size: 2.2rem;
-  line-height: 3.5rem;
-  font-weight: 500;
+  font-size: 1.6rem;
+  line-height: 3rem;
+  font-weight: 600;
+  color: #50b194;
 `
 
 const Heading = styled.h1`
