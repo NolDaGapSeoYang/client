@@ -1,4 +1,6 @@
 import { ReactComponent as Carbon } from 'assets/carbon_error.svg';
+import dataLoading from 'assets/load_data.png';
+import pageLoading from 'assets/load_page.png';
 import ErrorBoundary from 'components/common/ErrorBoundary';
 import Spinner from 'components/common/Spinner';
 import Default from 'layout/Default';
@@ -20,28 +22,32 @@ const Error = () => {
   )
 }
 
-export const Loading: FC<{ text?: string }> = ({ text = '페이지를 불러오고 있어요...' }) => {
+export const Loading: FC<{ text?: string; page?: boolean }> = ({
+  text = '페이지를 불러오고 있어요...',
+  page = true,
+}) => {
   return (
     <LoadingWrapper>
+      {page ? <LoadingImage src={pageLoading} /> : <LoadingImage src={dataLoading} />}
+
+      <p className='title-large'>{text}</p>
+
       <Spinner
         trackColor='#a7a7a7'
         indicatorColor='#4f4f4f'
-        size={100}
+        size={25}
         progress={25}
-        trackWidth={5}
-        indicatorWidth={5}
+        trackWidth={2}
+        indicatorWidth={2}
         spinnerMode={true}
       />
-      <p className='title-large'>{text}</p>
     </LoadingWrapper>
   )
 }
 
-const LoadingIcon = styled.div`
-  width: 10rem;
-  height: 10rem;
-  background-color: gray;
-  border-radius: 999rem;
+const LoadingImage = styled.img`
+  width: 100%;
+  height: auto;
 `
 
 const LoadingWrapper = styled.div`
@@ -59,9 +65,6 @@ const ErrorWrapper = styled.div`
   justify-content: center;
   align-items: center;
   height: calc(var(--vh, 1vh) * 100);
-  > p {
-    margin: 3.5rem 0;
-  }
 `
 const GoHome = styled(Link)`
   padding: 1rem 2.5rem;
