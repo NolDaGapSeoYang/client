@@ -7,6 +7,7 @@ import { ReactComponent as Nature } from 'assets/nature.svg'
 import { ReactComponent as Tracking } from 'assets/tracking.svg'
 import { ReactComponent as Sea } from 'assets/sea.svg'
 import { ReactComponent as Art } from 'assets/art.svg'
+import { ReactComponent as Shopping } from 'assets/shopping.svg'
 
 import store from 'store/index'
 import { SubTitle } from './HasGuardian'
@@ -77,7 +78,7 @@ const WhichPlace: React.FC<PlaceProps> = ({ onClickCategory }) => {
             onClickCategory('쇼핑')
           }}
         >
-          <Picture />
+          <Shopping />
           <OptionName>쇼핑</OptionName>
           <Example>면세점, 기념품샵</Example>
         </Option>
