@@ -1,9 +1,10 @@
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import bgImg from '../assets/main.png'
 
 const Home = () => {
   return (
-    <Container>
+    <Container style={{ backgroundImage: `url(${bgImg})` }}>
       <SubTitle>제주 휠체어 관광지 250곳 중</SubTitle>
       <Heading>어드레감디?</Heading>
 
@@ -17,7 +18,7 @@ const Home = () => {
 
       <Description
         style={{
-          marginTop: '12.5rem',
+          marginTop: '0.5rem',
         }}
       >
         원하는 조건 선택만 하면,
@@ -36,9 +37,7 @@ const Container = styled.div`
   height: 100vh;
   display: flex;
   flex-direction: column;
-
   position: relative;
-
   padding: 0 2rem;
 `
 const SubTitle = styled.h4`
