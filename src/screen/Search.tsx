@@ -1,15 +1,15 @@
-import { GetSearchListQuery } from 'api/graphql';
-import { ReactComponent as KakaoIcon } from 'assets/kakao.svg';
-import Spinner from 'components/common/Spinner';
-import DestinationCard from 'components/Search/DestinationCard';
-import { FILTER_TYPE, PER_PAGE } from 'constants/common';
-import { useEffect, useMemo, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
-import { Loading } from 'routes/Router';
-import store, { Selection } from 'store/index';
-import styled from 'styled-components';
+import { GetSearchListQuery } from 'api/graphql'
+import { ReactComponent as KakaoIcon } from 'assets/kakao.svg'
+import Spinner from 'components/common/Spinner'
+import DestinationCard from 'components/Search/DestinationCard'
+import { FILTER_TYPE, PER_PAGE } from 'constants/common'
+import { useEffect, useMemo, useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
+import { Loading } from 'routes/Router'
+import store, { Selection } from 'store/index'
+import styled from 'styled-components'
 
-import { gql, useQuery } from '@apollo/client';
+import { gql, useQuery } from '@apollo/client'
 
 export const SearchQuery = gql`
   query GetSearchList(
@@ -76,14 +76,17 @@ export const SearchQuery = gql`
 const Search = () => {
   const [searchParams] = useSearchParams()
 
-  const { toggle, setToggle, position, myName, selection, setSelection } = store((state) => ({
-    setToggle: state.setToggle,
-    position: state.position,
-    myName: state.myName,
-    toggle: state.toggle,
-    selection: state.selection,
-    setSelection: state.setSelection,
-  }))
+  const { toggle, setToggle, position, myName, sharedName, selection, setSelection } = store(
+    (state) => ({
+      setToggle: state.setToggle,
+      position: state.position,
+      myName: state.myName,
+      sharedName: state.sharedName,
+      toggle: state.toggle,
+      selection: state.selection,
+      setSelection: state.setSelection,
+    }),
+  )
   const [isLoading, setIsLoading] = useState(true)
   // const selection = useGetSelection()
   const variables = useMemo(() => {
@@ -164,7 +167,7 @@ const Search = () => {
         className='px'
       >
         <h3 className='title-large'>
-          {myName ? `${myName}님` : '내'} 주변 가까운 <br />
+          {sharedName ? `${sharedName}님` : myName ? `${myName}님` : '내'} 주변 가까운 <br />
           {places?.totalCount}개의 추천 관광지
         </h3>
         <div
@@ -180,7 +183,7 @@ const Search = () => {
                 thumb_1: edges[0].node.thumbnails[0],
                 thumb_2: edges[1].node.thumbnails[0],
                 thumb_3: edges[2].node.thumbnails[0],
-                name: 'test',
+                name: sharedName || myName,
                 ...vars,
               },
             })
