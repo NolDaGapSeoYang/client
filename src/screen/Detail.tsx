@@ -81,7 +81,7 @@ const Detail = () => {
         </ImageLayer>
         <Description>
           <Distance>나와의 거리 {getDistance(place?.distance)}</Distance>
-          <Address>{place?.address}</Address>
+          <Address>{place?.address.replace('제주특별자치도', '').trim()}</Address>
           <TopButtons style={{ padding: '1rem 0' }}>
             <button
               onClick={() =>
