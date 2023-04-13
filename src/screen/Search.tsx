@@ -265,7 +265,7 @@ const Wrapper = styled.div`
 const Stickable = styled.div`
   position: sticky;
   top: 0;
-  z-index: 1;
+  z-index: 3;
 `
 
 const DestinationList = styled.div`

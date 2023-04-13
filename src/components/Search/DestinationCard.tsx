@@ -1,13 +1,16 @@
-import { ReactComponent as Navigation } from 'assets/navigation.svg';
-import { ReactComponent as Phone } from 'assets/phone.svg';
-import serviceIcon from 'assets/serviceIcon';
-import { ReactComponent as WheelChair } from 'assets/wheelchair.svg';
-import { motion, useInView } from 'framer-motion';
-import { FC, useEffect, useMemo, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
-import store from 'store/index';
-import styled from 'styled-components';
-import { getDistance, linkToKaKaoMap } from 'utils/index';
+import MotionCheck from 'components/common/icons/MotionCheck'
+import MotionExclamation from 'components/common/icons/MotionExclamation'
+import { ReactComponent as Navigation } from 'assets/navigation.svg'
+import { ReactComponent as Phone } from 'assets/phone.svg'
+import serviceIcon from 'assets/serviceIcon'
+
+import PopupButton from 'components/common/PopupButton'
+import { motion, useInView } from 'framer-motion'
+import { FC, useEffect, useMemo, useRef } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import store from 'store/index'
+import styled from 'styled-components'
+import { getDistance, linkToKaKaoMap } from 'utils/index'
 
 const DestinationCard: FC<any> = ({ node, maxLength, idx, fetchMore }) => {
   const ref = useRef(null)
@@ -23,7 +26,13 @@ const DestinationCard: FC<any> = ({ node, maxLength, idx, fetchMore }) => {
   return (
     <Destination
       ref={ref}
-      onClick={() => {
+      style={{
+        pointerEvents: 'revert',
+      }}
+      onClick={(event) => {
+        if (event.target.closest('[data-tooltip]')?.dataset?.tooltip) {
+          return
+        }
         navigate(node.id)
       }}
     >
@@ -49,7 +58,7 @@ const DestinationCard: FC<any> = ({ node, maxLength, idx, fetchMore }) => {
                 .join(' ')}
             </Address>
           </div>
-          <TopButtons>
+          <TopButtons data-tooltip>
             <button
               onClick={() =>
                 linkToKaKaoMap({
@@ -68,11 +77,38 @@ const DestinationCard: FC<any> = ({ node, maxLength, idx, fetchMore }) => {
           </TopButtons>
         </LocationWrapper>
       </Top>
+
       <BottomButtons className='scrollbar-hide'>
         {node.parkingAvailable ? (
-          <Button>
+          <PopupButton
+            label={node.id}
+            toolTip={
+              !node.parkingCount ? (
+                <>
+                  <MotionExclamation />
+                  <div>
+                    <PopupTitle>장애인 주차장</PopupTitle>
+                    <Subscription red>
+                      정확한 주차 가능대수는 알 수 없어요 :(
+                      <br />
+                      전화 문의 부탁드립니다.
+                    </Subscription>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <MotionCheck />
+                  <div>
+                    <PopupTitle>장애인 주차장</PopupTitle>
+                    <Subscription>주차 가능대수는 {node.parkingCount}대 입니다.</Subscription>
+                  </div>
+                </>
+              )
+            }
+          >
+            <CircleBadge>{node.parkingCount ? `${node.parkingCount}` : '?'}</CircleBadge>
             <img src={serviceIcon.parkingAvailable} />
-          </Button>
+          </PopupButton>
         ) : null}
         {node.wheelChairRentable ? (
           <Button>
@@ -100,7 +136,18 @@ const DestinationCard: FC<any> = ({ node, maxLength, idx, fetchMore }) => {
 }
 
 export default DestinationCard
-const Destination = styled(motion.div)`
+export const PopupTitle = styled.p`
+  font-size: 1.6rem;
+  line-height: 3rem;
+  font-weight: 500;
+`
+export const Subscription = styled.p<{ red?: boolean }>`
+  color: ${({ red }) => (red ? 'rgb(222, 51, 36, 0.7)' : '#61646B')};
+  font-size: 1.3rem;
+  line-height: 2.5rem;
+  font-weight: 500;
+`
+const Destination = styled.div`
   padding: 2rem;
   border-radius: 1rem;
   display: flex;
@@ -110,11 +157,14 @@ const Destination = styled(motion.div)`
     padding-bottom: 1.2rem;
     border-bottom: 1px solid #efeff0;
     overflow-x: scroll;
+    z-index: 2;
   }
   > div:last-child {
-    margin-top: 1.2rem;
+    padding-top: 1.2rem;
     overflow-x: scroll;
+    z-index: 2;
   }
+  position: relative;
 `
 
 const Location = styled.div`
@@ -197,4 +247,20 @@ export const Button = styled.button`
   background-color: #efeff0;
   border-radius: 999rem;
   margin: 0 auto;
+  position: relative;
+`
+
+export const CircleBadge = styled.div`
+  position: absolute;
+  top: -0.5rem;
+  right: -0.5rem;
+  background-color: #de3324;
+  font-size: 1.3rem;
+  color: white;
+  border-radius: 999rem;
+  width: 2.1rem;
+  height: 2.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `

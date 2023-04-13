@@ -1,8 +1,20 @@
 import type { CodegenConfig } from '@graphql-codegen/cli'
+import dotenv from 'dotenv'
+dotenv.config({
+  path: `.env.${process.env.NODE_ENV}`,
+})
 
 const config: CodegenConfig = {
   overwrite: true,
-  schema: 'http://k8s-uhdregam-alb-9c0f3da497-731869144.ap-northeast-2.elb.amazonaws.com/graphql',
+  schema: [
+    {
+      [process.env.VITE_API_URL]: {
+        headers: {
+          'content-type': 'application/x-www-form-urlencoded',
+        },
+      },
+    },
+  ],
   documents: ['src/**/*.tsx', 'src/fragments.ts'],
   ignoreNoDocuments: true,
   generates: {

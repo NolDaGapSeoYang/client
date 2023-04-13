@@ -11,7 +11,11 @@ export interface Selection {
   pathExists: boolean
   needCompanion: boolean
 }
-
+export interface Popup {
+  show: boolean
+  id: ID
+}
+export type ID = null | string | number
 export interface IStore {
   isMobile: boolean
   toggle: boolean
@@ -25,9 +29,11 @@ export interface IStore {
   position?: GeolocationPosition | null
   setToggle: (flag?: boolean) => void
   setPosition: (p: GeolocationPosition) => void
+  popup: Popup
+  setShowPopup: (flag: { show: boolean; id?: ID }) => void
 }
 
-interface Store extends IStore {}
+export interface Store extends IStore {}
 
 const store = create<Store>()(
   persist(
@@ -39,6 +45,16 @@ const store = create<Store>()(
       position: null,
       myName: '',
       sharedName: '',
+      popup: {
+        show: false,
+        id: null,
+      },
+      setShowPopup: (flag) => {
+        set((state) => ({
+          ...state,
+          popup: { ...flag, id: flag.id || null },
+        }))
+      },
       setName: (options) => set((state) => ({ ...state, [options.key]: options.value })),
       selection: {
         categories: null,

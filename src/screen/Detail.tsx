@@ -1,14 +1,23 @@
-import { GetPlaceQuery } from 'api/graphql';
-import { ReactComponent as Navigation } from 'assets/navigation.svg';
-import { ReactComponent as Phone } from 'assets/phone.svg';
-import serviceIcon from 'assets/serviceIcon';
-import { Button, TopButtons } from 'components/Search/DestinationCard';
-import { useNavigate, useParams } from 'react-router-dom';
-import { Loading } from 'routes/Router';
-import styled from 'styled-components';
-import { getDistance, linkToKaKaoMap } from 'utils/index';
+import { GetPlaceQuery } from 'api/graphql'
+import { ReactComponent as Navigation } from 'assets/navigation.svg'
+import { ReactComponent as Phone } from 'assets/phone.svg'
+import serviceIcon from 'assets/serviceIcon'
+import {
+  Button,
+  CircleBadge,
+  PopupTitle,
+  Subscription,
+  TopButtons,
+} from 'components/Search/DestinationCard'
+import { useNavigate, useParams } from 'react-router-dom'
+import { Loading } from 'routes/Router'
+import styled from 'styled-components'
+import { getDistance, linkToKaKaoMap } from 'utils/index'
 
-import { gql, useQuery } from '@apollo/client';
+import { gql, useQuery } from '@apollo/client'
+import PopupButton from 'components/common/PopupButton'
+import MotionExclamation from 'components/common/icons/MotionExclamation'
+import MotionCheck from 'components/common/icons/MotionCheck'
 
 const getPlace = gql`
   query getPlace($id: String!) {
@@ -24,6 +33,7 @@ const getPlace = gql`
       toiletAvailable
       pathExists
       parkingAvailable
+      parkingCount
       pathDescription
       etc
       basicInfo
@@ -50,7 +60,6 @@ const Detail = () => {
     variables: { id: param.id },
     notifyOnNetworkStatusChange: true,
   })
-
   return loading ? (
     <Loading text='결과를 불러오고 있어요..' page={false} />
   ) : (
@@ -104,9 +113,35 @@ const Detail = () => {
       <Bottom>
         <IconWrapper>
           {place.parkingAvailable ? (
-            <Button>
+            <PopupButton
+              label={place.id}
+              toolTip={
+                !place.parkingCount ? (
+                  <>
+                    <MotionExclamation />
+                    <div>
+                      <PopupTitle>장애인 주차장</PopupTitle>
+                      <Subscription red>
+                        정확한 주차 가능대수는 알 수 없어요 :(
+                        <br />
+                        전화 문의 부탁드립니다.
+                      </Subscription>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <MotionCheck />
+                    <div>
+                      <PopupTitle>장애인 주차장</PopupTitle>
+                      <Subscription>주차 가능대수는 {place.parkingCount}대 입니다.</Subscription>
+                    </div>
+                  </>
+                )
+              }
+            >
+              <CircleBadge>{place.parkingCount ? `${place.parkingCount}` : '?'}</CircleBadge>
               <img src={serviceIcon.parkingAvailable} />
-            </Button>
+            </PopupButton>
           ) : null}
           {place.wheelChairRentable ? (
             <Button>

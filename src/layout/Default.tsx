@@ -1,10 +1,10 @@
-import code from 'assets/qr_code.png';
-import Slider from 'components/Search/Slider';
-import { AnimatePresence, easeInOut, motion, Variants } from 'framer-motion';
-import { useEffect } from 'react';
-import { Outlet } from 'react-router-dom';
-import store from 'store/index';
-import styled from 'styled-components';
+import code from 'assets/qr_code.png'
+import Slider from 'components/Search/Slider'
+import { AnimatePresence, easeInOut, motion, Variants } from 'framer-motion'
+import { useEffect } from 'react'
+import { Outlet } from 'react-router-dom'
+import store from 'store/index'
+import styled from 'styled-components'
 
 const Default = () => {
   const { selection, setSelection, setPosition, toggle, setToggle } = store((state) => ({
@@ -20,6 +20,10 @@ const Default = () => {
     let vh = window.innerHeight * 0.01
     document.documentElement.style.setProperty('--vh', `${vh}px`)
     document.documentElement.style.setProperty('--mx', `412px`)
+    const main = document.querySelector('main')
+    if (main) {
+      document.documentElement.style.setProperty('--main-mr', `${main.offsetLeft}px`)
+    }
   }
 
   setScreenSize()

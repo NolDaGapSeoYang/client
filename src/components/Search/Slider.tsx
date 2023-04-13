@@ -8,6 +8,7 @@ import store, { Selection } from 'store/index'
 import styled from 'styled-components'
 
 import { gql, useQuery } from '@apollo/client'
+import useScrollBlock from 'hooks/useScrollBlock'
 
 const getCount = gql`
   query getCount($PlaceCountInput: PlaceCountInput!) {
@@ -60,13 +61,20 @@ const SliderFilter = () => {
   const { data, refetch, loading } = useQuery<GetCountQuery>(getCount, {
     variables: { PlaceCountInput: { ...selection } } as GetCountQueryVariables,
   })
-
+  const { allowScroll, blockScroll } = useScrollBlock()
+  useEffect(() => {
+    blockScroll()
+    return () => {
+      allowScroll()
+    }
+  }, [])
   useEffect(() => {
     refetch({ ...variables })
   }, [variables])
   return (
-    <Darker initial='initial' animate='animate' exit='exit'>
+    <Darker initial='initial' animate='animate' exit='exit' style={{ left: 'var(--main-mr)' }}>
       <Shadow
+        style={{ left: 'var(--main-mr)' }}
         onClick={() => setToggle(false)}
         variants={{
           initial: {
@@ -369,7 +377,7 @@ const SliderFilter = () => {
 }
 
 export default SliderFilter
-const CloseButton = styled(X)`
+export const CloseButton = styled(X)`
   position: absolute;
   right: 2rem;
 `
@@ -445,17 +453,23 @@ const FilterHeader = styled.div`
   display: flex;
   justify-content: space-between;
 `
-const Darker = styled(motion.div)`
-  width: 100%;
-  height: 100%;
-  position: absolute;
+export const Darker = styled(motion.div)`
+  width: 100dvw;
+  height: 100dvh;
+  display: flex;
+  max-width: 412px;
   top: 0;
-  left: 0;
-  z-index: 2;
+  margin: auto;
+  position: fixed;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `
-const Shadow = styled(motion.div)`
+export const Shadow = styled(motion.div)`
   background-color: rgba(0, 0, 0, 0.7);
-  width: 100vw;
+  width: 100%;
+  max-width: 412px;
   height: 100vh;
   position: fixed;
   top: 0;
@@ -463,6 +477,7 @@ const Shadow = styled(motion.div)`
 `
 
 const Slider = styled(motion.div)`
+  max-width: 412px;
   background-color: white;
   position: fixed;
   bottom: 0;
