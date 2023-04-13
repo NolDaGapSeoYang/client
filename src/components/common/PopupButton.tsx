@@ -25,10 +25,12 @@ const PopupButton: FC<PopupButtonProps> = ({
       data-tooltip={disabled ? undefined : true}
       onClick={(event) => {
         if (!disabled) {
-          setOpen({
-            show: !open.show,
-            id: open.show ? null : label,
-          })
+          if (!open.show) {
+            setOpen({
+              show: true,
+              id: label,
+            })
+          }
         }
         rest.onClick && rest.onClick(event)
       }}
