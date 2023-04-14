@@ -16,55 +16,55 @@ export default ({ mode }) => {
       alias: [
         {
           find: 'screen',
-          replacement: path.resolve(__dirname, 'src/screen'),
+          replacement: path.resolve(process.cwd(), 'src/screen'),
         },
         {
           find: 'layout',
-          replacement: path.resolve(__dirname, 'src/layout'),
+          replacement: path.resolve(process.cwd(), 'src/layout'),
         },
         {
           find: 'components',
-          replacement: path.resolve(__dirname, 'src/components'),
+          replacement: path.resolve(process.cwd(), 'src/components'),
         },
         {
           find: 'store',
-          replacement: path.resolve(__dirname, 'src/store'),
+          replacement: path.resolve(process.cwd(), 'src/store'),
         },
         {
           find: 'constants',
-          replacement: path.resolve(__dirname, 'src/constants'),
+          replacement: path.resolve(process.cwd(), 'src/constants'),
         },
         {
           find: 'apollo',
-          replacement: path.resolve(__dirname, 'apollo'),
+          replacement: path.resolve(process.cwd(), 'apollo'),
         },
         {
           find: 'utils',
-          replacement: path.resolve(__dirname, 'src/utils'),
+          replacement: path.resolve(process.cwd(), 'src/utils'),
         },
         {
           find: 'assets',
-          replacement: path.resolve(__dirname, 'src/assets'),
+          replacement: path.resolve(process.cwd(), 'src/assets'),
         },
         {
           find: 'api',
-          replacement: path.resolve(__dirname, 'src/api'),
+          replacement: path.resolve(process.cwd(), 'src/api'),
         },
         {
           find: 'hooks',
-          replacement: path.resolve(__dirname, 'src/hooks'),
+          replacement: path.resolve(process.cwd(), 'src/hooks'),
         },
         {
           find: 'routes',
-          replacement: path.resolve(__dirname, 'src/routes'),
+          replacement: path.resolve(process.cwd(), 'src/routes'),
         },
         {
           find: 'types',
-          replacement: path.resolve(__dirname, 'types'),
+          replacement: path.resolve(process.cwd(), 'types'),
         },
         {
           find: 'store',
-          replacement: path.resolve(__dirname, 'store'),
+          replacement: path.resolve(process.cwd(), 'store'),
         },
       ],
     },
