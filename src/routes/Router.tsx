@@ -1,14 +1,14 @@
-import { ReactComponent as Carbon } from 'assets/carbon_error.svg';
-import dataLoading from 'assets/load_data.png';
-import pageLoading from 'assets/load_page.png';
-import ErrorBoundary from 'components/common/ErrorBoundary';
-import Spinner from 'components/common/Spinner';
-import Default from 'layout/Default';
-import { FC, lazy, LazyExoticComponent, Suspense } from 'react';
-import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
-import styled from 'styled-components';
+import { ReactComponent as Carbon } from '../assets/carbon_error.svg'
+import dataLoading from '../assets/load_data.png'
+import pageLoading from '../assets/load_page.png'
+import ErrorBoundary from 'components/common/ErrorBoundary'
+import Spinner from 'components/common/Spinner'
+import Default from 'layout/Default'
+import { FC, lazy, LazyExoticComponent, Suspense } from 'react'
+import { BrowserRouter, Link, Route, Routes } from 'react-router-dom'
+import styled from 'styled-components'
 
-import GlobalStyle from '../GlobalStyle';
+import GlobalStyle from '../GlobalStyle'
 
 const Error = () => {
   return (

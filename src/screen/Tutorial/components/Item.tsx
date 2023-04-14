@@ -1,6 +1,5 @@
 import styled from 'styled-components'
 import Slick from './Slick'
-import { ReactComponent as Picture } from 'assets/picture.svg'
 
 interface itemsProps {
   item: string

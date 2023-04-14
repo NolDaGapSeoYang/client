@@ -1,17 +1,16 @@
-import { GetSearchListQuery } from 'api/graphql';
-import option from 'assets/option';
-import { PER_PAGE } from 'constants/common';
-import { AnimatePresence, easeIn, motion, Variants } from 'framer-motion';
-import React, { useEffect, useMemo, useState } from 'react';
-import Slider from 'react-slick';
-import { Loading } from 'routes/Router';
-import store from 'store/index';
-import styled from 'styled-components';
+import { GetSearchListQuery } from 'api/graphql'
+import option from '../../../assets/option'
+import { PER_PAGE } from 'constants/common'
+import { AnimatePresence, motion, Variants } from 'framer-motion'
+import { useEffect, useMemo, useState } from 'react'
+import { Loading } from 'routes/Router'
+import store from 'store/index'
+import styled from 'styled-components'
 
-import { useQuery } from '@apollo/client';
+import { useQuery } from '@apollo/client'
 
-import { SearchQuery } from '../../Search';
-import Item from './Item';
+import { SearchQuery } from '../../Search'
+import Item from './Item'
 
 const SliderVariants: Variants = {
   initial: {

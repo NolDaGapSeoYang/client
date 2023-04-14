@@ -1,4 +1,4 @@
-import { ReactComponent as Check } from 'assets/InfoCircleicon.svg'
+import { ReactComponent as Check } from '../../assets/InfoCircleicon.svg'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import store from 'store/index'

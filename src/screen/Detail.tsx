@@ -1,7 +1,7 @@
 import { GetPlaceQuery } from 'api/graphql'
-import { ReactComponent as Navigation } from 'assets/navigation.svg'
-import { ReactComponent as Phone } from 'assets/phone.svg'
-import serviceIcon from 'assets/serviceIcon'
+import { ReactComponent as Navigation } from '../assets/navigation.svg'
+import { ReactComponent as Phone } from '../assets/phone.svg'
+import serviceIcon from '../assets/serviceIcon'
 import {
   Button,
   CircleBadge,

@@ -10,7 +10,6 @@
       "utils/*":["./src/utils/*"],
       "types/*":["./src/types/*"],
       "layout/*":["./src/layout/*"],
-      "assets/*":["./src/assets/*"],
       "store/*":["./src/store/*"],
     },
     "target": "ESNext",

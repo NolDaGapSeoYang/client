@@ -59,10 +59,6 @@ export default ({ mode }) => {
           replacement: path.resolve(process.cwd(), 'src/utils'),
         },
         {
-          find: 'assets',
-          replacement: path.resolve(process.cwd(), 'assets'),
-        },
-        {
           find: 'api',
           replacement: path.resolve(process.cwd(), 'src/api'),
         },

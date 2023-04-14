@@ -1,5 +1,5 @@
 import { GetSearchListQuery } from 'api/graphql'
-import { ReactComponent as KakaoIcon } from 'assets/kakao.svg'
+import { ReactComponent as KakaoIcon } from '../assets/kakao.svg'
 import Spinner from 'components/common/Spinner'
 import DestinationCard from 'components/Search/DestinationCard'
 import { FILTER_TYPE, PER_PAGE } from 'constants/common'

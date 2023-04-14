@@ -1,6 +1,6 @@
-import code from 'assets/qr_code.png'
+import code from '../assets/qr_code.png'
 import Slider from 'components/Search/Slider'
-import { AnimatePresence, easeInOut, motion, Variants } from 'framer-motion'
+import { AnimatePresence } from 'framer-motion'
 import { useEffect } from 'react'
 import { Outlet } from 'react-router-dom'
 import store from 'store/index'

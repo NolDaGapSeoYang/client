@@ -1,6 +1,6 @@
 import { GetCountQuery, GetCountQueryVariables, GetSearchListQuery } from 'api/graphql'
-import { ReactComponent as Reset } from 'assets/reset.svg'
-import { ReactComponent as X } from 'assets/x-thin.svg'
+import { ReactComponent as Reset } from '../../assets/reset.svg'
+import { ReactComponent as X } from '../../assets/x-thin.svg'
 import Spinner from 'components/common/Spinner'
 import { easeInOut, motion, Variants } from 'framer-motion'
 import React, { useEffect, useMemo, useState } from 'react'
