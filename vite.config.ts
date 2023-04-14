@@ -5,6 +5,8 @@ import svgr from 'vite-plugin-svgr'
 // https://vitejs.dev/config/
 export default ({ mode }) => {
   process.env = { ...process.env, ...loadEnv(mode, process.cwd()) }
+  console.log(process.cwd(), 'process.cwd()')
+  console.log(__dirname, '__dirname')
   return defineConfig({
     plugins: [react(), svgr()],
     server: {
