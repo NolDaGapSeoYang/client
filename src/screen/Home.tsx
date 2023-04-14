@@ -1,9 +1,9 @@
-import { ReactComponent as Title } from 'assets/title.svg';
-import React from 'react';
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import { ReactComponent as Title } from 'assets/title.svg'
+import React from 'react'
+import { Link } from 'react-router-dom'
+import styled from 'styled-components'
 
-import bgImg from '../assets/main.png';
+import bgImg from 'assets/main.png'
 
 const Home = () => {
   return (

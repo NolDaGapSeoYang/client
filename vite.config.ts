@@ -60,7 +60,7 @@ export default ({ mode }) => {
         },
         {
           find: 'assets',
-          replacement: path.resolve(process.cwd(), 'src/assets'),
+          replacement: path.resolve(process.cwd(), 'assets'),
         },
         {
           find: 'api',
