@@ -103,6 +103,7 @@ const Router = () => {
           <Route path='convenient' element={<Convenient />} />
           <Route path='option' element={<Tutorial />} />
         </Route>
+        <Route path='*' element={<Error />} />
       </Routes>
     </BrowserRouter>
   )
