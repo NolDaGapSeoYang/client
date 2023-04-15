@@ -113,7 +113,6 @@ const Result = () => {
   const paginate = (newDirection: number) => {
     setPage((prev) => [prev[0] + newDirection, newDirection])
   }
-  console.log(categories, 'option[categories[page % categories.length]]')
 
   if (isLoading || !called) return <Loading text='결과를 불러오고 있어요..' page={false} />
   const Icon = option[categories[page % categories.length]]
