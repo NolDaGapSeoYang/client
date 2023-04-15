@@ -105,18 +105,19 @@ const Result = () => {
     },
   }
 
-  const swipePower = (offset: number, velocity: number) => {
-    return Math.abs(offset) * velocity
-  }
+  // const swipePower = (offset: number, velocity: number) => {
+  //   return Math.abs(offset) * velocity
+  // }
 
   const [[page, direction], setPage] = useState([0, 0])
   const paginate = (newDirection: number) => {
     setPage((prev) => [prev[0] + newDirection, newDirection])
   }
+  console.log(categories, 'option[categories[page % categories.length]]')
 
-  return isLoading || !called ? (
-    <Loading text='결과를 불러오고 있어요..' page={false} />
-  ) : (
+  if (isLoading || !called) return <Loading text='결과를 불러오고 있어요..' page={false} />
+  const Icon = option[categories[page % categories.length]]
+  return (
     <Wrapper>
       <div style={{ display: 'flex', overflowX: 'hidden' }}>
         {/* <AnimatePresence mode='sync'>
@@ -147,26 +148,8 @@ const Result = () => {
                 animate='center'
                 exit='exit'
               >
-                <motion.img
-                  src={option[categories[page % categories.length]]}
-
-                  // transition={{
-                  //   x: { type: 'spring', stiffness: 300, damping: 30 },
-                  //   opacity: { duration: 0.2 },
-                  // }}
-                  // drag='x'
-                  // dragConstraints={{ left: 0, right: 0 }}
-                  // dragElastic={1}
-                  // onDragEnd={(e, { offset, velocity }) => {
-                  //   const swipe = swipePower(offset.x, velocity.x)
-
-                  //   if (swipe < -swipeConfidenceThreshold) {
-                  //     paginate(1)
-                  //   } else if (swipe > swipeConfidenceThreshold) {
-                  //     paginate(-1)
-                  //   }
-                  // }}
-                />
+                {/* <option[categories[page % categories.length]] /> */}
+                <Icon />
               </IconWrapper>
             </AnimatePresence>
           </Card>
@@ -197,10 +180,15 @@ const IconWrapper = styled(motion.div)`
   background-color: #fafafa;
   display: flex;
   justify-content: center;
+  align-items: center;
   padding: 2.5rem;
   width: 22rem;
   height: 16.5rem;
   border-radius: 3rem;
+  svg {
+    width: 100%;
+    height: 100%;
+  }
 `
 
 const Title = styled.span`

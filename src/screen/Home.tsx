@@ -1,4 +1,4 @@
-import { ReactComponent as Title } from '../assets/title.svg'
+import { Title } from '../assets/svg'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'

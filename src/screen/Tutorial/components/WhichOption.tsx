@@ -1,12 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Selection } from '../types/selection'
-import { ReactComponent as Picture } from '../../../assets/picture.svg'
-import { ReactComponent as ParkingLot } from '../../../assets/parkingLot.svg'
-import { ReactComponent as Elevator } from '../../../assets/elevator.svg'
-import { ReactComponent as Path } from '../../../assets/path.svg'
-import { ReactComponent as Wheel } from '../../../assets/wheel.svg'
-import { ReactComponent as Toilet } from '../../../assets/toilet.svg'
+import { Picture, ParkingLot, Elevator, Path, Wheel, Toilet } from '../../../assets/svg'
 
 import store from 'store/index'
 import { SubTitle } from './HasGuardian'

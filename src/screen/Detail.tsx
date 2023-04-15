@@ -1,6 +1,5 @@
 import { GetPlaceQuery } from 'api/graphql'
-import { ReactComponent as Navigation } from '../assets/navigation.svg'
-import { ReactComponent as Phone } from '../assets/phone.svg'
+import { Phone, Navigation, Check, Exclamation } from '../assets/svg'
 import serviceIcon from '../assets/serviceIcon'
 import {
   Button,
@@ -16,8 +15,6 @@ import { getDistance, linkToKaKaoMap } from 'utils/index'
 
 import { gql, useQuery } from '@apollo/client'
 import PopupButton from 'components/common/PopupButton'
-import MotionExclamation from 'components/common/icons/MotionExclamation'
-import MotionCheck from 'components/common/icons/MotionCheck'
 
 const getPlace = gql`
   query getPlace($id: String!) {
@@ -118,7 +115,7 @@ const Detail = () => {
               toolTip={
                 !place.parkingCount ? (
                   <>
-                    <MotionExclamation />
+                    <Exclamation />
                     <div>
                       <PopupTitle>장애인 주차장</PopupTitle>
                       <Subscription red>
@@ -130,7 +127,7 @@ const Detail = () => {
                   </>
                 ) : (
                   <>
-                    <MotionCheck />
+                    <Check />
                     <div>
                       <PopupTitle>장애인 주차장</PopupTitle>
                       <Subscription>주차 가능대수는 {place.parkingCount}대 입니다.</Subscription>
@@ -140,27 +137,27 @@ const Detail = () => {
               }
             >
               <CircleBadge>{place.parkingCount ? `${place.parkingCount}` : '?'}</CircleBadge>
-              <img src={serviceIcon.parkingAvailable} />
+              <serviceIcon.ParkingAvailable />
             </PopupButton>
           ) : null}
           {place.wheelChairRentable ? (
             <Button>
-              <img src={serviceIcon.wheelChairRentable} />
+              <serviceIcon.WheelChairRentable />
             </Button>
           ) : null}
           {place.toiletAvailable ? (
             <Button>
-              <img src={serviceIcon.toiletAvailable} />
+              <serviceIcon.ToiletAvailable />
             </Button>
           ) : null}
           {place.pathExists ? (
             <Button>
-              <img src={serviceIcon.pathExists} />
+              <serviceIcon.PathExists />
             </Button>
           ) : null}
           {place.elevatorAvailable ? (
             <Button>
-              <img src={serviceIcon.elevatorAvailable} />
+              <serviceIcon.ElevatorAvailable />
             </Button>
           ) : null}
         </IconWrapper>

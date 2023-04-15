@@ -1,15 +1,17 @@
-import elevatorAvailable from './elevatorAvailable.svg'
-import parkingAvailable from './parkingAvailable.svg'
-import pathExists from './pathExists.svg'
-import toiletAvailable from './toiletAvailable.svg'
-import wheelChairRentable from './wheelChairRentable.svg'
+import {
+  ElevatorAvailable,
+  ParkingAvailable,
+  PathExists,
+  ToiletAvailable,
+  WheelChairRentable,
+} from './svg'
 
 const serviceIcon = {
-  elevatorAvailable,
-  parkingAvailable,
-  pathExists,
-  toiletAvailable,
-  wheelChairRentable,
+  ElevatorAvailable,
+  ParkingAvailable,
+  PathExists,
+  ToiletAvailable,
+  WheelChairRentable,
 }
 
 export default serviceIcon

@@ -1,6 +1,6 @@
 import { GetCountQuery, GetCountQueryVariables, GetSearchListQuery } from 'api/graphql'
-import { ReactComponent as Reset } from '../../assets/reset.svg'
-import { ReactComponent as X } from '../../assets/x-thin.svg'
+import { Reset, Xthin } from '../../assets/svg'
+
 import Spinner from 'components/common/Spinner'
 import { easeInOut, motion, Variants } from 'framer-motion'
 import React, { useEffect, useMemo, useState } from 'react'
@@ -377,7 +377,7 @@ const SliderFilter = () => {
 }
 
 export default SliderFilter
-export const CloseButton = styled(X)`
+export const CloseButton = styled(Xthin)`
   position: absolute;
   right: 2rem;
 `

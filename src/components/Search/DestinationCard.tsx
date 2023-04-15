@@ -1,7 +1,4 @@
-import MotionCheck from 'components/common/icons/MotionCheck'
-import MotionExclamation from 'components/common/icons/MotionExclamation'
-import { ReactComponent as Navigation } from '../../assets/navigation.svg'
-import { ReactComponent as Phone } from '../../assets/phone.svg'
+import { Check, Exclamation, Navigation, Phone } from '../../assets/svg'
 import serviceIcon from '../../assets/serviceIcon'
 
 import PopupButton from 'components/common/PopupButton'
@@ -85,7 +82,7 @@ const DestinationCard: FC<any> = ({ node, maxLength, idx, fetchMore }) => {
             toolTip={
               !node.parkingCount ? (
                 <>
-                  <MotionExclamation />
+                  <Exclamation />
                   <div>
                     <PopupTitle>장애인 주차장</PopupTitle>
                     <Subscription red>
@@ -97,7 +94,7 @@ const DestinationCard: FC<any> = ({ node, maxLength, idx, fetchMore }) => {
                 </>
               ) : (
                 <>
-                  <MotionCheck />
+                  <Check />
                   <div>
                     <PopupTitle>장애인 주차장</PopupTitle>
                     <Subscription>주차 가능대수는 {node.parkingCount}대 입니다.</Subscription>
@@ -107,27 +104,27 @@ const DestinationCard: FC<any> = ({ node, maxLength, idx, fetchMore }) => {
             }
           >
             <CircleBadge>{node.parkingCount ? `${node.parkingCount}` : '?'}</CircleBadge>
-            <img src={serviceIcon.parkingAvailable} />
+            <serviceIcon.ParkingAvailable />
           </PopupButton>
         ) : null}
         {node.wheelChairRentable ? (
           <Button>
-            <img src={serviceIcon.wheelChairRentable} />
+            <serviceIcon.WheelChairRentable />
           </Button>
         ) : null}
         {node.toiletAvailable ? (
           <Button>
-            <img src={serviceIcon.toiletAvailable} />
+            <serviceIcon.ToiletAvailable />
           </Button>
         ) : null}
         {node.pathExists ? (
           <Button>
-            <img src={serviceIcon.pathExists} />
+            <serviceIcon.PathExists />
           </Button>
         ) : null}
         {node.elevatorAvailable ? (
           <Button>
-            <img src={serviceIcon.elevatorAvailable} />
+            <serviceIcon.ElevatorAvailable />
           </Button>
         ) : null}
       </BottomButtons>

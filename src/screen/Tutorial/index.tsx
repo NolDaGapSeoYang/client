@@ -1,5 +1,4 @@
-import { ReactComponent as Check } from '../../assets/InfoCircleicon.svg'
-import React from 'react'
+import { Check } from '../../assets/svg'
 import { useNavigate } from 'react-router-dom'
 import store from 'store/index'
 import styled from 'styled-components'
@@ -9,13 +8,14 @@ import ProgressBar from './components/ProgressBar'
 import Result from './components/Result'
 import WhichOption from './components/WhichOption'
 import WhichPlace from './components/WhichPlace'
+import { useState } from 'react'
 
 const Tutorial = () => {
   const [selection, setSelection] = store((state) => [state.selection, state.setSelection])
   const [name, setName] = store((state) => [state.myName, state.setName])
 
-  const [step, setStep] = React.useState(1)
-  const [percent, setPercent] = React.useState(20)
+  const [step, setStep] = useState(1)
+  const [percent, setPercent] = useState(20)
 
   const navigate = useNavigate()
 

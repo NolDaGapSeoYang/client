@@ -1,4 +1,4 @@
-import { ReactComponent as Carbon } from '../assets/carbon_error.svg'
+import { CarbonError as Carbon } from '../assets/svg'
 import dataLoading from '../assets/load_data.png'
 import pageLoading from '../assets/load_page.png'
 import ErrorBoundary from 'components/common/ErrorBoundary'

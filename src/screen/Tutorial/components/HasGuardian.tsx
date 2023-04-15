@@ -1,10 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { ReactComponent as Picture } from '../../../assets/picture.svg'
-import { ReactComponent as Alone } from '../../../assets/alone.svg'
-import { ReactComponent as People } from '../../../assets/people.svg'
-
-import { Selection } from '../types/selection'
+import { Alone, People } from '../../../assets/svg'
 import store from 'store/index'
 type HasGaurdianProps = {
   onChangeNeedCompanion: (needCompanion: boolean) => void

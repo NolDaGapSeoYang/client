@@ -1,9 +1,9 @@
-import Nature from './nature.svg'
-import Local from './local.svg'
-import Tracking from './tracking.svg'
-import Shopping from './shopping.svg'
-import Art from './art.svg'
-import Sea from './sea.svg'
+import Nature from './svg/Nature'
+import Local from './svg/Local'
+import Tracking from './svg/Tracking'
+import Shopping from './svg/Shopping'
+import Art from './svg/Art'
+import Sea from './svg/Sea'
 export default {
   자연경관: Nature,
   트레킹: Tracking,
