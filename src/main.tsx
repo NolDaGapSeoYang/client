@@ -4,6 +4,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { client } from './apollo'
 import App from './App'
+import reportWebVitals from './webVitals'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
@@ -12,3 +13,4 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     </ApolloProvider>
   </React.StrictMode>,
 )
+reportWebVitals(() => {})
