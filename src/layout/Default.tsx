@@ -68,8 +68,8 @@ const Default = () => {
           longitude: position.coords.longitude,
         }
 
-        // 이전 위치 정보가 있고, 이전 위치와 새로운 위치의 거리가 1m 이상인 경우에만 업데이트
-        if (prevPosition.current && calculateDistance(prevPosition.current, newPosition) >= 1) {
+        // 이전 위치 정보가 있고, 이전 위치와 새로운 위치의 거리가 100m 이상인 경우에만 업데이트
+        if (prevPosition.current && calculateDistance(prevPosition.current, newPosition) >= 100) {
           console.log('업데이트 된 Position : ', newPosition)
           setPosition(position)
           prevPosition.current = newPosition
