@@ -1,10 +1,16 @@
 import code from '../assets/qr_code.png'
 import Slider from 'components/Search/Slider'
 import { AnimatePresence } from 'framer-motion'
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import { Outlet } from 'react-router-dom'
 import store from 'store/index'
 import styled from 'styled-components'
+
+// 위치 정보를 담는 인터페이스
+interface Location {
+  latitude: number
+  longitude: number
+}
 
 const Default = () => {
   const { selection, setSelection, setPosition, toggle, setToggle } = store((state) => ({
@@ -27,6 +33,26 @@ const Default = () => {
   }
 
   setScreenSize()
+
+  // 이전 위치 정보를 저장할 변수
+  const prevPosition = useRef<Location | null>(null)
+
+  // 이전 위치와 새로운 위치의 거리를 계산하는 함수
+  const calculateDistance = (prev: Location, next: Location) => {
+    const R = 6371e3 // 지구 반경(m)
+    const prevLat = (prev.latitude * Math.PI) / 180
+    const nextLat = (next.latitude * Math.PI) / 180
+    const deltaLat = ((next.latitude - prev.latitude) * Math.PI) / 180
+    const deltaLon = ((next.longitude - prev.longitude) * Math.PI) / 180
+
+    const a =
+      Math.sin(deltaLat / 2) * Math.sin(deltaLat / 2) +
+      Math.cos(prevLat) * Math.cos(nextLat) * Math.sin(deltaLon / 2) * Math.sin(deltaLon / 2)
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
+
+    return R * c
+  }
+
   const cleanUp = (watchId: number) => {
     window.removeEventListener('resize', setScreenSize)
     window.navigator.geolocation.clearWatch(watchId)
@@ -36,7 +62,22 @@ const Default = () => {
 
     const watchId = window.navigator.geolocation.watchPosition(
       (position) => {
-        setPosition(position)
+        // 새로운 위치 정보
+        const newPosition: Location = {
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+        }
+
+        // 이전 위치 정보가 있고, 이전 위치와 새로운 위치의 거리가 100m 이상인 경우에만 업데이트
+        if (prevPosition.current && calculateDistance(prevPosition.current, newPosition) >= 100) {
+          setPosition(position)
+          prevPosition.current = newPosition
+        }
+        // 이전 위치 정보가 없는 경우에는 새로운 위치 정보를 저장하고 업데이트하지 않음
+        else if (!prevPosition.current) {
+          setPosition(position)
+          prevPosition.current = newPosition
+        }
       },
       (error) => {
         console.error(error, 'watchPositon error')
