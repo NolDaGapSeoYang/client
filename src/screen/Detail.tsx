@@ -237,7 +237,7 @@ const ImageLayer = styled.div`
 
 const Image = styled.img`
   object-fit: cover;
-
+  height: 100%;
   aspect-ratio: 4/3;
   &:first-child {
     grid-column: 1 / span 2;
