@@ -381,22 +381,6 @@ export const CloseButton = styled(Xthin)`
   position: absolute;
   right: 2rem;
 `
-const SnapBars = styled(motion.div)`
-  position: absolute;
-  touch-action: none;
-  margin: 0 auto;
-  padding: 1rem 0;
-  left: 50%;
-  top: -0.25rem;
-  transform: translateX(-50%);
-`
-const SnapBar = styled.div`
-  width: 3.4rem;
-  height: 0.4rem;
-  border-radius: 999rem;
-  background-color: #efeff0;
-`
-
 const Content = styled.div`
   display: flex;
   flex-direction: column;
@@ -442,7 +426,6 @@ const FilterItems = styled.div`
 const FilterItem = styled.label<{ selected: boolean }>`
   display: flex;
   justify-content: center;
-  /* padding: 0.5rem 0; */
   background-color: ${(props) => (props.selected ? '#61646B' : '#efeff0')};
   color: ${(props) => (props.selected ? '#FAFAFA' : '#19191B')};
   transition: all 0.1s ease-in-out;
@@ -475,7 +458,6 @@ export const Shadow = styled(motion.div)`
   top: 0;
   left: 0;
 `
-
 const Slider = styled(motion.div)`
   max-width: 412px;
   background-color: white;

@@ -110,38 +110,35 @@ const Detail = () => {
       <Bottom>
         <IconWrapper>
           {place.parkingAvailable ? (
-            // <PopupButton
-            //   label={place.id}
-            //   toolTip={
-            //     !place.parkingCount ? (
-            //       <>
-            //         <Exclamation />
-            //         <div>
-            //           <PopupTitle>장애인 주차장</PopupTitle>
-            //           <Subscription red>
-            //             정확한 주차 가능대수는 알 수 없어요 :(
-            //             <br />
-            //             전화 문의 부탁드립니다.
-            //           </Subscription>
-            //         </div>
-            //       </>
-            //     ) : (
-            //       <>
-            //         <Check />
-            //         <div>
-            //           <PopupTitle>장애인 주차장</PopupTitle>
-            //           <Subscription>주차 가능대수는 {place.parkingCount}대 입니다.</Subscription>
-            //         </div>
-            //       </>
-            //     )
-            //   }
-            // >
-            //   <CircleBadge>{place.parkingCount ? `${place.parkingCount}` : '?'}</CircleBadge>
-            //   <serviceIcon.ParkingAvailable />
-            // </PopupButton>
-            <Button>
+            <PopupButton
+              label={place.id}
+              toolTip={
+                !place.parkingCount ? (
+                  <>
+                    <Exclamation />
+                    <div>
+                      <PopupTitle>장애인 주차장</PopupTitle>
+                      <Subscription red>
+                        정확한 주차 가능대수는 알 수 없어요 :(
+                        <br />
+                        전화 문의 부탁드립니다.
+                      </Subscription>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <Check />
+                    <div>
+                      <PopupTitle>장애인 주차장</PopupTitle>
+                      <Subscription>주차 가능대수는 {place.parkingCount}대 입니다.</Subscription>
+                    </div>
+                  </>
+                )
+              }
+            >
+              <CircleBadge>{place.parkingCount ? `${place.parkingCount}` : '?'}</CircleBadge>
               <serviceIcon.ParkingAvailable />
-            </Button>
+            </PopupButton>
           ) : null}
           {place.wheelChairRentable ? (
             <Button>

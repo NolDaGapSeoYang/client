@@ -77,38 +77,35 @@ const DestinationCard: FC<any> = ({ node, maxLength, idx, fetchMore }) => {
 
       <BottomButtons className='scrollbar-hide'>
         {node.parkingAvailable ? (
-          // <PopupButton
-          //   label={node.id}
-          //   toolTip={
-          //     !node.parkingCount ? (
-          //       <>
-          //         <Exclamation />
-          //         <div>
-          //           <PopupTitle>장애인 주차장</PopupTitle>
-          //           <Subscription red>
-          //             정확한 주차 가능대수는 알 수 없어요 :(
-          //             <br />
-          //             전화 문의 부탁드립니다.
-          //           </Subscription>
-          //         </div>
-          //       </>
-          //     ) : (
-          //       <>
-          //         <Check />
-          //         <div>
-          //           <PopupTitle>장애인 주차장</PopupTitle>
-          //           <Subscription>주차 가능대수는 {node.parkingCount}대 입니다.</Subscription>
-          //         </div>
-          //       </>
-          //     )
-          //   }
-          // >
-          //   <CircleBadge>{node.parkingCount ? `${node.parkingCount}` : '?'}</CircleBadge>
-          //   <serviceIcon.ParkingAvailable />
-          // </PopupButton>
-          <Button>
+          <PopupButton
+            label={node.id}
+            toolTip={
+              !node.parkingCount ? (
+                <>
+                  <Exclamation />
+                  <div>
+                    <PopupTitle>장애인 주차장</PopupTitle>
+                    <Subscription red>
+                      정확한 주차 가능대수는 알 수 없어요 :(
+                      <br />
+                      전화 문의 부탁드립니다.
+                    </Subscription>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <Check />
+                  <div>
+                    <PopupTitle>장애인 주차장</PopupTitle>
+                    <Subscription>주차 가능대수는 {node.parkingCount}대 입니다.</Subscription>
+                  </div>
+                </>
+              )
+            }
+          >
+            <CircleBadge>{node.parkingCount ? `${node.parkingCount}` : '?'}</CircleBadge>
             <serviceIcon.ParkingAvailable />
-          </Button>
+          </PopupButton>
         ) : null}
         {node.wheelChairRentable ? (
           <Button>
