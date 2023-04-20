@@ -143,7 +143,7 @@ https://access.visitkorea.or.kr/main/main.do
     </tr>
     <tr>
         <td>
-            <strong>PM</strong>
+            <strong>Product <br> Manager</strong>
         </td>
         <td>
             <strong>UX/UI <br> Designer</strong>
