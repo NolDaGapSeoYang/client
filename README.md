@@ -149,13 +149,13 @@ https://access.visitkorea.or.kr/main/main.do
             <strong>UX/UI <br> Designer</strong>
         </td>
         <td>
-            <strong>Front-end Developer</strong>
+            <strong>Front-end <br> Developer</strong>
         </td>
         <td>
-            <strong>Front-end Developer</strong>
+            <strong>Front-end <br> Developer</strong>
         </td>
         <td>
-            <strong>Back-end Developer</strong>
+            <strong>Back-end <br> Developer</strong>
         </td>
     </tr>
 </table>
